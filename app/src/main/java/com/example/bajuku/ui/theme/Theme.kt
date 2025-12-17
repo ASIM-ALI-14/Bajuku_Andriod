@@ -14,11 +14,14 @@ import com.example.bajuku.ui.theme.AppColors.Primary0
 import com.example.bajuku.ui.theme.AppColors.Primary800
 
 private val DarkColorScheme = darkColorScheme(
-    background = Primary0
+    background = Primary0,
+    primary = Primary800
 )
 
 private val LightColorScheme = lightColorScheme(
-    background = Primary800
+    background = Primary800,
+    primary = Primary0
+
 
     /* Other default colors to override
     background = Color(0xFFFFFBFE),
@@ -35,7 +38,7 @@ private val LightColorScheme = lightColorScheme(
 fun BajukuTheme(
     darkTheme: Boolean = isSystemInDarkTheme(),
     // Dynamic color is available on Android 12+
-    dynamicColor: Boolean = true,
+    dynamicColor: Boolean = false,
     content: @Composable () -> Unit
 ) {
     val colorScheme = when {

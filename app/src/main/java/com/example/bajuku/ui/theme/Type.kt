@@ -20,49 +20,50 @@ val Typography = Typography(
     displayLarge = TextStyle(       // H1
         fontFamily = PlusJakartaSans,
         fontWeight = FontWeight.SemiBold,
-        fontSize = 40.sp
+        fontSize = 41.sp
     ),
     displayMedium = TextStyle(
         // H2
         fontFamily = PlusJakartaSans,
         fontWeight = FontWeight.SemiBold,
-        fontSize = 32.sp,
+        fontSize = 33.sp,
 
         ),
     displaySmall = TextStyle(       // H3
         fontFamily = PlusJakartaSans,
         fontWeight = FontWeight.Bold,
-        fontSize = 24.sp
+        fontSize = 25.sp
     ),
     headlineLarge = TextStyle(
         // H4
         fontFamily = PlusJakartaSans,
         fontWeight = FontWeight.SemiBold,
-        fontSize = 20.sp,
+        fontSize = 21.sp,
     ),
     headlineMedium = TextStyle(     // H5
         fontFamily = PlusJakartaSans,
         fontWeight = FontWeight.SemiBold,
-        fontSize = 18.sp
+        fontSize = 19.sp
     ),
     headlineSmall = TextStyle(      // H6
         fontFamily = PlusJakartaSans,
         fontWeight = FontWeight.SemiBold,
-        fontSize = 16.sp
+        fontSize = 17.sp
     ),
     bodyLarge = TextStyle(
         fontFamily = PlusJakartaSans,
-        fontSize = 18.sp
+        fontSize = 19.sp
     ),
     bodyMedium = TextStyle(
         fontFamily = PlusJakartaSans,
-        fontSize = 16.sp
+        fontSize = 17.sp
     ), bodySmall = TextStyle(
         fontFamily = PlusJakartaSans,
-        fontSize = 14.sp
+        fontSize = 15.sp
     ),
     labelLarge = TextStyle(
         fontFamily = PlusJakartaSans,
-        fontSize = 14.sp
+        fontSize = 13.sp,
+        lineHeight = 18.sp
     )
 )
