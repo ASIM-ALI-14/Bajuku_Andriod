@@ -2,33 +2,67 @@ package com.example.bajuku.ui.theme
 
 import androidx.compose.material3.Typography
 import androidx.compose.ui.text.TextStyle
+import androidx.compose.ui.text.font.Font
 import androidx.compose.ui.text.font.FontFamily
 import androidx.compose.ui.text.font.FontWeight
 import androidx.compose.ui.unit.sp
+import com.example.bajuku.R
 
-// Set of Material typography styles to start with
+
+val PlusJakartaSans = FontFamily(
+    Font(R.font.regular, FontWeight.Normal),      // Regular weight
+    Font(R.font.medium, FontWeight.Medium),       // Medium weight
+    Font(R.font.semibold, FontWeight.SemiBold),   // SemiBold weight
+    Font(R.font.bold, FontWeight.Bold)    // SemiBold weight
+)
+
 val Typography = Typography(
-    bodyLarge = TextStyle(
-        fontFamily = FontFamily.Default,
-        fontWeight = FontWeight.Normal,
-        fontSize = 16.sp,
-        lineHeight = 24.sp,
-        letterSpacing = 0.5.sp
-    )
-    /* Other default text styles to override
-    titleLarge = TextStyle(
-        fontFamily = FontFamily.Default,
-        fontWeight = FontWeight.Normal,
-        fontSize = 22.sp,
-        lineHeight = 28.sp,
-        letterSpacing = 0.sp
+    displayLarge = TextStyle(       // H1
+        fontFamily = PlusJakartaSans,
+        fontWeight = FontWeight.SemiBold,
+        fontSize = 40.sp
     ),
-    labelSmall = TextStyle(
-        fontFamily = FontFamily.Default,
-        fontWeight = FontWeight.Medium,
-        fontSize = 11.sp,
-        lineHeight = 16.sp,
-        letterSpacing = 0.5.sp
+    displayMedium = TextStyle(
+        // H2
+        fontFamily = PlusJakartaSans,
+        fontWeight = FontWeight.SemiBold,
+        fontSize = 32.sp,
+
+        ),
+    displaySmall = TextStyle(       // H3
+        fontFamily = PlusJakartaSans,
+        fontWeight = FontWeight.Bold,
+        fontSize = 24.sp
+    ),
+    headlineLarge = TextStyle(
+        // H4
+        fontFamily = PlusJakartaSans,
+        fontWeight = FontWeight.SemiBold,
+        fontSize = 20.sp,
+    ),
+    headlineMedium = TextStyle(     // H5
+        fontFamily = PlusJakartaSans,
+        fontWeight = FontWeight.SemiBold,
+        fontSize = 18.sp
+    ),
+    headlineSmall = TextStyle(      // H6
+        fontFamily = PlusJakartaSans,
+        fontWeight = FontWeight.SemiBold,
+        fontSize = 16.sp
+    ),
+    bodyLarge = TextStyle(
+        fontFamily = PlusJakartaSans,
+        fontSize = 18.sp
+    ),
+    bodyMedium = TextStyle(
+        fontFamily = PlusJakartaSans,
+        fontSize = 16.sp
+    ), bodySmall = TextStyle(
+        fontFamily = PlusJakartaSans,
+        fontSize = 14.sp
+    ),
+    labelLarge = TextStyle(
+        fontFamily = PlusJakartaSans,
+        fontSize = 14.sp
     )
-    */
 )
