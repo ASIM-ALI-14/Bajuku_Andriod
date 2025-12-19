@@ -32,7 +32,7 @@ val Typography = Typography(
     displaySmall = TextStyle(       // H3
         fontFamily = PlusJakartaSans,
         fontWeight = FontWeight.Bold,
-        fontSize = 25.sp
+        fontSize = 26.sp
     ),
     headlineLarge = TextStyle(
         // H4
