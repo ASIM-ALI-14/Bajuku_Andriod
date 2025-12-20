@@ -13,25 +13,20 @@ import androidx.compose.runtime.*
 import androidx.compose.ui.Alignment
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.draw.clip
-import androidx.compose.ui.graphics.Brush
 import androidx.compose.ui.graphics.Color
 import androidx.compose.ui.layout.ContentScale
 import androidx.compose.ui.res.painterResource
 import androidx.compose.ui.text.font.FontWeight
-import androidx.compose.ui.tooling.preview.Preview
 import androidx.compose.ui.unit.dp
 import com.example.bajuku.R
 import com.example.bajuku.ui.components.SelectedButton
-import com.example.bajuku.ui.theme.HorizontalSpacingL
 import com.example.bajuku.ui.theme.HorizontalSpacingM
-import com.example.bajuku.ui.theme.HorizontalSpacingS
 import com.example.bajuku.ui.theme.screenHorizontal
 import com.example.bajuku.ui.theme.verticalSpacingL
 import com.example.bajuku.ui.theme.verticalSpacingM
 
 @Composable
-fun Onboarding_4() {
-    // Track selected items by unique IDs (category + name)
+fun StyleScreen() {
     var selectedOptions by remember { mutableStateOf(setOf<String>()) }
     val isContinueEnabled = selectedOptions.isNotEmpty()
 
@@ -69,7 +64,6 @@ fun Onboarding_4() {
                 color = MaterialTheme.colorScheme.surfaceVariant
             )
             verticalSpacingL()
-
             // Woman styles
             Text("Woman", style = MaterialTheme.typography.titleLarge)
             verticalSpacingM()
@@ -92,7 +86,7 @@ fun Onboarding_4() {
                 }
             }
 
-            verticalSpacingL()
+            verticalSpacingM()
 
             // Man styles
             Text("Man", style = MaterialTheme.typography.titleLarge)

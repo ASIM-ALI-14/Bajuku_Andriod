@@ -2,7 +2,9 @@ package com.example.bajuku.ui.screen.onboarding.Components
 
 import androidx.compose.foundation.BorderStroke
 import androidx.compose.foundation.Image
+import androidx.compose.foundation.layout.PaddingValues
 import androidx.compose.foundation.layout.Spacer
+import androidx.compose.foundation.layout.defaultMinSize
 import androidx.compose.foundation.layout.size
 import androidx.compose.foundation.layout.width
 import androidx.compose.material.icons.Icons
@@ -15,6 +17,7 @@ import androidx.compose.runtime.Composable
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.graphics.painter.Painter
 import androidx.compose.ui.graphics.vector.ImageVector
+import androidx.compose.ui.res.painterResource
 import androidx.compose.ui.unit.dp
 
 
@@ -24,11 +27,15 @@ fun InterestsItemButton(
     onclick: () -> Unit,
     modifier: Modifier = Modifier,
     selected: Boolean = false,
-    icon: ImageVector? = null,
-    painter: Painter? = null
+    image: Int
+
 ) {
     OutlinedButton(
         onClick = onclick,
+        contentPadding = PaddingValues(horizontal = 15.dp),
+
+        // 2️⃣ Remove default minimum size (48.dp height)
+        modifier = modifier,
         border = BorderStroke(
             1.dp,
             if (selected) MaterialTheme.colorScheme.primary else MaterialTheme.colorScheme.outline
@@ -37,22 +44,12 @@ fun InterestsItemButton(
             containerColor = MaterialTheme.colorScheme.primaryContainer,
             contentColor = MaterialTheme.colorScheme.surfaceVariant
         ),
-        modifier = modifier
     ) {
         // Show icon if provided
-        when {
-            icon != null -> Icon(
-                imageVector = icon,
-                contentDescription = text,
-                modifier = Modifier.size(23.dp)
-            )
-
-            painter != null -> Image(
-                painter = painter,
-                contentDescription = text,
-                modifier = Modifier.size(23.dp)
-            )
-        }
+        Image(
+            painter = painterResource(id = image),
+            contentDescription = text
+        )
 
         Spacer(modifier = Modifier.width(8.dp)) // horizontal spacing
         Text(text = text)

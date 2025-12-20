@@ -1,7 +1,9 @@
 package com.example.bajuku.ui.screen.onboarding
 
+import androidx.compose.foundation.layout.Arrangement
 import androidx.compose.foundation.layout.Box
 import androidx.compose.foundation.layout.Column
+import androidx.compose.foundation.layout.Row
 import androidx.compose.foundation.layout.Spacer
 import androidx.compose.foundation.layout.fillMaxSize
 import androidx.compose.foundation.layout.fillMaxWidth
@@ -22,19 +24,26 @@ import androidx.compose.runtime.setValue
 import androidx.compose.ui.Alignment
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.unit.dp
-import com.example.bajuku.ui.components.NotSelectedButton
+import com.example.bajuku.R
 import com.example.bajuku.ui.components.SelectedButton
+import com.example.bajuku.ui.screen.onboarding.Components.InterestsItemButton
 import com.example.bajuku.ui.theme.screenHorizontal
 import com.example.bajuku.ui.theme.verticalSpacingL
 import com.example.bajuku.ui.theme.verticalSpacingM
-import com.example.bajuku.ui.theme.verticalSpacingS
 
 @Composable
-fun Onboarding_2() {
+fun Onboarding_3() {
     var selectedOptions by remember { mutableStateOf(setOf<String>()) }
 
     // Determine if Continue button should be enabled
     val isContinueEnabled = selectedOptions.isNotEmpty()
+    fun toggleSelection(option: String) {
+        selectedOptions =
+            if (selectedOptions.contains(option))
+                selectedOptions - option
+            else
+                selectedOptions + option
+    }
     Column(
         modifier = Modifier
             .fillMaxSize()
@@ -56,48 +65,80 @@ fun Onboarding_2() {
                 )
             }
             Text(
-                text = "1/5",
+                text = "2/5",
                 modifier = Modifier.align(Alignment.Center),
                 color = MaterialTheme.colorScheme.surfaceVariant,
                 style = MaterialTheme.typography.bodyMedium
             )
         }
         Column(modifier = Modifier.padding(screenHorizontal)) {
-            Text("Target Audience Selection", style = MaterialTheme.typography.displaySmall)
+            Text("Exploring Interests", style = MaterialTheme.typography.displaySmall)
             Text(
-                text = "Who do you usually shop for? (You can select multiple\noptions)",
+                text = "Which categories are you interested in ? (You can select\nmultiple options)",
                 style = MaterialTheme.typography.labelLarge,
                 color = MaterialTheme.colorScheme.surfaceVariant,
             )
             verticalSpacingL()
-            val options = listOf("Woman", "Man", "Kids", "Baby")
+            Row(
+                horizontalArrangement = Arrangement.SpaceBetween,
+                modifier = Modifier.fillMaxWidth()
+            ) {
+                InterestsItemButton(
+                    "Hats",
+                    { toggleSelection("Hats") },
+                    modifier = Modifier,
+                    selected = selectedOptions.contains("Hats"), R.drawable.group,
 
-            options.forEach { option ->
-                val isSelected = selectedOptions.contains(option)
-                NotSelectedButton(
-                    text = option,
-                    onclick = {
-                        selectedOptions = if (isSelected) {
-                            selectedOptions - option
-                        } else {
-                            selectedOptions + option
-                        }
-                    },
-                    modifier = Modifier
-                        .fillMaxWidth(),
-                    isSelected
+                    )
+                InterestsItemButton(
+                    "Jacket",
+                    { toggleSelection("Jacket") },
+                    modifier = Modifier,
+                    selected = selectedOptions.contains("Jacket"), R.drawable.group,
                 )
-                verticalSpacingS()
+                InterestsItemButton(
+                    "Dress & Skirts",
+                    { toggleSelection("Dress & Skirts") },
+                    modifier = Modifier,
+                    selected = selectedOptions.contains("Dress & Skirts"),
+                    R.drawable.group,
+                )
+            }
+            Row(
+                horizontalArrangement = Arrangement.SpaceBetween,
+                modifier = Modifier.fillMaxWidth()
+            ) {
+                InterestsItemButton(
+                    "Shoes",
+                    { toggleSelection("Shoes") },
+                    modifier = Modifier,
+                    selected = selectedOptions.contains("Shoes"),
+                    R.drawable.group,
+                )
+                InterestsItemButton(
+                    "Accessories",
+                    { toggleSelection("Accessories") },
+                    modifier = Modifier,
+                    selected = selectedOptions.contains("Accessories"),
+                    R.drawable.group,
+                )
+                InterestsItemButton(
+                    "Sport",
+                    { toggleSelection("Sport") },
+                    modifier = Modifier,
+                    selected = selectedOptions.contains("Sport"),
+                    R.drawable.group,
+                )
             }
             Spacer(modifier = Modifier.weight(1f))
             SelectedButton(
                 "Continue",
-                {},
                 modifier = Modifier.fillMaxWidth(),
-                selected = isContinueEnabled
+                selected = isContinueEnabled,
+                onclick = {}
             )
             verticalSpacingM()
-
         }
+
     }
 }
