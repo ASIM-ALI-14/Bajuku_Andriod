@@ -3,7 +3,10 @@ import android.os.Bundle
 import androidx.activity.ComponentActivity
 import androidx.activity.compose.setContent
 import androidx.activity.enableEdgeToEdge
+import com.example.bajuku.ui.screen.onboarding.CongratulationsScreen
 import com.example.bajuku.ui.screen.onboarding.LoginScreen
+import com.example.bajuku.ui.screen.onboarding.RegisterScreen
+import com.example.bajuku.ui.screen.onboarding.VerificationScreen
 import com.example.bajuku.ui.theme.BajukuTheme
 
 class MainActivity : ComponentActivity() {
@@ -12,7 +15,7 @@ class MainActivity : ComponentActivity() {
         enableEdgeToEdge()
         setContent {
             BajukuTheme {
-                LoginScreen()
+                CongratulationsScreen()
             }
         }
     }

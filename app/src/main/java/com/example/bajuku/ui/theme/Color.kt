@@ -50,4 +50,6 @@ object AppColors {
     val Error200 = Color(0xFFD22B2B)
     val Error300 = Color(0xFFD60000)
     val Error400 = Color(0xFF960000)
+
+    val Blur40 = Color(0xFF1B51DB)
 }

@@ -10,6 +10,7 @@ import androidx.compose.material3.dynamicLightColorScheme
 import androidx.compose.material3.lightColorScheme
 import androidx.compose.runtime.Composable
 import androidx.compose.ui.platform.LocalContext
+import com.example.bajuku.ui.theme.AppColors.Blur40
 import com.example.bajuku.ui.theme.AppColors.Primary0
 import com.example.bajuku.ui.theme.AppColors.Primary100
 import com.example.bajuku.ui.theme.AppColors.Primary200
@@ -26,7 +27,10 @@ private val DarkColorScheme = darkColorScheme(
     outline = Primary100,
     surfaceVariant = Primary400,
     onSurfaceVariant = Primary50,
-    onBackground = Primary300
+    onBackground = Primary300,
+    secondary = Blur40,
+    tertiary = Primary200
+
 )
 
 private val LightColorScheme = lightColorScheme(
@@ -37,7 +41,9 @@ private val LightColorScheme = lightColorScheme(
     outline = Primary100,
     surfaceVariant = Primary400,
     onSurfaceVariant = Primary50,
-    onBackground = Primary300
+    onBackground = Primary300,
+    secondary = Blur40,
+    tertiary = Primary200
 
 
     /* Other default colors to override
