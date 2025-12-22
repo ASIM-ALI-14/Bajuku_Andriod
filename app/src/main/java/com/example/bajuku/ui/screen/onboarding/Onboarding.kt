@@ -26,7 +26,7 @@ import com.example.bajuku.ui.theme.verticalSpacingM
 
 @OptIn(ExperimentalAnimationApi::class)
 @Composable
-fun OnboardingScreen() {
+fun OnboardingScreen(onFinished: () -> Unit) {
     var currentPage by remember { mutableStateOf(0) }
     var previousPage by remember { mutableStateOf(0) }
 
@@ -154,7 +154,11 @@ fun OnboardingScreen() {
                         text = "Next",
                         onclick = {
                             previousPage = currentPage
-                            if (currentPage < onboardingItems.size - 1) currentPage++
+                            if (currentPage < onboardingItems.size - 1) {
+                                currentPage++
+                            } else {
+                                onFinished()
+                            }
                         },
                         modifier = Modifier.weight(1f),
                         true

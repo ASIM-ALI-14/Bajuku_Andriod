@@ -21,6 +21,7 @@ import androidx.compose.ui.Modifier
 import androidx.compose.ui.text.font.FontWeight
 import androidx.compose.ui.text.style.TextAlign
 import androidx.compose.ui.unit.dp
+import androidx.navigation.NavHostController
 import com.example.bajuku.ui.components.SelectedButton
 import com.example.bajuku.ui.screen.onboarding.Components.OtpVerificationRow
 import com.example.bajuku.ui.theme.HorizontalSpacingS
@@ -30,7 +31,7 @@ import com.example.bajuku.ui.theme.verticalSpacingM
 import com.example.bajuku.ui.theme.verticalSpacingS
 
 @Composable
-fun VerificationScreen() {
+fun VerificationScreen(navController: NavHostController) {
     var isOtpComplete by remember { mutableStateOf(false) }
     var otpValue by remember { mutableStateOf("") }
     Column(
@@ -81,11 +82,10 @@ fun VerificationScreen() {
             verticalSpacingM()
             SelectedButton(
                 "Verification",
-                {},
+                { if (isOtpComplete) navController.navigate("congratulations") },
                 modifier = Modifier.fillMaxWidth(),
                 selected = isOtpComplete
             )
-
         }
         verticalSpacingL()
         Text(

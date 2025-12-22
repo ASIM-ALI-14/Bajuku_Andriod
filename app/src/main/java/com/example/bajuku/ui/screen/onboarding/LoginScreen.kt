@@ -3,6 +3,7 @@ package com.example.bajuku.ui.screen.onboarding
 import android.R.attr.text
 import androidx.compose.foundation.Image
 import androidx.compose.foundation.background
+import androidx.compose.foundation.clickable
 import androidx.compose.foundation.layout.Arrangement
 import androidx.compose.foundation.layout.Column
 import androidx.compose.foundation.layout.Row
@@ -36,6 +37,7 @@ import androidx.compose.ui.text.font.FontWeight
 import androidx.compose.ui.text.input.KeyboardType
 import androidx.compose.ui.text.style.TextAlign
 import androidx.compose.ui.unit.dp
+import androidx.navigation.NavHostController
 import com.example.bajuku.R
 import com.example.bajuku.ui.components.SelectedButton
 import com.example.bajuku.ui.screen.onboarding.Components.AppTextFieldBasic
@@ -47,7 +49,7 @@ import com.example.bajuku.ui.theme.verticalSpacingM
 import com.example.bajuku.ui.theme.verticalSpacingS
 
 @Composable
-fun LoginScreen() {
+fun LoginScreen(navController: NavHostController) {
     var email by remember { mutableStateOf("") }
     var Password by remember { mutableStateOf("") }
     Column(
@@ -174,7 +176,10 @@ fun LoginScreen() {
                 text = "Register",
                 style = MaterialTheme.typography.labelLarge,
                 fontWeight = FontWeight.SemiBold,
-                color = MaterialTheme.colorScheme.secondary
+                color = MaterialTheme.colorScheme.secondary,
+                modifier = Modifier.clickable {
+                    navController.navigate("register")
+                }
             )
         }
         verticalSpacingEXL()

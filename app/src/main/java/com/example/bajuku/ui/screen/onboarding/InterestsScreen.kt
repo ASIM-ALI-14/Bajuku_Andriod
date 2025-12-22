@@ -24,6 +24,7 @@ import androidx.compose.runtime.setValue
 import androidx.compose.ui.Alignment
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.unit.dp
+import androidx.navigation.NavHostController
 import com.example.bajuku.R
 import com.example.bajuku.ui.components.SelectedButton
 import com.example.bajuku.ui.screen.onboarding.Components.InterestsItemButton
@@ -32,7 +33,7 @@ import com.example.bajuku.ui.theme.verticalSpacingL
 import com.example.bajuku.ui.theme.verticalSpacingM
 
 @Composable
-fun Onboarding_3() {
+fun Onboarding_3(navController: NavHostController) {
     var selectedOptions by remember { mutableStateOf(setOf<String>()) }
 
     // Determine if Continue button should be enabled
@@ -53,7 +54,7 @@ fun Onboarding_3() {
             modifier = Modifier.fillMaxWidth()
         ) {
             IconButton(
-                onClick = {}
+                onClick = { navController.popBackStack() }
             ) {
                 Icon(
                     Icons.Filled.ArrowBack,
@@ -135,7 +136,11 @@ fun Onboarding_3() {
                 "Continue",
                 modifier = Modifier.fillMaxWidth(),
                 selected = isContinueEnabled,
-                onclick = {}
+                onclick = {
+                    if (isContinueEnabled) {
+                        navController.navigate("style")
+                    }
+                }
             )
             verticalSpacingM()
         }

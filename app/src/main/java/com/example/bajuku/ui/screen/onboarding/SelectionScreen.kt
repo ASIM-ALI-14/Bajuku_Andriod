@@ -22,6 +22,7 @@ import androidx.compose.runtime.setValue
 import androidx.compose.ui.Alignment
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.unit.dp
+import androidx.navigation.NavHostController
 import com.example.bajuku.ui.components.NotSelectedButton
 import com.example.bajuku.ui.components.SelectedButton
 import com.example.bajuku.ui.theme.screenHorizontal
@@ -30,7 +31,7 @@ import com.example.bajuku.ui.theme.verticalSpacingM
 import com.example.bajuku.ui.theme.verticalSpacingS
 
 @Composable
-fun SelectionScreen() {
+fun SelectionScreen(navController: NavHostController) {
     var selectedOptions by remember { mutableStateOf(setOf<String>()) }
 
     // Determine if Continue button should be enabled
@@ -44,7 +45,7 @@ fun SelectionScreen() {
             modifier = Modifier.fillMaxWidth()
         ) {
             IconButton(
-                onClick = {}
+                onClick = { navController.popBackStack() }
             ) {
                 Icon(
                     Icons.Filled.ArrowBack,
@@ -92,12 +93,15 @@ fun SelectionScreen() {
             Spacer(modifier = Modifier.weight(1f))
             SelectedButton(
                 "Continue",
-                {},
+                onclick = {
+                    if (isContinueEnabled) {
+                        navController.navigate("interests")
+                    }
+                },
                 modifier = Modifier.fillMaxWidth(),
                 selected = isContinueEnabled
             )
             verticalSpacingM()
-
         }
     }
 }

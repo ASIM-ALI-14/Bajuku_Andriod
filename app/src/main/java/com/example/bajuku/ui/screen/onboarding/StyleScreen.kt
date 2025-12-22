@@ -18,6 +18,7 @@ import androidx.compose.ui.layout.ContentScale
 import androidx.compose.ui.res.painterResource
 import androidx.compose.ui.text.font.FontWeight
 import androidx.compose.ui.unit.dp
+import androidx.navigation.NavHostController
 import com.example.bajuku.R
 import com.example.bajuku.ui.components.SelectedButton
 import com.example.bajuku.ui.theme.HorizontalSpacingM
@@ -26,7 +27,7 @@ import com.example.bajuku.ui.theme.verticalSpacingL
 import com.example.bajuku.ui.theme.verticalSpacingM
 
 @Composable
-fun StyleScreen() {
+fun StyleScreen(navController: NavHostController) {
     var selectedOptions by remember { mutableStateOf(setOf<String>()) }
     val isContinueEnabled = selectedOptions.isNotEmpty()
 
@@ -37,7 +38,7 @@ fun StyleScreen() {
     ) {
         // Top bar
         Box(modifier = Modifier.fillMaxWidth()) {
-            IconButton(onClick = { /* Back */ }) {
+            IconButton(onClick = { navController.popBackStack() }) {
                 Icon(
                     Icons.Filled.ArrowBack,
                     contentDescription = null,
@@ -114,7 +115,11 @@ fun StyleScreen() {
 
             SelectedButton(
                 text = "Continue",
-                onclick = { /* Continue action */ },
+                onclick = {
+                    if (isContinueEnabled) {
+                        navController.navigate("login")
+                    }
+                },
                 modifier = Modifier.fillMaxWidth(),
                 selected = isContinueEnabled
             )
