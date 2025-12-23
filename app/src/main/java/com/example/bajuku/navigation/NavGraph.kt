@@ -2,7 +2,7 @@ import androidx.compose.runtime.Composable
 import androidx.navigation.NavHostController
 import androidx.navigation.compose.NavHost
 import androidx.navigation.compose.composable
-import com.example.bajuku.ui.screen.HomeScreen.HomeScreen
+import com.example.bajuku.ui.screen.MianScreen.MainScreen
 import com.example.bajuku.ui.screen.onboarding.CongratulationsScreen
 import com.example.bajuku.ui.screen.onboarding.LoginScreen
 import com.example.bajuku.ui.screen.onboarding.Onboarding_3
@@ -74,7 +74,7 @@ fun AppNavGraph(navController: NavHostController) {
 
         // 6. Home (final destination)
         composable("home") {
-            HomeScreen()
+            MainScreen(navController)
         }
     }
 }

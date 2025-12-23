@@ -12,20 +12,35 @@ import androidx.compose.material3.Text
 import androidx.compose.material3.TextFieldColors
 import androidx.compose.runtime.Composable
 import androidx.compose.ui.Modifier
+import androidx.compose.ui.graphics.Color
+import androidx.compose.ui.text.font.FontWeight
+import androidx.compose.ui.unit.Dp
 import androidx.compose.ui.unit.dp
 
 @Composable
-fun SelectedButton(text: String, onclick: () -> Unit, modifier: Modifier, selected: Boolean) {
+fun SelectedButton(
+    text: String,
+    onclick: () -> Unit,
+    modifier: Modifier,
+    selected: Boolean,
+    bg: Color = MaterialTheme.colorScheme.primary,
+    contantcolor: Color = MaterialTheme.colorScheme.onPrimary,
+    height: Dp = 45.dp
+) {
 
     Button(
         onClick = { onclick() },
-        modifier = modifier.height(45.dp),
+        modifier = modifier.height(height),
         colors = ButtonDefaults.buttonColors(
-            contentColor = if (selected) MaterialTheme.colorScheme.onPrimary else MaterialTheme.colorScheme.onSurfaceVariant,
-            containerColor = if (selected) MaterialTheme.colorScheme.primary else MaterialTheme.colorScheme.surfaceVariant
+            contentColor = if (selected) contantcolor else MaterialTheme.colorScheme.onSurfaceVariant,
+            containerColor = if (selected) bg else MaterialTheme.colorScheme.surfaceVariant
         )
     ) {
-        Text(text = text)
+        Text(
+            text = text,
+            style = MaterialTheme.typography.labelLarge,
+            fontWeight = FontWeight.SemiBold
+        )
     }
 }
 

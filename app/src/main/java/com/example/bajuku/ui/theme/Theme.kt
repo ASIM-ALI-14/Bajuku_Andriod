@@ -17,6 +17,7 @@ import com.example.bajuku.ui.theme.AppColors.Primary200
 import com.example.bajuku.ui.theme.AppColors.Primary300
 import com.example.bajuku.ui.theme.AppColors.Primary400
 import com.example.bajuku.ui.theme.AppColors.Primary50
+import com.example.bajuku.ui.theme.AppColors.Primary500
 import com.example.bajuku.ui.theme.AppColors.Primary800
 
 private val DarkColorScheme = darkColorScheme(
@@ -29,7 +30,8 @@ private val DarkColorScheme = darkColorScheme(
     onSurfaceVariant = Primary50,
     onBackground = Primary300,
     secondary = Blur40,
-    tertiary = Primary200
+    tertiary = Primary200,
+    onSecondary = Primary500
 
 )
 
@@ -43,7 +45,9 @@ private val LightColorScheme = lightColorScheme(
     onSurfaceVariant = Primary50,
     onBackground = Primary300,
     secondary = Blur40,
-    tertiary = Primary200
+    tertiary = Primary200,
+    onSecondary = Primary500
+
 
 
     /* Other default colors to override

@@ -15,7 +15,6 @@ val PlusJakartaSans = FontFamily(
     Font(R.font.semibold, FontWeight.SemiBold),   // SemiBold weight
     Font(R.font.bold, FontWeight.Bold)    // SemiBold weight
 )
-
 val Typography = Typography(
     displayLarge = TextStyle(       // H1
         fontFamily = PlusJakartaSans,
