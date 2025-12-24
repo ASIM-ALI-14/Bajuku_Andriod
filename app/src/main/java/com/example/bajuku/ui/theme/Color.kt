@@ -52,4 +52,6 @@ object AppColors {
     val Error400 = Color(0xFF960000)
 
     val Blur40 = Color(0xFF1B51DB)
+    val Blur20 = Color(0xFF2277F6)
+
 }

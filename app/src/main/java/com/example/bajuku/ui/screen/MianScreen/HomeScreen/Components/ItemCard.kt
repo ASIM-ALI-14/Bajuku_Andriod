@@ -7,7 +7,6 @@ import androidx.compose.foundation.layout.padding
 import androidx.compose.foundation.layout.size
 import androidx.compose.material.icons.Icons
 import androidx.compose.material.icons.outlined.FavoriteBorder
-import androidx.compose.material3.Card
 import androidx.compose.material3.CardDefaults
 import androidx.compose.material3.ElevatedCard
 import androidx.compose.material3.Icon
@@ -16,26 +15,25 @@ import androidx.compose.material3.Text
 import androidx.compose.runtime.Composable
 import androidx.compose.ui.Alignment
 import androidx.compose.ui.Modifier
+import androidx.compose.ui.graphics.painter.Painter
 import androidx.compose.ui.layout.ContentScale
 import androidx.compose.ui.res.painterResource
 import androidx.compose.ui.text.font.FontWeight
 import androidx.compose.ui.text.style.TextDecoration
 import androidx.compose.ui.unit.dp
-import com.example.bajuku.R
 import com.example.bajuku.ui.theme.AppColors
-import com.example.bajuku.ui.theme.screenHorizontal
 import com.example.bajuku.ui.theme.verticalSpacingM
 import com.example.bajuku.ui.theme.verticalSpacingS
 
 @Composable
-fun ItemCard() {
+fun ItemCard(Image: Painter) {
     ElevatedCard(
         colors = CardDefaults.cardColors(containerColor = MaterialTheme.colorScheme.background),
     ) {
         Column() {
             Box() {
                 Image(
-                    painter = painterResource(R.drawable.jacket_1),
+                    painter = Image,
                     contentDescription = null,
                     modifier = Modifier.size(167.dp),
                     contentScale = ContentScale.FillBounds

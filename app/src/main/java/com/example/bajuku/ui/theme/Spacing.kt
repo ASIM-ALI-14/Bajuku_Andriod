@@ -29,6 +29,11 @@ fun verticalSpacingS() {
 }
 
 @Composable
+fun verticalSpacingES() {
+    Spacer(modifier = Modifier.height(4.dp))
+}
+
+@Composable
 fun HorizontalSpacingEXL() {
     Spacer(modifier = Modifier.width(45.dp))
 }
@@ -46,6 +51,11 @@ fun HorizontalSpacingM() {
 @Composable
 fun HorizontalSpacingS() {
     Spacer(modifier = Modifier.width(7.dp))
+}
+
+@Composable
+fun HorizontalSpacingES() {
+    Spacer(modifier = Modifier.height(4.dp))
 }
 
 val screenHorizontal: Dp = 16.dp

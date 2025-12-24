@@ -1,15 +1,24 @@
 package com.example.bajuku.ui.screen.MianScreen.Components
 
+
+import androidx.compose.foundation.layout.Column
+import androidx.compose.foundation.layout.height
+import androidx.compose.foundation.layout.navigationBarsPadding
 import androidx.compose.material.icons.Icons
+import androidx.compose.material.icons.filled.Category
 import androidx.compose.material.icons.filled.Favorite
-import androidx.compose.material.icons.filled.GridView
+import androidx.compose.material.icons.filled.FavoriteBorder
+import androidx.compose.material.icons.filled.Folder
 import androidx.compose.material.icons.filled.Home
 import androidx.compose.material.icons.filled.Person
+import androidx.compose.material.icons.filled.Settings
 import androidx.compose.material.icons.outlined.FavoriteBorder
 import androidx.compose.material.icons.outlined.GridView
 import androidx.compose.material.icons.outlined.Home
 import androidx.compose.material.icons.outlined.Person
+import androidx.compose.material3.HorizontalDivider
 import androidx.compose.material3.Icon
+import androidx.compose.material3.MaterialTheme
 import androidx.compose.material3.NavigationBar
 import androidx.compose.material3.NavigationBarItem
 import androidx.compose.material3.NavigationBarItemDefaults
@@ -20,87 +29,79 @@ import androidx.compose.ui.draw.shadow
 import androidx.compose.ui.graphics.Color
 import androidx.compose.ui.graphics.vector.ImageVector
 import androidx.compose.ui.unit.dp
-import androidx.compose.ui.unit.sp
-import androidx.navigation.NavHostController
 
 data class BottomNavItem(
-    val title: String,
+    val route: String,
     val selectedIcon: ImageVector,
     val unselectedIcon: ImageVector,
-    val route: String
+    val label: String
 )
+
+
+private val bottomItems = listOf(
+    BottomNavItem(
+        "home",
+        selectedIcon = Icons.Default.Home,
+        unselectedIcon = Icons.Outlined.Home,
+        label = "Home"
+    ),
+    BottomNavItem(
+        "category",
+        selectedIcon = Icons.Filled.Favorite,
+        unselectedIcon = Icons.Outlined.FavoriteBorder,
+        label = "Whilst"
+    ),
+    BottomNavItem(
+        "profile",
+        selectedIcon = Icons.Filled.Category,
+        unselectedIcon = Icons.Outlined.GridView, // or any outline variant
+        label = "Calgary"
+    ),
+    BottomNavItem(
+        "wishlist",
+        selectedIcon = Icons.Filled.Person,
+        unselectedIcon = Icons.Outlined.Person,
+        label = "Profile"
+    )
+)
+
 
 @Composable
 fun BottomNavBar(
-    navController: NavHostController,
-    currentRoute: String?
+    currentRoute: String?,
+    onNavigate: (String) -> Unit
 ) {
-    val items = listOf(
-        BottomNavItem(
-            title = "Home",
-            selectedIcon = Icons.Filled.Home,
-            unselectedIcon = Icons.Outlined.Home,
-            route = "home"
-        ),
-        BottomNavItem(
-            title = "Wishlist",
-            selectedIcon = Icons.Filled.Favorite,
-            unselectedIcon = Icons.Outlined.FavoriteBorder,
-            route = "wishlist"
-        ),
-        BottomNavItem(
-            title = "Category",
-            selectedIcon = Icons.Filled.GridView,
-            unselectedIcon = Icons.Outlined.GridView,
-            route = "category"
-        ),
-        BottomNavItem(
-            title = "Profile",
-            selectedIcon = Icons.Filled.Person,
-            unselectedIcon = Icons.Outlined.Person,
-            route = "profile"
-        )
-    )
-
+    Column() {
+        HorizontalDivider(thickness = 0.3.dp, color = MaterialTheme.colorScheme.primary)
     NavigationBar(
-        containerColor = Color.White,
+        containerColor = MaterialTheme.colorScheme.background,
+        modifier = Modifier
+            .navigationBarsPadding()
+            .height(60.dp),
         tonalElevation = 0.dp,
-        modifier = Modifier.shadow(15.dp)
     ) {
-        items.forEach { item ->
-            val selected = currentRoute == item.route
-
+        bottomItems.forEach { item ->
             NavigationBarItem(
-                selected = selected,
-                onClick = {
-                    navController.navigate(item.route) {
-                        popUpTo(navController.graph.startDestinationId) {
-                            saveState = true
-                        }
-                        launchSingleTop = true
-                        restoreState = true
-                    }
-                },
+                selected = currentRoute == item.route,
+                onClick = { onNavigate(item.route) },
                 icon = {
                     Icon(
-                        imageVector = if (selected) item.selectedIcon else item.unselectedIcon,
-                        contentDescription = item.title
+                        imageVector = if (currentRoute == item.route) item.selectedIcon else item.unselectedIcon,
+                        contentDescription = item.label
                     )
-                },
-                label = {
-                    Text(
-                        text = item.title,
-                        fontSize = 12.sp
-                    )
-                },
+                }, label = { Text(item.label) },
+                alwaysShowLabel = true,
                 colors = NavigationBarItemDefaults.colors(
-                    selectedIconColor = Color.Black,
-                    selectedTextColor = Color.Black,
-                    unselectedIconColor = Color.Gray,
-                    unselectedTextColor = Color.Gray,
-                    indicatorColor = Color.Transparent
+                    indicatorColor = Color.Transparent,
+                    selectedIconColor = MaterialTheme.colorScheme.primary,
+                    unselectedIconColor = MaterialTheme.colorScheme.tertiary,
+                    selectedTextColor = MaterialTheme.colorScheme.primary,
+                    unselectedTextColor = MaterialTheme.colorScheme.tertiary
                 )
             )
         }
     }
+    }
 }
+
+

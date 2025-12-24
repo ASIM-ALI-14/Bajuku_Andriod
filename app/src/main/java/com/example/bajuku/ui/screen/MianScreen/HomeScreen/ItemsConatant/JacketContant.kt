@@ -1,7 +1,7 @@
 package com.example.bajuku.ui.screen.MianScreen.HomeScreen.ItemsConatant
 
-import androidx.compose.foundation.gestures.scrollable
 import androidx.compose.foundation.layout.Arrangement
+import androidx.compose.foundation.layout.Box
 import androidx.compose.foundation.layout.Column
 import androidx.compose.foundation.layout.Row
 import androidx.compose.foundation.layout.fillMaxWidth
@@ -14,10 +14,14 @@ import androidx.compose.material3.MaterialTheme
 import androidx.compose.runtime.Composable
 import androidx.compose.ui.Alignment
 import androidx.compose.ui.Modifier
+import androidx.compose.ui.res.painterResource
 import androidx.compose.ui.text.font.FontWeight
+import androidx.compose.ui.unit.dp
+import com.example.bajuku.R
 import com.example.bajuku.ui.screen.MianScreen.HomeScreen.Components.ItemCard
 import com.example.bajuku.ui.theme.HorizontalSpacingM
 import com.example.bajuku.ui.theme.screenHorizontal
+import com.example.bajuku.ui.theme.verticalSpacingEXL
 import com.example.bajuku.ui.theme.verticalSpacingL
 import com.example.bajuku.ui.theme.verticalSpacingM
 
@@ -26,7 +30,10 @@ fun Jacket() {
     Column(
         modifier = Modifier
             .padding(screenHorizontal)
+            .padding(bottom = 39.dp)
             .verticalScroll(rememberScrollState())
+
+
     ) {
         Row(
             horizontalArrangement = Arrangement.SpaceBetween,
@@ -48,9 +55,16 @@ fun Jacket() {
         }
         verticalSpacingM()
         Row() {
-            ItemCard()
+            Box() {
+
+                ItemCard(Image = painterResource(R.drawable.jacket_1))
+                SaleCard()
+            }
             HorizontalSpacingM()
-            ItemCard()
+            Box() {
+                ItemCard(Image = painterResource(R.drawable.jacket_2))
+                BestSaler()
+            }
         }
         verticalSpacingL()
         Row(
@@ -73,9 +87,9 @@ fun Jacket() {
         }
         verticalSpacingM()
         Row() {
-            ItemCard()
+            ItemCard(Image = painterResource(R.drawable.jacket_3))
             HorizontalSpacingM()
-            ItemCard()
+            ItemCard(Image = painterResource(R.drawable.jacket_4))
         }
         verticalSpacingL()
         Row(
@@ -98,10 +112,11 @@ fun Jacket() {
         }
         verticalSpacingM()
         Row() {
-            ItemCard()
+            ItemCard(Image = painterResource(R.drawable.jacket_5))
             HorizontalSpacingM()
-            ItemCard()
+            ItemCard(Image = painterResource(R.drawable.jacket_6))
         }
-        verticalSpacingL()
+//        Box(modifier = Modifier.height(120.dp))
+        verticalSpacingEXL()
     }
 }

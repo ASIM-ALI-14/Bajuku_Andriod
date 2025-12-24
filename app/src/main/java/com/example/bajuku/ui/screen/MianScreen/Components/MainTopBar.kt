@@ -1,5 +1,6 @@
 package com.example.bajuku.ui.screen.MianScreen.Components
 
+import androidx.compose.foundation.background
 import androidx.compose.foundation.border
 import androidx.compose.foundation.clickable
 import androidx.compose.foundation.layout.Arrangement
@@ -24,20 +25,22 @@ import androidx.compose.ui.graphics.Color
 import androidx.compose.ui.graphics.vector.ImageVector
 import androidx.compose.ui.text.input.KeyboardType
 import androidx.compose.ui.unit.dp
+import androidx.navigation.NavHostController
 import com.example.bajuku.ui.components.AppTextFieldBasic
+import com.example.bajuku.ui.components.SearchField
 import com.example.bajuku.ui.theme.HorizontalSpacingM
 import com.example.bajuku.ui.theme.HorizontalSpacingS
 import com.example.bajuku.ui.theme.screenHorizontal
 
 @Composable
-fun HomeTopBar(value: String) {
+fun HomeTopBar(value: String, onSearch: () -> Unit) {
     Row(
         modifier = Modifier
             .fillMaxWidth()
             .padding(screenHorizontal)
             .systemBarsPadding()
     ) {
-        AppTextFieldBasic(
+        SearchField(
             value = value,
             onValueChange = {},
             keyboardType = KeyboardType.Text,
@@ -45,7 +48,10 @@ fun HomeTopBar(value: String) {
             leadingIcon = Icons.Filled.Search,
             modifier = Modifier.weight(1f),
             Background = Color.Transparent,
-            border = MaterialTheme.colorScheme.outline.copy(alpha = 0.7f)
+            border = MaterialTheme.colorScheme.outline.copy(alpha = 0.7f),
+            onTrailingIconClick = {
+                onSearch()
+            }
         )
         HorizontalSpacingM()
         CompactIconButton(

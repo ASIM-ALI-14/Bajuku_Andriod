@@ -35,11 +35,13 @@ import com.example.bajuku.ui.theme.verticalSpacingL
 import com.example.bajuku.ui.theme.verticalSpacingM
 import com.example.bajuku.ui.theme.verticalSpacingS
 
-@Preview
 @Composable
-fun HomeContant() {
+fun HomeContant(onclciksearch: Boolean) {
     val tabs = listOf("Jacket", "Pants", "Shoes", "Dress", "Accessories")
     var selectedTabIndex by remember { mutableStateOf(0) }
+    if (onclciksearch) {
+        SearchContant()
+    } else {
     Column(modifier = Modifier.fillMaxWidth()) {
         TabRow(
             selectedTabIndex = selectedTabIndex,
@@ -88,6 +90,7 @@ fun HomeContant() {
         }
         verticalSpacingM()
         BannerCarousel()
+
         when (selectedTabIndex) {
             0 -> Jacket()
             1 -> Pants()
@@ -95,6 +98,8 @@ fun HomeContant() {
             3 -> Dress()
             4 -> Accessories()
         }
+    }
+
     }
 }
 
