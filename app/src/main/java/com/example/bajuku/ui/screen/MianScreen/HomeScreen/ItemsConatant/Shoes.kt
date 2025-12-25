@@ -14,7 +14,6 @@ import androidx.compose.ui.Alignment
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.res.painterResource
 import androidx.compose.ui.text.font.FontWeight
-import androidx.compose.ui.unit.dp
 import com.example.bajuku.R
 import com.example.bajuku.ui.screen.MianScreen.HomeScreen.Components.ItemCard
 import com.example.bajuku.ui.theme.HorizontalSpacingM
@@ -24,11 +23,10 @@ import com.example.bajuku.ui.theme.verticalSpacingL
 import com.example.bajuku.ui.theme.verticalSpacingM
 
 @Composable
-fun Shoes() {
+fun Shoes(onclick: () -> Unit) {
     Column(
         modifier = Modifier
-            .padding(screenHorizontal)
-            .padding(bottom = 39.dp)
+            .padding(horizontal = screenHorizontal)
             .verticalScroll(rememberScrollState())
     ) {
         Row(
@@ -52,12 +50,12 @@ fun Shoes() {
         verticalSpacingM()
         Row() {
             Box() {
-                ItemCard(Image = painterResource(R.drawable.shoes_1))
+                ItemCard(Image = painterResource(R.drawable.shoes_1), onclick)
                 BestSaler()
             }
             HorizontalSpacingM()
             Box() {
-                ItemCard(Image = painterResource(R.drawable.shoes_2))
+                ItemCard(Image = painterResource(R.drawable.shoes_2), onclick)
                 SaleCard()
             }
         }
@@ -82,9 +80,9 @@ fun Shoes() {
         }
         verticalSpacingM()
         Row() {
-            ItemCard(Image = painterResource(R.drawable.shoes_3))
+            ItemCard(Image = painterResource(R.drawable.shoes_3), onclick)
             HorizontalSpacingM()
-            ItemCard(Image = painterResource(R.drawable.shoes_4))
+            ItemCard(Image = painterResource(R.drawable.shoes_4), onclick)
         }
         verticalSpacingL()
         Row(
@@ -107,9 +105,9 @@ fun Shoes() {
         }
         verticalSpacingM()
         Row() {
-            ItemCard(Image = painterResource(R.drawable.shoes_4))
+            ItemCard(Image = painterResource(R.drawable.shoes_4), onclick)
             HorizontalSpacingM()
-            ItemCard(Image = painterResource(R.drawable.shoes_3))
+            ItemCard(Image = painterResource(R.drawable.shoes_3), onclick)
         }
         verticalSpacingEXL()
     }

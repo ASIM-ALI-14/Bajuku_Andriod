@@ -18,6 +18,11 @@ import androidx.compose.material.icons.outlined.ShoppingBag
 import androidx.compose.material3.Icon
 import androidx.compose.material3.MaterialTheme
 import androidx.compose.runtime.Composable
+import androidx.compose.runtime.getValue
+import androidx.compose.runtime.mutableStateOf
+import androidx.compose.runtime.remember
+import androidx.compose.runtime.saveable.rememberSaveable
+import androidx.compose.runtime.setValue
 import androidx.compose.ui.Alignment
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.draw.clip
@@ -33,26 +38,32 @@ import com.example.bajuku.ui.theme.HorizontalSpacingS
 import com.example.bajuku.ui.theme.screenHorizontal
 
 @Composable
-fun HomeTopBar(value: String, onSearch: () -> Unit) {
+fun HomeTopBar(isSearchMode: () -> Unit, searchQuery: String, onValueChange: (String) -> Unit) {
+
     Row(
         modifier = Modifier
             .fillMaxWidth()
             .padding(screenHorizontal)
             .systemBarsPadding()
     ) {
+        Box(
+            modifier = Modifier
+                .weight(1f)
+                .clickable {
+                    isSearchMode()
+                }
+        ) {
         SearchField(
-            value = value,
-            onValueChange = {},
+            value = searchQuery,
+            onValueChange = onValueChange,
             keyboardType = KeyboardType.Text,
             placeholder = "Search or tab",
             leadingIcon = Icons.Filled.Search,
-            modifier = Modifier.weight(1f),
+            modifier = Modifier,
             Background = Color.Transparent,
             border = MaterialTheme.colorScheme.outline.copy(alpha = 0.7f),
-            onTrailingIconClick = {
-                onSearch()
-            }
         )
+        }
         HorizontalSpacingM()
         CompactIconButton(
             onClick = {},

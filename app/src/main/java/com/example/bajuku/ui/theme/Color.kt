@@ -54,4 +54,7 @@ object AppColors {
     val Blur40 = Color(0xFF1B51DB)
     val Blur20 = Color(0xFF2277F6)
 
+    val Star50 = Color(0xFFF4C51C)
+
+
 }

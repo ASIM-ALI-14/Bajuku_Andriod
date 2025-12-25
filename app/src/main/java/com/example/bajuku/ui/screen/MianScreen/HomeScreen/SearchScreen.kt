@@ -11,7 +11,9 @@ import androidx.compose.foundation.layout.fillMaxSize
 import androidx.compose.foundation.layout.fillMaxWidth
 import androidx.compose.foundation.layout.padding
 import androidx.compose.foundation.layout.size
+import androidx.compose.foundation.rememberScrollState
 import androidx.compose.foundation.shape.RoundedCornerShape
+import androidx.compose.foundation.verticalScroll
 import androidx.compose.material.icons.Icons
 import androidx.compose.material.icons.outlined.ArrowOutward
 import androidx.compose.material.icons.outlined.Clear
@@ -29,175 +31,248 @@ import androidx.compose.ui.graphics.Color
 import androidx.compose.ui.layout.ContentScale
 import androidx.compose.ui.res.painterResource
 import androidx.compose.ui.text.font.FontWeight
-import androidx.compose.ui.tooling.preview.Preview
 import androidx.compose.ui.unit.dp
 import androidx.compose.ui.unit.sp
-import androidx.navigation.NavHostController
 import com.example.bajuku.R
 import com.example.bajuku.ui.theme.AppColors
+import com.example.bajuku.ui.theme.HorizontalSpacingES
 import com.example.bajuku.ui.theme.HorizontalSpacingM
 import com.example.bajuku.ui.theme.HorizontalSpacingS
 import com.example.bajuku.ui.theme.screenHorizontal
-import com.example.bajuku.ui.theme.verticalSpacingES
+import com.example.bajuku.ui.theme.verticalSpacingEXL
 import com.example.bajuku.ui.theme.verticalSpacingL
 import com.example.bajuku.ui.theme.verticalSpacingM
 import com.example.bajuku.ui.theme.verticalSpacingS
+import com.example.bajuku.ui.theme.verticalSpacingXS
 
 @Composable
-fun SearchContant() {
+fun SearchContant(
+    isTyping: Boolean
+) {
     Column(
         modifier = Modifier
             .fillMaxSize()
             .background(Color(0xFFFAFAFA))
+            .verticalScroll(rememberScrollState())
     ) {
         HorizontalDivider(thickness = 1.4.dp, color = MaterialTheme.colorScheme.primaryContainer)
-        verticalSpacingL()
-        Column() {
-            SearchContantRow(text = "Seamless", num = 12)
-            verticalSpacingES()
-            HorizontalDivider(thickness = 1.dp, color = MaterialTheme.colorScheme.primaryContainer)
-            verticalSpacingS()
-            SearchContantRow(text = "Superstar Shoes", num = 12)
-            verticalSpacingES()
-            HorizontalDivider(thickness = 1.dp, color = MaterialTheme.colorScheme.primaryContainer)
-            verticalSpacingS()
-            SearchContantRow(text = "Seamless", num = 12)
-            verticalSpacingES()
-            HorizontalDivider(thickness = 1.dp, color = MaterialTheme.colorScheme.primaryContainer)
-            verticalSpacingS()
-            SearchContantRow(text = "Superstar Shoes", num = 12)
-            verticalSpacingES()
-            HorizontalDivider(thickness = 1.dp, color = MaterialTheme.colorScheme.primaryContainer)
-            Row(
-                modifier = Modifier.fillMaxWidth(),
-                horizontalArrangement = Arrangement.SpaceBetween,
-                verticalAlignment = Alignment.CenterVertically
-            ) {
-                Text(
-                    text = "Top Product",
-                    style = MaterialTheme.typography.headlineMedium,
-                    color = MaterialTheme.colorScheme.primary,
-                    fontWeight = FontWeight.SemiBold
+        verticalSpacingM()
+        if (isTyping) {
+            Column(modifier = Modifier.padding(horizontal = screenHorizontal)) {
+                SearchContantRow(text = "Seamless", num = 12)
+                verticalSpacingXS()
+                HorizontalDivider(
+                    thickness = 1.dp,
+                    color = MaterialTheme.colorScheme.primaryContainer
                 )
+                verticalSpacingS()
+                SearchContantRow(text = "Superstar Shoes", num = 12)
+                verticalSpacingXS()
+                HorizontalDivider(
+                    thickness = 1.dp,
+                    color = MaterialTheme.colorScheme.primaryContainer
+                )
+                verticalSpacingS()
+                SearchContantRow(text = "Seamless", num = 12)
+                verticalSpacingXS()
+                HorizontalDivider(
+                    thickness = 1.dp,
+                    color = MaterialTheme.colorScheme.primaryContainer
+                )
+                verticalSpacingS()
+                SearchContantRow(text = "Superstar Shoes", num = 12)
+                verticalSpacingXS()
+                HorizontalDivider(
+                    thickness = 1.dp,
+                    color = MaterialTheme.colorScheme.primaryContainer
+                )
+                verticalSpacingM()
+                Row(
+                    modifier = Modifier.fillMaxWidth(),
+                    horizontalArrangement = Arrangement.SpaceBetween,
+                    verticalAlignment = Alignment.CenterVertically
+                ) {
+                    Text(
+                        text = "Top Product",
+                        style = MaterialTheme.typography.headlineMedium,
+                        color = MaterialTheme.colorScheme.primary,
+                        fontWeight = FontWeight.SemiBold
+                    )
+                    Text(
+                        text = "see All",
+                        style = MaterialTheme.typography.labelLarge,
+                        color = MaterialTheme.colorScheme.onBackground
+                    )
+                }
+                verticalSpacingM()
+                TopSearchRow()
+                verticalSpacingS()
+                HorizontalDivider(
+                    thickness = 1.dp,
+                    color = MaterialTheme.colorScheme.primaryContainer
+                )
+                verticalSpacingS()
+                TopSearchRow()
+                verticalSpacingS()
+                HorizontalDivider(
+                    thickness = 1.dp,
+                    color = MaterialTheme.colorScheme.primaryContainer
+                )
+                verticalSpacingS()
+                TopSearchRow()
+                verticalSpacingS()
+                HorizontalDivider(
+                    thickness = 1.dp,
+                    color = MaterialTheme.colorScheme.primaryContainer
+                )
+                verticalSpacingS()
+                TopSearchRow()
+                verticalSpacingS()
+                HorizontalDivider(
+                    thickness = 1.dp,
+                    color = MaterialTheme.colorScheme.primaryContainer
+                )
+                verticalSpacingM()
+                Row(
+                    modifier = Modifier.fillMaxWidth(),
+                    horizontalArrangement = Arrangement.SpaceBetween,
+                    verticalAlignment = Alignment.CenterVertically
+                ) {
+                    Text(
+                        text = "Related Search",
+                        style = MaterialTheme.typography.headlineMedium,
+                        color = MaterialTheme.colorScheme.primary,
+                        fontWeight = FontWeight.SemiBold
+                    )
+                    Text(
+                        text = "see All",
+                        style = MaterialTheme.typography.labelLarge,
+                        color = MaterialTheme.colorScheme.onBackground
+                    )
+                }
+                verticalSpacingM()
+                Row() {
+                    RelatedRow()
+                    HorizontalSpacingS()
+                    RelatedRow()
+                }
+                verticalSpacingS()
+                Row() {
+                    RelatedRow()
+                    HorizontalSpacingM()
+                    RelatedRow()
+                }
+
+
+            }
+        } else {
+            Column(modifier = Modifier.padding(horizontal = screenHorizontal)) {
+                Row(
+                    modifier = Modifier.fillMaxWidth(),
+                    horizontalArrangement = Arrangement.SpaceBetween,
+                    verticalAlignment = Alignment.CenterVertically
+                ) {
+                    Text(
+                        text = "Recent Search",
+                        style = MaterialTheme.typography.headlineMedium,
+                        color = MaterialTheme.colorScheme.primary,
+                        fontWeight = FontWeight.SemiBold
+                    )
+                    Text(
+                        text = "Remove All",
+                        style = MaterialTheme.typography.labelLarge,
+                        color = MaterialTheme.colorScheme.onBackground
+                    )
+                }
+                verticalSpacingS()
+                Row(verticalAlignment = Alignment.CenterVertically) {
+                    Row(
+                        verticalAlignment = Alignment.CenterVertically,
+                        modifier = Modifier.clickable(onClick = {})
+                    ) {
+                        Icon(
+                            Icons.Outlined.Restore,
+                            contentDescription = null,
+                            tint = MaterialTheme.colorScheme.tertiary
+                        )
+                        HorizontalSpacingS()
+                        Text(
+                            text = "Superstar Shoes",
+                            style = MaterialTheme.typography.labelLarge,
+                            color = MaterialTheme.colorScheme.surfaceVariant
+                        )
+                    }
+                    Spacer(modifier = Modifier.weight(1f))
+                    IconButton(onClick = {}) {
+                        Icon(
+                            Icons.Outlined.Clear,
+                            contentDescription = null,
+                            tint = MaterialTheme.colorScheme.primary
+                        )
+                    }
+                }
+                Row(verticalAlignment = Alignment.CenterVertically) {
+                    Row(
+                        verticalAlignment = Alignment.CenterVertically,
+                        modifier = Modifier.clickable(onClick = {})
+                    ) {
+                        Icon(
+                            Icons.Outlined.Restore,
+                            contentDescription = null,
+                            tint = MaterialTheme.colorScheme.tertiary
+                        )
+                        HorizontalSpacingS()
+                        Text(
+                            text = "Reusable Tote Bag (Medium)",
+                            style = MaterialTheme.typography.labelLarge,
+                            color = MaterialTheme.colorScheme.surfaceVariant
+                        )
+                    }
+                    Spacer(modifier = Modifier.weight(1f))
+                    IconButton(onClick = {}) {
+                        Icon(
+                            Icons.Outlined.Clear,
+                            contentDescription = null,
+                            tint = MaterialTheme.colorScheme.primary
+                        )
+                    }
+                }
+                Row(verticalAlignment = Alignment.CenterVertically) {
+                    Row(
+                        verticalAlignment = Alignment.CenterVertically,
+                        modifier = Modifier.clickable(onClick = {})
+                    ) {
+                        Icon(
+                            Icons.Outlined.Restore,
+                            contentDescription = null,
+                            tint = MaterialTheme.colorScheme.tertiary
+                        )
+                        HorizontalSpacingS()
+                        Text(
+                            text = "Adi break Pants",
+                            style = MaterialTheme.typography.labelLarge,
+                            color = MaterialTheme.colorScheme.surfaceVariant
+                        )
+                    }
+                    Spacer(modifier = Modifier.weight(1f))
+                    IconButton(onClick = {}) {
+                        Icon(
+                            Icons.Outlined.Clear,
+                            contentDescription = null,
+                            tint = MaterialTheme.colorScheme.primary
+                        )
+                    }
+                }
+                verticalSpacingM()
                 Text(
-                    text = "see All",
+                    text = "View all search history (10)",
                     style = MaterialTheme.typography.labelLarge,
-                    color = MaterialTheme.colorScheme.onBackground
+                    fontWeight = FontWeight.Medium,
+                    color = AppColors.Blur20
                 )
             }
-            verticalSpacingS()
-            TopSearchRow()
-
         }
-
-
-
-
-        Column(modifier = Modifier.padding(horizontal = screenHorizontal)) {
-            Row(
-                modifier = Modifier.fillMaxWidth(),
-                horizontalArrangement = Arrangement.SpaceBetween,
-                verticalAlignment = Alignment.CenterVertically
-            ) {
-                Text(
-                    text = "Recent Search",
-                    style = MaterialTheme.typography.headlineMedium,
-                    color = MaterialTheme.colorScheme.primary,
-                    fontWeight = FontWeight.SemiBold
-                )
-                Text(
-                    text = "Remove All",
-                    style = MaterialTheme.typography.labelLarge,
-                    color = MaterialTheme.colorScheme.onBackground
-                )
-            }
-            verticalSpacingS()
-            Row(verticalAlignment = Alignment.CenterVertically) {
-                Row(
-                    verticalAlignment = Alignment.CenterVertically,
-                    modifier = Modifier.clickable(onClick = {})
-                ) {
-                    Icon(
-                        Icons.Outlined.Restore,
-                        contentDescription = null,
-                        tint = MaterialTheme.colorScheme.tertiary
-                    )
-                    HorizontalSpacingS()
-                    Text(
-                        text = "Superstar Shoes",
-                        style = MaterialTheme.typography.labelLarge,
-                        color = MaterialTheme.colorScheme.surfaceVariant
-                    )
-                }
-                Spacer(modifier = Modifier.weight(1f))
-                IconButton(onClick = {}) {
-                    Icon(
-                        Icons.Outlined.Clear,
-                        contentDescription = null,
-                        tint = MaterialTheme.colorScheme.primary
-                    )
-                }
-            }
-            Row(verticalAlignment = Alignment.CenterVertically) {
-                Row(
-                    verticalAlignment = Alignment.CenterVertically,
-                    modifier = Modifier.clickable(onClick = {})
-                ) {
-                    Icon(
-                        Icons.Outlined.Restore,
-                        contentDescription = null,
-                        tint = MaterialTheme.colorScheme.tertiary
-                    )
-                    HorizontalSpacingS()
-                    Text(
-                        text = "Reusable Tote Bag (Medium)",
-                        style = MaterialTheme.typography.labelLarge,
-                        color = MaterialTheme.colorScheme.surfaceVariant
-                    )
-                }
-                Spacer(modifier = Modifier.weight(1f))
-                IconButton(onClick = {}) {
-                    Icon(
-                        Icons.Outlined.Clear,
-                        contentDescription = null,
-                        tint = MaterialTheme.colorScheme.primary
-                    )
-                }
-            }
-            Row(verticalAlignment = Alignment.CenterVertically) {
-                Row(
-                    verticalAlignment = Alignment.CenterVertically,
-                    modifier = Modifier.clickable(onClick = {})
-                ) {
-                    Icon(
-                        Icons.Outlined.Restore,
-                        contentDescription = null,
-                        tint = MaterialTheme.colorScheme.tertiary
-                    )
-                    HorizontalSpacingS()
-                    Text(
-                        text = "Adi break Pants",
-                        style = MaterialTheme.typography.labelLarge,
-                        color = MaterialTheme.colorScheme.surfaceVariant
-                    )
-                }
-                Spacer(modifier = Modifier.weight(1f))
-                IconButton(onClick = {}) {
-                    Icon(
-                        Icons.Outlined.Clear,
-                        contentDescription = null,
-                        tint = MaterialTheme.colorScheme.primary
-                    )
-                }
-            }
-            verticalSpacingM()
-            Text(
-                text = "View all search history (10)",
-                style = MaterialTheme.typography.labelLarge,
-                fontWeight = FontWeight.Medium,
-                color = AppColors.Blur20
-            )
-        }
+        verticalSpacingEXL()
     }
 
 
@@ -205,7 +280,7 @@ fun SearchContant() {
 
 @Composable
 fun SearchContantRow(text: String, num: Int) {
-    Row() {
+    Row(verticalAlignment = Alignment.CenterVertically) {
         Column() {
             Text(
                 text = text,
@@ -221,16 +296,15 @@ fun SearchContantRow(text: String, num: Int) {
                 fontWeight = FontWeight.Medium,
                 lineHeight = 12.sp
             )
-            Spacer(modifier = Modifier.weight(1f))
-            IconButton(onClick = {}) {
-                Icon(
-                    Icons.Outlined.ArrowOutward,
-                    contentDescription = null,
-                    tint = MaterialTheme.colorScheme.primary
-                )
 
-            }
-
+        }
+        Spacer(modifier = Modifier.weight(1f))
+        IconButton(onClick = {}) {
+            Icon(
+                Icons.Outlined.ArrowOutward,
+                contentDescription = null,
+                tint = MaterialTheme.colorScheme.primary
+            )
 
         }
     }
@@ -238,7 +312,7 @@ fun SearchContantRow(text: String, num: Int) {
 
 @Composable
 fun TopSearchRow() {
-    Row() {
+    Row(verticalAlignment = Alignment.CenterVertically) {
         Image(
             painter = painterResource(R.drawable.jacket_2),
             contentDescription = null,
@@ -255,12 +329,52 @@ fun TopSearchRow() {
                 color = MaterialTheme.colorScheme.primary,
                 fontWeight = FontWeight.Medium
             )
-            verticalSpacingES()
+            verticalSpacingXS()
             Text(
                 text = "Jacket (334 stock)",
                 style = MaterialTheme.typography.labelLarge,
                 color = MaterialTheme.colorScheme.onBackground,
                 fontWeight = FontWeight.Normal
+            )
+        }
+    }
+}
+
+@Composable
+fun RelatedRow() {
+    Row(
+        modifier = Modifier
+            .background(Color(0xFFF5F5F5), RoundedCornerShape(10.dp))
+            .padding(end = 15.dp),
+        verticalAlignment = Alignment.CenterVertically
+    ) {
+        Image(
+            painter = painterResource(R.drawable.jacket_2),
+            contentDescription = null,
+            contentScale = ContentScale.Crop,
+            modifier = Modifier
+                .size(50.dp)
+                .clip(
+                    RoundedCornerShape(
+                        topStart = 5.dp,
+                        0.dp,
+                        bottomStart = 5.dp,
+                        bottomEnd = 0.dp
+                    )
+                )
+        )
+        HorizontalSpacingS()
+        Column() {
+            Text(
+                text = "Seamless Down",
+                style = MaterialTheme.typography.labelLarge,
+                fontWeight = FontWeight.SemiBold,
+                color = MaterialTheme.colorScheme.primary
+            )
+            Text(
+                text = "Parka", style = MaterialTheme.typography.labelLarge,
+                fontWeight = FontWeight.SemiBold,
+                color = MaterialTheme.colorScheme.primary
             )
         }
     }

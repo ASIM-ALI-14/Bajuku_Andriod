@@ -16,6 +16,7 @@ import androidx.compose.ui.Modifier
 import androidx.compose.ui.res.painterResource
 import androidx.compose.ui.text.font.FontWeight
 import androidx.compose.ui.unit.dp
+import androidx.navigation.NavHostController
 import com.example.bajuku.R
 import com.example.bajuku.ui.screen.MianScreen.HomeScreen.Components.ItemCard
 import com.example.bajuku.ui.theme.HorizontalSpacingM
@@ -25,11 +26,10 @@ import com.example.bajuku.ui.theme.verticalSpacingL
 import com.example.bajuku.ui.theme.verticalSpacingM
 
 @Composable
-fun Accessories() {
+fun Accessories(onclick: () -> Unit) {
     Column(
         modifier = Modifier
-            .padding(screenHorizontal)
-            .padding(bottom = 39.dp)
+            .padding(horizontal = screenHorizontal)
             .verticalScroll(rememberScrollState())
     ) {
         Row(
@@ -52,10 +52,10 @@ fun Accessories() {
         }
         verticalSpacingM()
         Row() {
-            ItemCard(Image = painterResource(R.drawable.acess_1))
+            ItemCard(Image = painterResource(R.drawable.acess_1), onclick)
             HorizontalSpacingM()
             Box() {
-                ItemCard(Image = painterResource(R.drawable.acess_2))
+                ItemCard(Image = painterResource(R.drawable.acess_2), onclick)
                 SaleCard()
             }
         }
@@ -81,11 +81,11 @@ fun Accessories() {
         verticalSpacingM()
         Row() {
             Box() {
-                ItemCard(Image = painterResource(R.drawable.acess_2))
+                ItemCard(Image = painterResource(R.drawable.acess_2), onclick)
                 BestSaler()
             }
             HorizontalSpacingM()
-            ItemCard(Image = painterResource(R.drawable.acess_1))
+            ItemCard(Image = painterResource(R.drawable.acess_1), onclick)
         }
         verticalSpacingL()
         Row(
@@ -108,9 +108,9 @@ fun Accessories() {
         }
         verticalSpacingM()
         Row() {
-            ItemCard(Image = painterResource(R.drawable.acess_2))
+            ItemCard(Image = painterResource(R.drawable.acess_2), onclick)
             HorizontalSpacingM()
-            ItemCard(Image = painterResource(R.drawable.acess_1))
+            ItemCard(Image = painterResource(R.drawable.acess_1), onclick)
         }
         verticalSpacingEXL()
     }

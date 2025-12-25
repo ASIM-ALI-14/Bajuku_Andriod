@@ -25,11 +25,11 @@ fun verticalSpacingM() {
 
 @Composable
 fun verticalSpacingS() {
-    Spacer(modifier = Modifier.height(8.dp))
+    Spacer(modifier = Modifier.height(11.dp))
 }
 
 @Composable
-fun verticalSpacingES() {
+fun verticalSpacingXS() {
     Spacer(modifier = Modifier.height(4.dp))
 }
 

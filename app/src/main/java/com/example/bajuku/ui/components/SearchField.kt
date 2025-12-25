@@ -46,7 +46,6 @@ fun SearchField(
     leadingIcon: ImageVector? = null,
     Background: Color = MaterialTheme.colorScheme.onSurfaceVariant,
     border: Color = MaterialTheme.colorScheme.outline,
-    onTrailingIconClick: () -> Unit = {}
 ) {
     var passwordVisible by remember { mutableStateOf(false) }
     val isPassword = keyboardType == KeyboardType.Password
@@ -75,7 +74,7 @@ fun SearchField(
                     modifier = Modifier
                         .size(20.dp)
                         .clip(CircleShape)
-                        .clickable(onClick = { onTrailingIconClick() })
+//                        .clickable(onClick = { onTrailingIconClick() })
                 )
             }
             Box(
@@ -108,21 +107,6 @@ fun SearchField(
                     cursorBrush = SolidColor(MaterialTheme.colorScheme.onBackground),
                     modifier = Modifier.fillMaxWidth()
                 )
-            }
-
-            if (isPassword) {
-                IconButton(
-                    onClick = { passwordVisible = !passwordVisible },
-                    modifier = Modifier.size(24.dp)
-                ) {
-                    Icon(
-                        imageVector = if (passwordVisible) Icons.Outlined.Visibility
-                        else Icons.Outlined.VisibilityOff,
-                        contentDescription = null,
-                        tint = MaterialTheme.colorScheme.onBackground,
-                        modifier = Modifier.size(20.dp)
-                    )
-                }
             }
         }
     }

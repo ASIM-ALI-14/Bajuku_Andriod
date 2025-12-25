@@ -26,14 +26,11 @@ import com.example.bajuku.ui.theme.verticalSpacingL
 import com.example.bajuku.ui.theme.verticalSpacingM
 
 @Composable
-fun Jacket() {
+fun Jacket(onclick: () -> Unit) {
     Column(
         modifier = Modifier
-            .padding(screenHorizontal)
-            .padding(bottom = 39.dp)
+            .padding(horizontal = screenHorizontal)
             .verticalScroll(rememberScrollState())
-
-
     ) {
         Row(
             horizontalArrangement = Arrangement.SpaceBetween,
@@ -57,12 +54,12 @@ fun Jacket() {
         Row() {
             Box() {
 
-                ItemCard(Image = painterResource(R.drawable.jacket_1))
+                ItemCard(Image = painterResource(R.drawable.jacket_1), onclick)
                 SaleCard()
             }
             HorizontalSpacingM()
             Box() {
-                ItemCard(Image = painterResource(R.drawable.jacket_2))
+                ItemCard(Image = painterResource(R.drawable.jacket_2), onclick)
                 BestSaler()
             }
         }
@@ -87,9 +84,9 @@ fun Jacket() {
         }
         verticalSpacingM()
         Row() {
-            ItemCard(Image = painterResource(R.drawable.jacket_3))
+            ItemCard(Image = painterResource(R.drawable.jacket_3), onclick)
             HorizontalSpacingM()
-            ItemCard(Image = painterResource(R.drawable.jacket_4))
+            ItemCard(Image = painterResource(R.drawable.jacket_4), onclick)
         }
         verticalSpacingL()
         Row(
@@ -112,9 +109,9 @@ fun Jacket() {
         }
         verticalSpacingM()
         Row() {
-            ItemCard(Image = painterResource(R.drawable.jacket_5))
+            ItemCard(Image = painterResource(R.drawable.jacket_5), onclick)
             HorizontalSpacingM()
-            ItemCard(Image = painterResource(R.drawable.jacket_6))
+            ItemCard(Image = painterResource(R.drawable.jacket_6), onclick)
         }
 //        Box(modifier = Modifier.height(120.dp))
         verticalSpacingEXL()

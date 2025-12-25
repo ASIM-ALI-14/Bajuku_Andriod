@@ -24,11 +24,10 @@ import com.example.bajuku.ui.theme.verticalSpacingL
 import com.example.bajuku.ui.theme.verticalSpacingM
 
 @Composable
-fun Dress() {
+fun Dress(onclick: () -> Unit) {
     Column(
         modifier = Modifier
-            .padding(screenHorizontal)
-            .padding(bottom = 39.dp)
+            .padding(horizontal = screenHorizontal)
             .verticalScroll(rememberScrollState())
     ) {
         Row(
@@ -51,10 +50,10 @@ fun Dress() {
         }
         verticalSpacingM()
         Row() {
-            ItemCard(Image = painterResource(R.drawable.dress_1))
+            ItemCard(Image = painterResource(R.drawable.dress_1), onclick)
             HorizontalSpacingM()
             Box() {
-                ItemCard(Image = painterResource(R.drawable.dress_2))
+                ItemCard(Image = painterResource(R.drawable.dress_2), onclick)
                 SaleCard()
             }
         }
@@ -80,11 +79,11 @@ fun Dress() {
         verticalSpacingM()
         Row() {
             Box() {
-                ItemCard(Image = painterResource(R.drawable.dress_2))
+                ItemCard(Image = painterResource(R.drawable.dress_2), onclick)
                 BestSaler()
             }
             HorizontalSpacingM()
-            ItemCard(Image = painterResource(R.drawable.dress_1))
+            ItemCard(Image = painterResource(R.drawable.dress_1), onclick)
         }
         verticalSpacingL()
         Row(
@@ -107,9 +106,9 @@ fun Dress() {
         }
         verticalSpacingM()
         Row() {
-            ItemCard(Image = painterResource(R.drawable.dress_2))
+            ItemCard(Image = painterResource(R.drawable.dress_2), onclick)
             HorizontalSpacingM()
-            ItemCard(Image = painterResource(R.drawable.dress_1))
+            ItemCard(Image = painterResource(R.drawable.dress_1), onclick)
         }
         verticalSpacingEXL()
     }

@@ -23,6 +23,7 @@ import androidx.compose.ui.graphics.Color
 import androidx.compose.ui.text.font.FontWeight
 import androidx.compose.ui.tooling.preview.Preview
 import androidx.compose.ui.unit.dp
+import androidx.navigation.NavHostController
 import com.example.bajuku.ui.screen.MianScreen.HomeScreen.Components.BannerCarousel
 import com.example.bajuku.ui.screen.MianScreen.HomeScreen.Components.ItemCard
 import com.example.bajuku.ui.screen.MianScreen.HomeScreen.ItemsConatant.Accessories
@@ -36,69 +37,73 @@ import com.example.bajuku.ui.theme.verticalSpacingM
 import com.example.bajuku.ui.theme.verticalSpacingS
 
 @Composable
-fun HomeContant(onclciksearch: Boolean) {
+fun HomeContant(
+    onclciksearch: Boolean, searchQuery: String, navHostController: NavHostController
+) {
     val tabs = listOf("Jacket", "Pants", "Shoes", "Dress", "Accessories")
     var selectedTabIndex by remember { mutableStateOf(0) }
     if (onclciksearch) {
-        SearchContant()
+        SearchContant(
+            isTyping = searchQuery.isNotEmpty()
+        )
     } else {
-    Column(modifier = Modifier.fillMaxWidth()) {
-        TabRow(
-            selectedTabIndex = selectedTabIndex,
-            containerColor = Color.Transparent,
-            contentColor = MaterialTheme.colorScheme.primary,
-            indicator = { tabPositions ->
-                Box(
-                    modifier = Modifier
-                        .tabIndicatorOffset(tabPositions[selectedTabIndex])
-                        .fillMaxWidth()
-                        .height(1.5.dp)
-                        .padding(horizontal = 8.dp)
-                        .background(
-                            color = MaterialTheme.colorScheme.primary,
-                            shape = RoundedCornerShape(70)
-                        )
-                )
-            },
-            divider = {
-                Divider(
-                    thickness = 1.2.dp,
-                    color = MaterialTheme.colorScheme.primaryContainer
-                )
+        Column(modifier = Modifier.fillMaxWidth()) {
+            TabRow(
+                selectedTabIndex = selectedTabIndex,
+                containerColor = Color.Transparent,
+                contentColor = MaterialTheme.colorScheme.primary,
+                indicator = { tabPositions ->
+                    Box(
+                        modifier = Modifier
+                            .tabIndicatorOffset(tabPositions[selectedTabIndex])
+                            .fillMaxWidth()
+                            .height(1.5.dp)
+                            .padding(horizontal = 8.dp)
+                            .background(
+                                color = MaterialTheme.colorScheme.primary,
+                                shape = RoundedCornerShape(70)
+                            )
+                    )
+                },
+                divider = {
+                    Divider(
+                        thickness = 1.2.dp,
+                        color = MaterialTheme.colorScheme.primaryContainer
+                    )
+                }
+            ) {
+                tabs.forEachIndexed { index, title ->
+                    val isSelected = selectedTabIndex == index
+
+                    Tab(
+                        selected = isSelected,
+                        onClick = { selectedTabIndex = index },
+                        selectedContentColor = MaterialTheme.colorScheme.primary,
+                        unselectedContentColor = MaterialTheme.colorScheme.tertiary,
+                        text = {
+                            Text(
+                                text = title,
+                                style = MaterialTheme.typography.labelLarge,
+                                fontWeight = FontWeight.SemiBold,
+                                maxLines = 1,
+                                softWrap = false
+                            )
+
+                        }
+                    )
+                }
             }
-        ) {
-            tabs.forEachIndexed { index, title ->
-                val isSelected = selectedTabIndex == index
+            verticalSpacingM()
+            BannerCarousel()
 
-                Tab(
-                    selected = isSelected,
-                    onClick = { selectedTabIndex = index },
-                    selectedContentColor = MaterialTheme.colorScheme.primary,
-                    unselectedContentColor = MaterialTheme.colorScheme.tertiary,
-                    text = {
-                        Text(
-                            text = title,
-                            style = MaterialTheme.typography.labelLarge,
-                            fontWeight = FontWeight.SemiBold,
-                            maxLines = 1,
-                            softWrap = false
-                        )
-
-                    }
-                )
+            when (selectedTabIndex) {
+                0 -> Jacket({ navHostController.navigate("ItemDetail") })
+                1 -> Pants({ navHostController.navigate("ItemDetail") })
+                2 -> Shoes({ navHostController.navigate("ItemDetail") })
+                3 -> Dress({ navHostController.navigate("ItemDetail") })
+                4 -> Accessories({ navHostController.navigate("ItemDetail") })
             }
         }
-        verticalSpacingM()
-        BannerCarousel()
-
-        when (selectedTabIndex) {
-            0 -> Jacket()
-            1 -> Pants()
-            2 -> Shoes()
-            3 -> Dress()
-            4 -> Accessories()
-        }
-    }
 
     }
 }
