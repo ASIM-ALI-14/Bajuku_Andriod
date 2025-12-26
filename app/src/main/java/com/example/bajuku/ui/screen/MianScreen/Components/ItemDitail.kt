@@ -11,6 +11,7 @@ import androidx.compose.foundation.layout.IntrinsicSize
 import androidx.compose.foundation.layout.Row
 import androidx.compose.foundation.layout.Spacer
 import androidx.compose.foundation.layout.fillMaxHeight
+import androidx.compose.foundation.layout.fillMaxSize
 import androidx.compose.foundation.layout.fillMaxWidth
 import androidx.compose.foundation.layout.height
 import androidx.compose.foundation.layout.padding
@@ -32,6 +33,7 @@ import androidx.compose.material3.IconButton
 import androidx.compose.material3.MaterialTheme
 import androidx.compose.material3.Scaffold
 import androidx.compose.material3.Text
+import androidx.compose.material3.TextButton
 import androidx.compose.runtime.Composable
 import androidx.compose.runtime.getValue
 import androidx.compose.runtime.mutableStateOf
@@ -48,6 +50,7 @@ import androidx.compose.ui.text.style.TextAlign
 import androidx.compose.ui.text.style.TextDecoration
 import androidx.compose.ui.unit.dp
 import androidx.compose.ui.unit.sp
+import androidx.compose.ui.window.Dialog
 import com.example.bajuku.R
 import com.example.bajuku.ui.components.NotSelectedButton
 import com.example.bajuku.ui.components.SelectedButton
@@ -66,7 +69,7 @@ import com.example.bajuku.ui.theme.verticalSpacingS
 import com.example.bajuku.ui.theme.verticalSpacingXS
 
 @Composable
-fun ItemDetail() {
+fun ItemDetail(onClick: () -> Unit) {
     val productImages = listOf(
         R.drawable.jacket_1,
         R.drawable.jacket_2,
@@ -82,7 +85,10 @@ fun ItemDetail() {
     )
     var selectedSize by remember { mutableStateOf(SizeProduct[0]) }
     var selectedImage by remember { mutableStateOf(productImages[0]) }
-    Scaffold(topBar = { ItemTopBar() }, bottomBar = { ItemBottomBar() }) { innerPadding ->
+    var showDialog by remember { mutableStateOf(false) }
+    Scaffold(
+        topBar = { ItemTopBar() },
+        bottomBar = { ItemBottomBar({ showDialog = true }) }) { innerPadding ->
         Column(
             modifier = Modifier
                 .padding(innerPadding)
@@ -502,8 +508,59 @@ fun ItemDetail() {
 
             }
         }
+        if (showDialog) {
+            Dialog(
+                onDismissRequest = { showDialog = false }
+            ) {
+                Card(
+                    modifier = Modifier
+                        .fillMaxWidth()
+                        .height(130.dp),
+                    shape = RoundedCornerShape(26.dp),
+                    colors = CardDefaults.cardColors(
+                        containerColor = MaterialTheme.colorScheme.background
+                    )
+                ) {
+                    Column(
+                        modifier = Modifier
+                            .fillMaxSize(),
+                        horizontalAlignment = Alignment.CenterHorizontally,
+                        verticalArrangement = Arrangement.Center
+                    ) {
+                        Text(
+                            text = "The product has been successfully added to your bag",
+                            textAlign = TextAlign.Center,
+                            style = MaterialTheme.typography.headlineSmall,
+                            color = MaterialTheme.colorScheme.primary,
+                            fontWeight = FontWeight.SemiBold,
+                            modifier = Modifier.padding(horizontal = screenHorizontal)
+                        )
+                        verticalSpacingS()
+                        HorizontalDivider(
+                            thickness = 1.7.dp,
+                            color = MaterialTheme.colorScheme.primaryContainer
+                        )
+                        TextButton(
+                            onClick = {
+                                showDialog = false
+                                onClick()
+                            }
+                        ) {
+                            Text(
+                                "Check now",
+                                style = MaterialTheme.typography.headlineSmall,
+                                color = AppColors.Blur20,
+                                fontWeight = FontWeight.SemiBold
+                            )
+                        }
+                    }
+                }
+            }
+        }
+
     }
 }
+
 
 @Composable
 fun ItemTopBar() {
@@ -536,11 +593,14 @@ fun ItemTopBar() {
                     MaterialTheme.colorScheme.tertiary
             )
         }
+
+
     }
 }
 
+
 @Composable
-fun ItemBottomBar() {
+fun ItemBottomBar(onClick: () -> Unit) {
     Column() {
         HorizontalDivider(
             thickness = 1.7.dp,
@@ -551,7 +611,7 @@ fun ItemBottomBar() {
             NotSelectedButton(
                 "Add to bag",
                 selected = false,
-                onclick = {},
+                onclick = { onClick() },
                 modifier = Modifier.weight(1f)
             )
             HorizontalSpacingM()
@@ -722,7 +782,6 @@ fun CommentBox() {
             )
         }
     }
-
-
 }
+
 

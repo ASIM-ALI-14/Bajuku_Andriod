@@ -1,9 +1,7 @@
 package com.example.bajuku.ui.screen.MianScreen
 
-import androidx.compose.foundation.background
 import androidx.compose.foundation.layout.fillMaxSize
 import androidx.compose.foundation.layout.padding
-import androidx.compose.material.TopAppBar
 import androidx.compose.material3.Scaffold
 import androidx.compose.runtime.Composable
 import androidx.compose.runtime.getValue
@@ -19,6 +17,7 @@ import com.example.bajuku.ui.screen.MianScreen.CategoryScreen.CategoryScreen
 import com.example.bajuku.ui.screen.MianScreen.Components.BottomNavBar
 import com.example.bajuku.ui.screen.MianScreen.Components.HomeTopBar
 import com.example.bajuku.ui.screen.MianScreen.Components.ItemDetail
+import com.example.bajuku.ui.screen.MianScreen.HomeScreen.BagDetail
 import com.example.bajuku.ui.screen.MianScreen.HomeScreen.HomeContant
 import com.example.bajuku.ui.screen.MianScreen.ProfileScreen.ProfileScreen
 import com.example.bajuku.ui.screen.MianScreen.WishListScreen.WishlistScreen
@@ -34,19 +33,20 @@ fun MainScreen(navController: NavHostController) {
 
     Scaffold(
         topBar = {
-            if (currentRoute != "ItemDetail") {
+            if (currentRoute != "BagScreen" && currentRoute != "ItemDetail") {
                 HomeTopBar(
                     searchQuery = searchQuery, onValueChange = {
                         searchQuery = it
                     },
-                    isSearchMode = { isSearchMode = !isSearchMode }
+                    isSearchMode = { isSearchMode = !isSearchMode },
+                    onBag = { navController.navigate("BagScreen") }
 
 
                 )
             }
         },
         bottomBar = {
-            if (currentRoute != "ItemDetail") {
+            if (currentRoute != "BagScreen" && currentRoute != "ItemDetail") {
                 BottomNavBar(
                     currentRoute = currentRoute,
                     onNavigate = { route ->
@@ -75,7 +75,8 @@ fun MainScreen(navController: NavHostController) {
             composable("wishlist") { WishlistScreen() }
             composable("category") { CategoryScreen() }
             composable("profile") { ProfileScreen() }
-            composable("ItemDetail") { ItemDetail() }
+            composable("ItemDetail") { ItemDetail(onClick = { navController.navigate("BagScreen") }) }
+            composable("BagScreen") { BagDetail() }
         }
     }
 }

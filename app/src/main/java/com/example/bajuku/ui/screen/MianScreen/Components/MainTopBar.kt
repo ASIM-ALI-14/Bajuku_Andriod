@@ -38,7 +38,12 @@ import com.example.bajuku.ui.theme.HorizontalSpacingS
 import com.example.bajuku.ui.theme.screenHorizontal
 
 @Composable
-fun HomeTopBar(isSearchMode: () -> Unit, searchQuery: String, onValueChange: (String) -> Unit) {
+fun HomeTopBar(
+    isSearchMode: () -> Unit,
+    searchQuery: String,
+    onValueChange: (String) -> Unit,
+    onBag: () -> Unit
+) {
 
     Row(
         modifier = Modifier
@@ -71,7 +76,7 @@ fun HomeTopBar(isSearchMode: () -> Unit, searchQuery: String, onValueChange: (St
         )
         HorizontalSpacingS()
         CompactIconButton(
-            onClick = {},
+            onClick = { onBag() },
             icon = Icons.Outlined.ShoppingBag
         )
     }
