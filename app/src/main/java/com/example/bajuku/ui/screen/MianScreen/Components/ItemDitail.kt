@@ -69,7 +69,7 @@ import com.example.bajuku.ui.theme.verticalSpacingS
 import com.example.bajuku.ui.theme.verticalSpacingXS
 
 @Composable
-fun ItemDetail(onClick: () -> Unit) {
+fun ItemDetail(onClick: () -> Unit, onBuy: () -> Unit) {
     val productImages = listOf(
         R.drawable.jacket_1,
         R.drawable.jacket_2,
@@ -88,7 +88,7 @@ fun ItemDetail(onClick: () -> Unit) {
     var showDialog by remember { mutableStateOf(false) }
     Scaffold(
         topBar = { ItemTopBar() },
-        bottomBar = { ItemBottomBar({ showDialog = true }) }) { innerPadding ->
+        bottomBar = { ItemBottomBar({ showDialog = true }, { onBuy() }) }) { innerPadding ->
         Column(
             modifier = Modifier
                 .padding(innerPadding)
@@ -600,7 +600,7 @@ fun ItemTopBar() {
 
 
 @Composable
-fun ItemBottomBar(onClick: () -> Unit) {
+fun ItemBottomBar(onClick: () -> Unit, Buynow: () -> Unit) {
     Column() {
         HorizontalDivider(
             thickness = 1.7.dp,
@@ -618,7 +618,7 @@ fun ItemBottomBar(onClick: () -> Unit) {
             SelectedButton(
                 "Buy now",
                 selected = true,
-                onclick = {},
+                onclick = { Buynow() },
                 modifier = Modifier.weight(1f)
             )
         }

@@ -42,7 +42,8 @@ fun HomeTopBar(
     isSearchMode: () -> Unit,
     searchQuery: String,
     onValueChange: (String) -> Unit,
-    onBag: () -> Unit
+    onBag: () -> Unit,
+    onNotification: () -> Unit
 ) {
 
     Row(
@@ -71,7 +72,7 @@ fun HomeTopBar(
         }
         HorizontalSpacingM()
         CompactIconButton(
-            onClick = {},
+            onClick = { onNotification() },
             icon = Icons.Outlined.NotificationsNone
         )
         HorizontalSpacingS()

@@ -18,7 +18,11 @@ import com.example.bajuku.ui.screen.MianScreen.Components.BottomNavBar
 import com.example.bajuku.ui.screen.MianScreen.Components.HomeTopBar
 import com.example.bajuku.ui.screen.MianScreen.Components.ItemDetail
 import com.example.bajuku.ui.screen.MianScreen.HomeScreen.BagDetail
+import com.example.bajuku.ui.screen.MianScreen.HomeScreen.CheckOutScreen
+import com.example.bajuku.ui.screen.MianScreen.HomeScreen.Components.PaymentScreen
 import com.example.bajuku.ui.screen.MianScreen.HomeScreen.HomeContant
+import com.example.bajuku.ui.screen.MianScreen.HomeScreen.NotificationScreen
+import com.example.bajuku.ui.screen.MianScreen.HomeScreen.OrderSuccessScreen
 import com.example.bajuku.ui.screen.MianScreen.ProfileScreen.ProfileScreen
 import com.example.bajuku.ui.screen.MianScreen.WishListScreen.WishlistScreen
 
@@ -29,24 +33,23 @@ fun MainScreen(navController: NavHostController) {
         navController.currentBackStackEntryAsState().value?.destination?.route
     var searchQuery by remember { mutableStateOf("") }
     var isSearchMode by remember { mutableStateOf(false) }
-
-
     Scaffold(
         topBar = {
-            if (currentRoute != "BagScreen" && currentRoute != "ItemDetail") {
+            if (currentRoute != "BagScreen" && currentRoute != "ItemDetail" && currentRoute != "CheckOut" && currentRoute != "PaymentScreen" && currentRoute != "order screen" && currentRoute != "notification") {
                 HomeTopBar(
                     searchQuery = searchQuery, onValueChange = {
                         searchQuery = it
                     },
                     isSearchMode = { isSearchMode = !isSearchMode },
-                    onBag = { navController.navigate("BagScreen") }
+                    onBag = { navController.navigate("BagScreen") },
+                    onNotification = { navController.navigate("notification") }
 
 
                 )
             }
         },
         bottomBar = {
-            if (currentRoute != "BagScreen" && currentRoute != "ItemDetail") {
+            if (currentRoute != "BagScreen" && currentRoute != "ItemDetail" && currentRoute != "CheckOut" && currentRoute != "PaymentScreen" && currentRoute != "order screen" && currentRoute != "notification") {
                 BottomNavBar(
                     currentRoute = currentRoute,
                     onNavigate = { route ->
@@ -75,8 +78,20 @@ fun MainScreen(navController: NavHostController) {
             composable("wishlist") { WishlistScreen() }
             composable("category") { CategoryScreen() }
             composable("profile") { ProfileScreen() }
-            composable("ItemDetail") { ItemDetail(onClick = { navController.navigate("BagScreen") }) }
+            composable("ItemDetail") {
+                ItemDetail(
+                    onClick = { navController.navigate("BagScreen") },
+                    { navController.navigate("CheckOut") })
+            }
             composable("BagScreen") { BagDetail() }
+            composable("CheckOut") {
+                CheckOutScreen(
+                    onclick = { navController.navigate("PaymentScreen") },
+                    onsucses = { navController.navigate("order screen") })
+            }
+            composable("PaymentScreen") { PaymentScreen() }
+            composable("order screen") { OrderSuccessScreen() }
+            composable("notification") { NotificationScreen() }
         }
     }
 }
