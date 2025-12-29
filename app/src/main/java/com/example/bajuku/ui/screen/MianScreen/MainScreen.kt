@@ -35,7 +35,7 @@ fun MainScreen(navController: NavHostController) {
     var isSearchMode by remember { mutableStateOf(false) }
     Scaffold(
         topBar = {
-            if (currentRoute != "BagScreen" && currentRoute != "ItemDetail" && currentRoute != "CheckOut" && currentRoute != "PaymentScreen" && currentRoute != "order screen" && currentRoute != "notification") {
+            if (currentRoute != "BagScreen" && currentRoute != "ItemDetail" && currentRoute != "CheckOut" && currentRoute != "PaymentScreen" && currentRoute != "order screen" && currentRoute != "notification" && currentRoute != "profile") {
                 HomeTopBar(
                     searchQuery = searchQuery, onValueChange = {
                         searchQuery = it
@@ -49,7 +49,7 @@ fun MainScreen(navController: NavHostController) {
             }
         },
         bottomBar = {
-            if (currentRoute != "BagScreen" && currentRoute != "ItemDetail" && currentRoute != "CheckOut" && currentRoute != "PaymentScreen" && currentRoute != "order screen" && currentRoute != "notification") {
+            if (currentRoute != "BagScreen" && currentRoute != "ItemDetail" && currentRoute != "CheckOut" && currentRoute != "PaymentScreen" && currentRoute != "order screen" && currentRoute != "notification" && currentRoute != "profile") {
                 BottomNavBar(
                     currentRoute = currentRoute,
                     onNavigate = { route ->
@@ -76,7 +76,7 @@ fun MainScreen(navController: NavHostController) {
         ) {
             composable("home") { HomeContant(isSearchMode, searchQuery, navController) }
             composable("wishlist") { WishlistScreen() }
-            composable("category") { CategoryScreen() }
+            composable("Category") { CategoryScreen() }
             composable("profile") { ProfileScreen() }
             composable("ItemDetail") {
                 ItemDetail(

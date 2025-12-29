@@ -7,11 +7,9 @@ import androidx.compose.foundation.layout.navigationBarsPadding
 import androidx.compose.material.icons.Icons
 import androidx.compose.material.icons.filled.Category
 import androidx.compose.material.icons.filled.Favorite
-import androidx.compose.material.icons.filled.FavoriteBorder
-import androidx.compose.material.icons.filled.Folder
+import androidx.compose.material.icons.filled.GridView
 import androidx.compose.material.icons.filled.Home
 import androidx.compose.material.icons.filled.Person
-import androidx.compose.material.icons.filled.Settings
 import androidx.compose.material.icons.outlined.FavoriteBorder
 import androidx.compose.material.icons.outlined.GridView
 import androidx.compose.material.icons.outlined.Home
@@ -25,7 +23,6 @@ import androidx.compose.material3.NavigationBarItemDefaults
 import androidx.compose.material3.Text
 import androidx.compose.runtime.Composable
 import androidx.compose.ui.Modifier
-import androidx.compose.ui.draw.shadow
 import androidx.compose.ui.graphics.Color
 import androidx.compose.ui.graphics.vector.ImageVector
 import androidx.compose.ui.unit.dp
@@ -46,24 +43,25 @@ private val bottomItems = listOf(
         label = "Home"
     ),
     BottomNavItem(
-        "category",
+        "wishlist",
         selectedIcon = Icons.Filled.Favorite,
         unselectedIcon = Icons.Outlined.FavoriteBorder,
-        label = "Whilst"
+        label = "Wishlist"
+    ),
+    BottomNavItem(
+        "category",
+        selectedIcon = Icons.Filled.GridView,
+        unselectedIcon = Icons.Outlined.GridView,
+        label = "Category"
     ),
     BottomNavItem(
         "profile",
-        selectedIcon = Icons.Filled.Category,
-        unselectedIcon = Icons.Outlined.GridView, // or any outline variant
-        label = "Calgary"
-    ),
-    BottomNavItem(
-        "wishlist",
         selectedIcon = Icons.Filled.Person,
-        unselectedIcon = Icons.Outlined.Person,
+        unselectedIcon = Icons.Outlined.Person, // or any outline variant
         label = "Profile"
+    ),
+
     )
-)
 
 
 @Composable
@@ -73,34 +71,34 @@ fun BottomNavBar(
 ) {
     Column() {
         HorizontalDivider(thickness = 0.3.dp, color = MaterialTheme.colorScheme.primary)
-    NavigationBar(
-        containerColor = MaterialTheme.colorScheme.background,
-        modifier = Modifier
-            .navigationBarsPadding()
-            .height(60.dp),
-        tonalElevation = 0.dp,
-    ) {
-        bottomItems.forEach { item ->
-            NavigationBarItem(
-                selected = currentRoute == item.route,
-                onClick = { onNavigate(item.route) },
-                icon = {
-                    Icon(
-                        imageVector = if (currentRoute == item.route) item.selectedIcon else item.unselectedIcon,
-                        contentDescription = item.label
+        NavigationBar(
+            containerColor = MaterialTheme.colorScheme.background,
+            modifier = Modifier
+                .navigationBarsPadding()
+                .height(60.dp),
+            tonalElevation = 0.dp,
+        ) {
+            bottomItems.forEach { item ->
+                NavigationBarItem(
+                    selected = currentRoute == item.route,
+                    onClick = { onNavigate(item.route) },
+                    icon = {
+                        Icon(
+                            imageVector = if (currentRoute == item.route) item.selectedIcon else item.unselectedIcon,
+                            contentDescription = item.label
+                        )
+                    }, label = { Text(item.label) },
+                    alwaysShowLabel = true,
+                    colors = NavigationBarItemDefaults.colors(
+                        indicatorColor = Color.Transparent,
+                        selectedIconColor = MaterialTheme.colorScheme.primary,
+                        unselectedIconColor = MaterialTheme.colorScheme.tertiary,
+                        selectedTextColor = MaterialTheme.colorScheme.primary,
+                        unselectedTextColor = MaterialTheme.colorScheme.tertiary
                     )
-                }, label = { Text(item.label) },
-                alwaysShowLabel = true,
-                colors = NavigationBarItemDefaults.colors(
-                    indicatorColor = Color.Transparent,
-                    selectedIconColor = MaterialTheme.colorScheme.primary,
-                    unselectedIconColor = MaterialTheme.colorScheme.tertiary,
-                    selectedTextColor = MaterialTheme.colorScheme.primary,
-                    unselectedTextColor = MaterialTheme.colorScheme.tertiary
                 )
-            )
+            }
         }
-    }
     }
 }
 
