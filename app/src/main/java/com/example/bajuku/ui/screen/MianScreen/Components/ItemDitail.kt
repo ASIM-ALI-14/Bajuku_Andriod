@@ -52,8 +52,6 @@ import androidx.compose.ui.unit.dp
 import androidx.compose.ui.unit.sp
 import androidx.compose.ui.window.Dialog
 import com.example.bajuku.R
-import com.example.bajuku.ui.components.NotSelectedButton
-import com.example.bajuku.ui.components.SelectedButton
 import com.example.bajuku.ui.screen.MianScreen.HomeScreen.Components.ItemCard
 import com.example.bajuku.ui.screen.MianScreen.HomeScreen.ItemsConatant.SaleCard
 import com.example.bajuku.ui.screen.MianScreen.HomeScreen.RelatedRow
@@ -608,19 +606,19 @@ fun ItemBottomBar(onClick: () -> Unit, Buynow: () -> Unit) {
         )
         verticalSpacingM()
         Row(modifier = Modifier.padding(horizontal = screenHorizontal)) {
-            NotSelectedButton(
-                "Add to bag",
-                selected = false,
-                onclick = { onClick() },
-                modifier = Modifier.weight(1f)
-            )
-            HorizontalSpacingM()
-            SelectedButton(
-                "Buy now",
-                selected = true,
-                onclick = { Buynow() },
-                modifier = Modifier.weight(1f)
-            )
+//            NotSelectedButton(
+//                "Add to bag",
+//                selected = false,
+//                onclick = { onClick() },
+//                modifier = Modifier.weight(1f)
+//            )
+//            HorizontalSpacingM()
+//            SelectedButton(
+//                "Buy now",
+//                selected = true,
+//                onclick = { Buynow() },
+//                modifier = Modifier.weight(1f)
+//            )
         }
     }
 }

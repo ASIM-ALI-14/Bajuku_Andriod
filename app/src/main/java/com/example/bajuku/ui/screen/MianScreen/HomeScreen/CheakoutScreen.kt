@@ -32,7 +32,6 @@ import androidx.compose.ui.Modifier
 import androidx.compose.ui.graphics.Color
 import androidx.compose.ui.text.font.FontWeight
 import androidx.compose.ui.unit.dp
-import com.example.bajuku.ui.components.SelectedButton
 import com.example.bajuku.ui.theme.HorizontalSpacingEXL
 import com.example.bajuku.ui.theme.screenHorizontal
 import com.example.bajuku.ui.theme.verticalSpacingL
@@ -271,14 +270,14 @@ fun CheckOutBottomBar(onclick: () -> Unit) {
                 fontWeight = FontWeight.Bold
             )
             HorizontalSpacingEXL()
-            SelectedButton(
-                "Next",
-                { onclick() },
-                modifier = Modifier
-                    .fillMaxWidth(),
-                selected = false
-
-            )
+//            SelectedButton(
+//                "Next",
+//                { onclick() },
+//                modifier = Modifier
+//                    .fillMaxWidth(),
+//                selected = false
+//
+//            )
 
         }
     }

@@ -27,7 +27,6 @@ import androidx.compose.ui.res.painterResource
 import androidx.compose.ui.unit.dp
 import androidx.compose.ui.util.lerp
 import com.example.bajuku.R
-import com.example.bajuku.ui.components.SelectedButton
 import com.example.bajuku.ui.theme.verticalSpacingXS
 import kotlin.math.absoluteValue
 
@@ -144,15 +143,15 @@ fun BannerCarousel() {
                             style = MaterialTheme.typography.headlineSmall
                         )
                         verticalSpacingXS()
-                        SelectedButton(
-                            "Get it Now",
-                            {},
-                            modifier = Modifier,
-                            selected = true,
-                            bg = MaterialTheme.colorScheme.background,
-                            contantcolor = MaterialTheme.colorScheme.primary,
-                            height = 39.dp
-                        )
+//                        SelectedButton(
+//                            "Get it Now",
+//                            {},
+//                            modifier = Modifier,
+//                            selected = true,
+//                            bg = MaterialTheme.colorScheme.background,
+//                            contantcolor = MaterialTheme.colorScheme.primary,
+//                            height = 39.dp
+//                        )
 
                     }
                 }

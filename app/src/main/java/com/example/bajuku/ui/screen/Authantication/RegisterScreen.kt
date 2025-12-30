@@ -1,4 +1,4 @@
-package com.example.bajuku.ui.screen.onboarding
+package com.example.bajuku.ui.screen.Authantication
 
 import androidx.compose.foundation.border
 import androidx.compose.foundation.clickable
@@ -31,9 +31,8 @@ import androidx.compose.ui.text.font.FontWeight
 import androidx.compose.ui.text.input.KeyboardType
 import androidx.compose.ui.unit.dp
 import androidx.navigation.NavHostController
-import com.example.bajuku.ui.components.SelectedButton
 import com.example.bajuku.ui.components.AppTextFieldBasic
-import com.example.bajuku.ui.screen.onboarding.Components.PasswordRequirements
+import com.example.bajuku.ui.components.Button
 import com.example.bajuku.ui.theme.HorizontalSpacingS
 import com.example.bajuku.ui.theme.screenHorizontal
 import com.example.bajuku.ui.theme.verticalSpacingEXL
@@ -136,9 +135,9 @@ fun RegisterScreen(navController: NavHostController) {
                 )
                 PasswordRequirements(requirements = passwordRequirements)
                 verticalSpacingM()
-                SelectedButton(
+                Button(
                     "Register",
-                    onclick = { navController.navigate("verification") },
+                    onClick = { navController.navigate("verification") },
                     modifier = Modifier.fillMaxWidth(),
                     true
                 )

@@ -1,4 +1,4 @@
-package com.example.bajuku.ui.screen.onboarding
+package com.example.bajuku.ui.screen.Authantication
 
 import androidx.compose.foundation.Image
 import androidx.compose.foundation.background
@@ -35,7 +35,6 @@ import androidx.compose.ui.text.style.TextAlign
 import androidx.compose.ui.unit.dp
 import androidx.navigation.NavHostController
 import com.example.bajuku.R
-import com.example.bajuku.ui.components.SelectedButton
 import com.example.bajuku.ui.components.AppTextFieldBasic
 import com.example.bajuku.ui.theme.HorizontalSpacingS
 import com.example.bajuku.ui.theme.screenHorizontal
@@ -92,13 +91,13 @@ fun LoginScreen(navController: NavHostController) {
             color = MaterialTheme.colorScheme.secondary
         )
         verticalSpacingL()
-        SelectedButton(
-            "Login",
-            {},
-            modifier = Modifier
-                .fillMaxWidth(),
-            selected = true
-        )
+//        Button(
+//            "Login",
+//            {},
+//
+//            Modifier.fillMaxWidth(),
+//            true
+//        )
         verticalSpacingL()
 
         Row(verticalAlignment = Alignment.CenterVertically) {

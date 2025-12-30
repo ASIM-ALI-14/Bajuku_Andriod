@@ -1,11 +1,11 @@
 package com.example.bajuku
 
+import com.example.bajuku.navigation.AppNavGraph
 import android.os.Bundle
 import androidx.activity.ComponentActivity
 import androidx.activity.compose.setContent
 import androidx.activity.enableEdgeToEdge
 import androidx.navigation.compose.rememberNavController
-import com.example.bajuku.ui.screen.MianScreen.MainScreen
 import com.example.bajuku.ui.theme.BajukuTheme
 
 class MainActivity : ComponentActivity() {
@@ -16,8 +16,7 @@ class MainActivity : ComponentActivity() {
         setContent {
             BajukuTheme {
                 val navController = rememberNavController()
-//                AppNavGraph(navController = navController)
-                MainScreen(navController)
+                AppNavGraph(navController = navController)
             }
         }
     }

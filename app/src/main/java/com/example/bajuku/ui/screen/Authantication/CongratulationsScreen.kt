@@ -1,8 +1,7 @@
-package com.example.bajuku.ui.screen.onboarding
+package com.example.bajuku.ui.screen.Authantication
 
 import androidx.compose.foundation.Image
 import androidx.compose.foundation.layout.Arrangement
-import androidx.compose.foundation.layout.Box
 import androidx.compose.foundation.layout.Column
 import androidx.compose.foundation.layout.Spacer
 import androidx.compose.foundation.layout.fillMaxSize
@@ -19,7 +18,7 @@ import androidx.compose.ui.text.style.TextAlign
 import androidx.compose.ui.unit.dp
 import androidx.navigation.NavHostController
 import com.example.bajuku.R
-import com.example.bajuku.ui.components.SelectedButton
+import com.example.bajuku.ui.components.Button
 import com.example.bajuku.ui.theme.screenHorizontal
 import com.example.bajuku.ui.theme.verticalSpacingEXL
 import com.example.bajuku.ui.theme.verticalSpacingS
@@ -48,7 +47,7 @@ fun CongratulationsScreen(navController: NavHostController) {
         )
 
         Spacer(modifier = Modifier.weight(1f))
-        SelectedButton(
+        Button(
             "Continue",
             {
                 navController.navigate("home") {
@@ -56,7 +55,7 @@ fun CongratulationsScreen(navController: NavHostController) {
                 }
             },
             modifier = Modifier.fillMaxWidth(),
-            selected = true,
+            true,
         )
         verticalSpacingEXL()
 

@@ -43,7 +43,6 @@ import androidx.compose.ui.text.style.TextDecoration
 import androidx.compose.ui.unit.dp
 import androidx.compose.ui.unit.sp
 import com.example.bajuku.R
-import com.example.bajuku.ui.components.SelectedButton
 import com.example.bajuku.ui.theme.AppColors
 import com.example.bajuku.ui.theme.HorizontalSpacingES
 import com.example.bajuku.ui.theme.HorizontalSpacingS
@@ -145,15 +144,15 @@ fun BagBottomBar() {
     Column(modifier = Modifier.background(Color.White)) {
         HorizontalDivider(thickness = 1.5.dp, color = MaterialTheme.colorScheme.onSurfaceVariant)
         verticalSpacingS()
-        SelectedButton(
-            "Select",
-            {},
-            modifier = Modifier
-                .padding(screenHorizontal)
-                .fillMaxWidth(),
-            selected = true
-
-        )
+//        SelectedButton(
+//            "Select",
+//            {},
+//            modifier = Modifier
+//                .padding(screenHorizontal)
+//                .fillMaxWidth(),
+//            selected = true
+//
+//        )
         verticalSpacingS()
     }
 

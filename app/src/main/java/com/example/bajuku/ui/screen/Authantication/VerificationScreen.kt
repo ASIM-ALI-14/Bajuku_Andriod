@@ -1,4 +1,4 @@
-package com.example.bajuku.ui.screen.onboarding
+package com.example.bajuku.ui.screen.Authantication
 
 import androidx.compose.foundation.background
 import androidx.compose.foundation.border
@@ -22,8 +22,6 @@ import androidx.compose.ui.text.font.FontWeight
 import androidx.compose.ui.text.style.TextAlign
 import androidx.compose.ui.unit.dp
 import androidx.navigation.NavHostController
-import com.example.bajuku.ui.components.SelectedButton
-import com.example.bajuku.ui.screen.onboarding.Components.OtpVerificationRow
 import com.example.bajuku.ui.theme.HorizontalSpacingS
 import com.example.bajuku.ui.theme.screenHorizontal
 import com.example.bajuku.ui.theme.verticalSpacingL
@@ -80,12 +78,12 @@ fun VerificationScreen(navController: NavHostController) {
                 )
             }
             verticalSpacingM()
-            SelectedButton(
-                "Verification",
-                { if (isOtpComplete) navController.navigate("congratulations") },
-                modifier = Modifier.fillMaxWidth(),
-                selected = isOtpComplete
-            )
+//            SelectedButton(
+//                "Verification",
+//                { if (isOtpComplete) navController.navigate("congratulations") },
+//                modifier = Modifier.fillMaxWidth(),
+//                selected = isOtpComplete
+//            )
         }
         verticalSpacingL()
         Text(

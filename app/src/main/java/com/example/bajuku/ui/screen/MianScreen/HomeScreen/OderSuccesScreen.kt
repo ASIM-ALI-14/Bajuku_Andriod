@@ -18,8 +18,7 @@ import androidx.compose.ui.text.font.FontWeight
 import androidx.compose.ui.text.style.TextAlign
 import androidx.compose.ui.unit.dp
 import com.example.bajuku.R
-import com.example.bajuku.ui.components.NotSelectedButton
-import com.example.bajuku.ui.components.SelectedButton
+
 import com.example.bajuku.ui.theme.screenHorizontal
 import com.example.bajuku.ui.theme.verticalSpacingEXL
 import com.example.bajuku.ui.theme.verticalSpacingS
@@ -55,25 +54,25 @@ fun OrderSuccessScreen() {
                 color = MaterialTheme.colorScheme.primary
             )
             verticalSpacingEXL()
-            SelectedButton(
-                "Continue",
-                {
-                },
-                modifier = Modifier
-                    .fillMaxWidth()
-                    .padding(horizontal = 60.dp),
-                selected = true,
-            )
-            verticalSpacingS()
-            NotSelectedButton(
-                "View E-Receipt",
-                {
-                },
-                modifier = Modifier
-                    .fillMaxWidth()
-                    .padding(horizontal = 60.dp),
-                selected = false,
-            )
+//            SelectedButton(
+//                "Continue",
+//                {
+//                },
+//                modifier = Modifier
+//                    .fillMaxWidth()
+//                    .padding(horizontal = 60.dp),
+//                selected = true,
+//            )
+//            verticalSpacingS()
+//            NotSelectedButton(
+//                "View E-Receipt",
+//                {
+//                },
+//                modifier = Modifier
+//                    .fillMaxWidth()
+//                    .padding(horizontal = 60.dp),
+//                selected = false,
+//            )
 
 
         }

@@ -31,7 +31,6 @@ import androidx.compose.ui.graphics.Color
 import androidx.compose.ui.res.painterResource
 import androidx.compose.ui.text.font.FontWeight
 import androidx.compose.ui.unit.dp
-import com.example.bajuku.ui.components.SelectedButton
 import com.example.bajuku.ui.theme.HorizontalSpacingS
 import com.example.bajuku.ui.theme.screenHorizontal
 import com.example.bajuku.ui.theme.verticalSpacingL
@@ -139,14 +138,14 @@ fun PaymentTopbar() {
 @Composable
 fun PaymentBottombar() {
     Column() {
-        SelectedButton(
-            "Select",
-            {},
-            modifier = Modifier
-                .padding(screenHorizontal)
-                .fillMaxWidth(),
-            selected = true
-        )
+//        SelectedButton(
+//            "Select",
+//            {},
+//            modifier = Modifier
+//                .padding(screenHorizontal)
+//                .fillMaxWidth(),
+//            selected = true
+//        )
     }
 }
 

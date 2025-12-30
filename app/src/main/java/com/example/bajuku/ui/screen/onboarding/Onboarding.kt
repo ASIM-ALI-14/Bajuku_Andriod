@@ -15,9 +15,9 @@ import androidx.compose.ui.layout.ContentScale
 import androidx.compose.ui.res.painterResource
 import androidx.compose.ui.text.font.FontWeight
 import androidx.compose.ui.unit.dp
-import com.example.bajuku.ui.components.NotSelectedButton
+import com.example.bajuku.ui.components.PrimaryButton
+import com.example.bajuku.ui.components.SecondaryButton
 import com.example.bajuku.ui.screen.onboarding.Components.PageIndicator
-import com.example.bajuku.ui.components.SelectedButton
 import com.example.bajuku.ui.screen.onboarding.Model.onboardingItems
 import com.example.bajuku.ui.theme.screenHorizontal
 import com.example.bajuku.ui.theme.verticalSpacingEXL
@@ -29,6 +29,7 @@ import com.example.bajuku.ui.theme.verticalSpacingM
 fun OnboardingScreen(onFinished: () -> Unit) {
     var currentPage by remember { mutableStateOf(0) }
     var previousPage by remember { mutableStateOf(0) }
+
 
     Column(
         modifier = Modifier
@@ -123,9 +124,9 @@ fun OnboardingScreen(onFinished: () -> Unit) {
             verticalSpacingEXL()
             if (currentPage == 0) {
                 // First page: full width Next button only
-                SelectedButton(
-                    text = "Next",
-                    onclick = {
+                PrimaryButton(
+                    buttonText = "Next",
+                    onClick = {
                         previousPage = currentPage
                         currentPage++
                     },
@@ -138,21 +139,21 @@ fun OnboardingScreen(onFinished: () -> Unit) {
                     modifier = Modifier.fillMaxWidth(),
                     horizontalArrangement = Arrangement.SpaceBetween
                 ) {
-                    NotSelectedButton(
-                        text = "Back",
-                        onclick = {
+                    SecondaryButton(
+                        buttonText = "Back",
+                        onClick = {
                             previousPage = currentPage
                             currentPage--
                         },
                         modifier = Modifier.weight(1f),
-                        false
+                        onSelected = false
                     )
 
                     Spacer(modifier = Modifier.width(16.dp)) // Optional spacing
 
-                    SelectedButton(
-                        text = "Next",
-                        onclick = {
+                    PrimaryButton(
+                        buttonText = "Next",
+                        onClick = {
                             previousPage = currentPage
                             if (currentPage < onboardingItems.size - 1) {
                                 currentPage++
@@ -168,5 +169,3 @@ fun OnboardingScreen(onFinished: () -> Unit) {
         }
     }
 }
-
-

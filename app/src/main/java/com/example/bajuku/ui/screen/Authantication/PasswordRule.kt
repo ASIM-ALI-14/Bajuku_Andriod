@@ -1,6 +1,5 @@
-package com.example.bajuku.ui.screen.onboarding.Components
+package com.example.bajuku.ui.screen.Authantication
 
-import androidx.compose.foundation.Canvas
 import androidx.compose.foundation.layout.Column
 import androidx.compose.foundation.layout.Row
 import androidx.compose.foundation.layout.Spacer

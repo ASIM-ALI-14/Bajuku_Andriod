@@ -1,84 +1,112 @@
+package com.example.bajuku.navigation
+
 import androidx.compose.runtime.Composable
+import androidx.navigation.NavGraphBuilder
 import androidx.navigation.NavHostController
 import androidx.navigation.compose.NavHost
 import androidx.navigation.compose.composable
-import com.example.bajuku.ui.screen.MianScreen.Components.ItemDetail
-import com.example.bajuku.ui.screen.MianScreen.HomeScreen.SearchContant
 import com.example.bajuku.ui.screen.MianScreen.MainScreen
-import com.example.bajuku.ui.screen.onboarding.CongratulationsScreen
-import com.example.bajuku.ui.screen.onboarding.LoginScreen
+import com.example.bajuku.ui.screen.Authantication.CongratulationsScreen
+import com.example.bajuku.ui.screen.Authantication.LoginScreen
 import com.example.bajuku.ui.screen.onboarding.Onboarding_3
-import com.example.bajuku.ui.screen.onboarding.RegisterScreen
+import com.example.bajuku.ui.screen.Authantication.RegisterScreen
 import com.example.bajuku.ui.screen.onboarding.SelectionScreen
 import com.example.bajuku.ui.screen.onboarding.StyleScreen
-import com.example.bajuku.ui.screen.onboarding.VerificationScreen
+import com.example.bajuku.ui.screen.Authantication.VerificationScreen
 import com.example.bajuku.ui.screen.splash.SplashScreen
 import com.example.bajuku.ui.screens.onboarding.OnboardingScreen
+
+
+object Routes {
+    const val SPLASH = "splash"
+
+    // Onboarding
+    const val ONBOARDING_INTRO = "onboarding_intro"
+    const val SELECTION = "selection"
+    const val INTERESTS = "interests"
+    const val STYLE = "style"
+    const val CONGRATULATIONS = "congratulations"
+
+    // Auth
+    const val LOGIN = "login"
+    const val REGISTER = "register"
+    const val VERIFICATION = "verification"
+
+    // Main
+    const val HOME = "home"
+}
 
 @Composable
 fun AppNavGraph(navController: NavHostController) {
 
     NavHost(
-        navController = navController,
-        startDestination = "splash"
+        navController = navController, startDestination = Routes.SPLASH
     ) {
 
-        // 1. Splash (removed permanently)
-        composable("splash") {
-            SplashScreen(
-                onFinish = {
-                    navController.navigate("onboarding_intro") {
-                        popUpTo("splash") { inclusive = true }
-                    }
-                }
-            )
-        }
-
-        // 2. Onboarding Intro (kept in back stack)
-        composable("onboarding_intro") {
-            OnboardingScreen(
-                onFinished = {
-                    navController.navigate("selection")
-                }
-            )
-        }
-
-        // 3. Onboarding steps
-        composable("selection") {
-            SelectionScreen(navController)
-        }
-
-        composable("interests") {
-            Onboarding_3(navController)
-        }
-
-        composable("style") {
-            StyleScreen(navController)
-        }
-
-        // 4. Authentication
-        composable("login") {
-            LoginScreen(navController)
-        }
-
-        composable("register") {
-            RegisterScreen(navController)
-        }
-
-        composable("verification") {
-            VerificationScreen(navController)
-        }
-
-        // 5. Final onboarding screen
-        composable("congratulations") {
-            CongratulationsScreen(navController)
-        }
-
-        // 6. Home (final destination)
-        composable("home") {
-            MainScreen(navController)
-        }
-
-
+        splashGraph(navController)
+        onboardingGraph(navController)
+        authGraph(navController)
+        mainGraph(navController)
     }
 }
+
+fun NavGraphBuilder.splashGraph(navController: NavHostController) {
+    composable(Routes.SPLASH) {
+        SplashScreen(
+            onFinish = {
+                navController.navigate(Routes.ONBOARDING_INTRO) {
+                    popUpTo(Routes.SPLASH) { inclusive = true }
+                }
+            })
+    }
+}
+
+fun NavGraphBuilder.onboardingGraph(navController: NavHostController) {
+
+    composable(Routes.ONBOARDING_INTRO) {
+        OnboardingScreen(
+            onFinished = {
+                navController.navigate(Routes.SELECTION)
+            })
+    }
+    composable(Routes.SELECTION) {
+        SelectionScreen(navController)
+    }
+    composable(Routes.INTERESTS) {
+        Onboarding_3(navController)
+    }
+    composable(Routes.STYLE) {
+        StyleScreen(navController)
+    }
+    composable(Routes.CONGRATULATIONS) {
+        CongratulationsScreen(
+            navController = navController
+        )
+    }
+}
+
+fun NavGraphBuilder.authGraph(navController: NavHostController) {
+
+    composable(Routes.LOGIN) {
+        LoginScreen(navController)
+    }
+
+    composable(Routes.REGISTER) {
+        RegisterScreen(navController)
+    }
+
+    composable(Routes.VERIFICATION) {
+        VerificationScreen(navController)
+    }
+}
+
+
+fun NavGraphBuilder.mainGraph(navController: NavHostController) {
+
+    composable(Routes.HOME) {
+        MainScreen(navController)
+    }
+}
+
+
+

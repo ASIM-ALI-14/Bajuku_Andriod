@@ -12,23 +12,26 @@ import androidx.compose.material3.MaterialTheme
 import androidx.compose.material3.Text
 import androidx.compose.runtime.Composable
 import androidx.compose.runtime.LaunchedEffect
+import androidx.compose.runtime.collectAsState
+import androidx.compose.runtime.getValue
 import androidx.compose.ui.Alignment
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.geometry.Offset
 import androidx.compose.ui.graphics.Shadow
 import androidx.compose.ui.res.painterResource
 import androidx.compose.ui.text.font.FontWeight
-import androidx.compose.ui.tooling.preview.Preview
 import androidx.compose.ui.unit.dp
-import com.example.bajuku.R
-import kotlinx.coroutines.delay
+import androidx.lifecycle.viewmodel.compose.viewModel
 
 
 @Composable
 fun SplashScreen(onFinish: () -> Unit) {
-    LaunchedEffect(Unit) {
-        delay(1500)
-        onFinish()
+    val viewModel: SplashViewModel = viewModel()
+    val uiModel = viewModel.uiModel
+    val navigate by viewModel.navigate.collectAsState()
+
+    LaunchedEffect(navigate) {
+        if (navigate) onFinish()
     }
     Column(
         modifier = Modifier
@@ -38,13 +41,13 @@ fun SplashScreen(onFinish: () -> Unit) {
         horizontalAlignment = Alignment.CenterHorizontally
     ) {
         Image(
-            painterResource(R.drawable.main_logo),
+            painterResource(uiModel.logoRes),
             contentDescription = null,
-            modifier = Modifier.size(44.dp)
+            modifier = Modifier.size(uiModel.logoSizeDp.dp)
         )
         Spacer(modifier = Modifier.height(4.dp))
         Text(
-            text = "Bajuku",
+            text = uiModel.appName,
             style = MaterialTheme.typography.displaySmall.copy(
                 fontWeight = FontWeight.Bold,
                 shadow = Shadow(
