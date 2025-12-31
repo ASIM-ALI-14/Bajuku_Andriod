@@ -37,53 +37,44 @@ fun OtpBox(
     onBackspace: () -> Unit,
     modifier: Modifier = Modifier,
     focusRequester: FocusRequester,
-    isFocused: Boolean
+    isFocused: Boolean,
+    boxSize: Int = 47,
+    filledColor: Color = MaterialTheme.colorScheme.primaryContainer,
+    borderColor: Color = MaterialTheme.colorScheme.outline
 ) {
+    val interactionSource = remember { MutableInteractionSource() }
+
     BasicTextField(
         value = value,
-        onValueChange = {
-            if (it.length <= 1) {
-                onValueChange(it)
-            }
-        },
+        onValueChange = { if (it.length <= 1) onValueChange(it) },
         modifier = modifier
-            .size(47.dp)
+            .size(boxSize.dp)
             .focusRequester(focusRequester)
             .onKeyEvent {
                 if (it.key == Key.Backspace && value.isEmpty()) {
                     onBackspace()
                     true
-                } else {
-                    false
-                }
+                } else false
             }
             .border(
-                1.dp,
-                if (isFocused)
-                    MaterialTheme.colorScheme.primary
-                else
-                    MaterialTheme.colorScheme.outline,
-                RoundedCornerShape(12.dp)
+                width = 1.dp,
+                color = if (isFocused) MaterialTheme.colorScheme.primary else borderColor,
+                shape = RoundedCornerShape(12.dp)
             )
             .background(
-                if (value.isNotEmpty())
-                    MaterialTheme.colorScheme.primaryContainer
-                else
-                    Color.Transparent,
-                RoundedCornerShape(12.dp)
+                color = if (value.isNotEmpty()) filledColor else Color.Transparent,
+                shape = RoundedCornerShape(12.dp)
             ),
         singleLine = true,
         textStyle = TextStyle(
             textAlign = TextAlign.Center,
-            fontSize = 20.sp
+            fontSize = 20.sp,
+            color = MaterialTheme.colorScheme.onBackground
         ),
-        keyboardOptions = KeyboardOptions(
-            keyboardType = KeyboardType.Number
-        ),
+        keyboardOptions = KeyboardOptions(keyboardType = KeyboardType.Number),
+        interactionSource = interactionSource,
         decorationBox = { innerTextField ->
-            Box(contentAlignment = Alignment.Center) {
-                innerTextField()
-            }
+            Box(contentAlignment = Alignment.Center) { innerTextField() }
         }
     )
 }
@@ -91,13 +82,14 @@ fun OtpBox(
 @Composable
 fun OtpVerificationRow(
     otpLength: Int = 6,
-    onOtpComplete: (String) -> Unit
+    onOtpComplete: (String) -> Unit,
+    boxSize: Int = 47,
+    spacing: Int = 8
 ) {
     val otpValues = remember { mutableStateListOf(*Array(otpLength) { "" }) }
     val focusRequesters = remember { List(otpLength) { FocusRequester() } }
 
-    Row(horizontalArrangement = Arrangement.spacedBy(8.dp)) {
-
+    Row(horizontalArrangement = Arrangement.spacedBy(spacing.dp)) {
         otpValues.forEachIndexed { index, value ->
 
             val interactionSource = remember { MutableInteractionSource() }
@@ -107,29 +99,31 @@ fun OtpVerificationRow(
                 value = value,
                 isFocused = isFocused,
                 focusRequester = focusRequesters[index],
-
                 onValueChange = { newValue ->
                     otpValues[index] = newValue
 
-                    if (newValue.isNotEmpty()) {
-                        if (index < otpLength - 1) {
-                            focusRequesters[index + 1].requestFocus()
-                        }
+                    // Move focus to next box
+                    if (newValue.isNotEmpty() && index < otpLength - 1) {
+                        focusRequesters[index + 1].requestFocus()
                     }
 
-                    if (otpValues.all { it.isNotEmpty() }) {
-                        onOtpComplete(otpValues.joinToString(""))
-                    }
+                    // Always update OTP
+                    onOtpComplete(otpValues.joinToString(""))
                 },
-
                 onBackspace = {
+                    otpValues[index] = "" // clear current box
                     if (index > 0) {
-                        otpValues[index - 1] = ""
                         focusRequesters[index - 1].requestFocus()
                     }
-                }
+
+                    // Update OTP after deletion
+                    onOtpComplete(otpValues.joinToString(""))
+                },
+                boxSize = boxSize
             )
+
         }
     }
 }
+
 

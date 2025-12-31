@@ -21,6 +21,7 @@ import androidx.compose.material3.Divider
 import androidx.compose.material3.MaterialTheme
 import androidx.compose.material3.OutlinedButton
 import androidx.compose.material3.Text
+import androidx.compose.material3.TextButton
 import androidx.compose.runtime.Composable
 import androidx.compose.runtime.getValue
 import androidx.compose.runtime.mutableStateOf
@@ -35,7 +36,9 @@ import androidx.compose.ui.text.style.TextAlign
 import androidx.compose.ui.unit.dp
 import androidx.navigation.NavHostController
 import com.example.bajuku.R
+import com.example.bajuku.navigation.Routes
 import com.example.bajuku.ui.components.AppTextFieldBasic
+import com.example.bajuku.ui.components.PrimaryButton
 import com.example.bajuku.ui.theme.HorizontalSpacingS
 import com.example.bajuku.ui.theme.screenHorizontal
 import com.example.bajuku.ui.theme.verticalSpacingEXL
@@ -46,7 +49,7 @@ import com.example.bajuku.ui.theme.verticalSpacingS
 @Composable
 fun LoginScreen(navController: NavHostController) {
     var email by remember { mutableStateOf("") }
-    var Password by remember { mutableStateOf("") }
+    var password by remember { mutableStateOf("") }
     Column(
         modifier = Modifier
             .padding(horizontal = screenHorizontal)
@@ -76,28 +79,29 @@ fun LoginScreen(navController: NavHostController) {
         Text(text = "Password", style = MaterialTheme.typography.labelLarge)
         verticalSpacingS()
         AppTextFieldBasic(
-            value = Password,
-            onValueChange = { Password = it },
+            value = password,
+            onValueChange = { password = it },
             keyboardType = KeyboardType.Password,
-            placeholder = "Input your Password"
+            placeholder = "Input your password",
         )
         verticalSpacingS()
-        Text(
-            text = "Forgot Password?",
-            modifier = Modifier.fillMaxWidth(),
-            textAlign = TextAlign.End,
-            style = MaterialTheme.typography.labelLarge,
-            fontWeight = FontWeight.SemiBold,
-            color = MaterialTheme.colorScheme.secondary
-        )
+        TextButton(onClick = {}) {
+            Text(
+                text = "Forgot Password?",
+                modifier = Modifier.fillMaxWidth(),
+                textAlign = TextAlign.End,
+                style = MaterialTheme.typography.labelLarge,
+                fontWeight = FontWeight.SemiBold,
+                color = MaterialTheme.colorScheme.secondary
+            )
+        }
         verticalSpacingL()
-//        Button(
-//            "Login",
-//            {},
-//
-//            Modifier.fillMaxWidth(),
-//            true
-//        )
+        PrimaryButton(
+            "Login",
+            { navController.navigate(Routes.VERIFICATION) },
+            Modifier.fillMaxWidth(),
+            true
+        )
         verticalSpacingL()
 
         Row(verticalAlignment = Alignment.CenterVertically) {
@@ -173,7 +177,7 @@ fun LoginScreen(navController: NavHostController) {
                 fontWeight = FontWeight.SemiBold,
                 color = MaterialTheme.colorScheme.secondary,
                 modifier = Modifier.clickable {
-                    navController.navigate("register")
+                    navController.navigate(Routes.REGISTER)
                 }
             )
         }

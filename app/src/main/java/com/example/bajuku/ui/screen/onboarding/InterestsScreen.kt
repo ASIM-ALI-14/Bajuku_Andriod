@@ -15,12 +15,11 @@ import androidx.compose.runtime.remember
 import androidx.compose.runtime.setValue
 import androidx.compose.ui.Modifier
 import androidx.navigation.NavHostController
-import com.example.bajuku.R
 import com.example.bajuku.ui.components.PrimaryButton
-import com.example.bajuku.ui.components.SecondaryButton
 import com.example.bajuku.ui.screen.onboarding.Components.InterestsItemButton
 import com.example.bajuku.ui.screen.onboarding.Components.OnboardingHeadings
 import com.example.bajuku.ui.screen.onboarding.Components.OnboardingTopBar
+import com.example.bajuku.ui.screen.onboarding.Model.interestOptions
 import com.example.bajuku.ui.theme.screenHorizontal
 import com.example.bajuku.ui.theme.verticalSpacingL
 import com.example.bajuku.ui.theme.verticalSpacingM
@@ -29,14 +28,8 @@ import com.example.bajuku.ui.theme.verticalSpacingM
 fun Onboarding_3(navController: NavHostController) {
 
     var selectedOptions by remember { mutableStateOf(setOf<String>()) }
-    val interests = listOf(
-        "Hats" to R.drawable.group__2_,
-        "Jacket" to R.drawable.group__1_,
-        "Dress & Skirts" to R.drawable.vector,
-        "Shoes" to R.drawable.group,
-        "Accessories" to R.drawable.jewelry,
-        "Sport" to R.drawable.group__3_
-    )
+    val interests = interestOptions
+
 
     // Determine if Continue button should be enabled
     val isContinueEnabled = selectedOptions.isNotEmpty()
@@ -67,20 +60,16 @@ fun Onboarding_3(navController: NavHostController) {
                     modifier = Modifier.fillMaxWidth(),
                     horizontalArrangement = Arrangement.SpaceBetween
                 ) {
-                    rowItems.forEach { (title, icon) ->
+                    rowItems.forEach { item ->
                         InterestsItemButton(
-                            title,
-                            onclick = { toggleSelection(title) },
-                            selected = selectedOptions.contains(title),
-                            modifier = Modifier,
-                            image = icon
+                            onclick = { toggleSelection(item.id) },
+                            text = item.title,
+                            image = item.iconRes,
+                            selected = selectedOptions.contains(item.id),
                         )
                     }
                 }
             }
-
-
-
             Spacer(modifier = Modifier.weight(1f))
             PrimaryButton(
                 "Continue",

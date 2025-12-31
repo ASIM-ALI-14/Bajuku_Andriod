@@ -20,6 +20,7 @@ import com.example.bajuku.ui.components.SecondaryButton
 import com.example.bajuku.ui.screen.onboarding.Components.InterestsItemButton
 import com.example.bajuku.ui.screen.onboarding.Components.OnboardingHeadings
 import com.example.bajuku.ui.screen.onboarding.Components.OnboardingTopBar
+import com.example.bajuku.ui.screen.onboarding.Model.audienceOptions
 import com.example.bajuku.ui.theme.screenHorizontal
 import com.example.bajuku.ui.theme.verticalSpacingL
 import com.example.bajuku.ui.theme.verticalSpacingM
@@ -28,8 +29,9 @@ import com.example.bajuku.ui.theme.verticalSpacingS
 @Composable
 fun SelectionScreen(navController: NavHostController) {
     var selectedOptions by remember { mutableStateOf(setOf<String>()) }
-    val options = listOf("Woman", "Man", "Kids", "Baby")
     val isContinueEnabled = selectedOptions.isNotEmpty()
+    val options = audienceOptions
+
     val toggleSelection: (String) -> Unit = { option ->
         selectedOptions =
             if (selectedOptions.contains(option))
@@ -55,16 +57,17 @@ fun SelectionScreen(navController: NavHostController) {
             verticalSpacingL()
 
             options.forEach { option ->
-                val isSelected = selectedOptions.contains(option)
+                val isSelected = selectedOptions.contains(option.id)
+
                 SecondaryButton(
-                    buttonText = option,
-                    onClick = { toggleSelection(option) },
-                    modifier = Modifier
-                        .fillMaxWidth(),
+                    buttonText = option.title,
+                    onClick = { toggleSelection(option.id) },
+                    modifier = Modifier.fillMaxWidth(),
                     onSelected = isSelected
                 )
                 verticalSpacingS()
             }
+
             Spacer(modifier = Modifier.weight(1f))
             PrimaryButton(
                 "Continue",
@@ -76,7 +79,6 @@ fun SelectionScreen(navController: NavHostController) {
                 modifier = Modifier.fillMaxWidth(),
                 isSelected = isContinueEnabled
             )
-            verticalSpacingM()
         }
     }
 }

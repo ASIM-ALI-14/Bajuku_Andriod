@@ -31,6 +31,7 @@ import androidx.compose.ui.text.font.FontWeight
 import androidx.compose.ui.text.input.KeyboardType
 import androidx.compose.ui.unit.dp
 import androidx.navigation.NavHostController
+import com.example.bajuku.navigation.Routes
 import com.example.bajuku.ui.components.AppTextFieldBasic
 import com.example.bajuku.ui.components.Button
 import com.example.bajuku.ui.theme.HorizontalSpacingS
@@ -42,7 +43,9 @@ import com.example.bajuku.ui.theme.verticalSpacingS
 @Composable
 fun RegisterScreen(navController: NavHostController) {
     var email by remember { mutableStateOf("") }
-    var Password by remember { mutableStateOf("") }
+    var password by remember { mutableStateOf("") }
+    var confirmPassword by remember { mutableStateOf("") }
+
     Column(
         modifier = Modifier
             .fillMaxSize()
@@ -109,8 +112,8 @@ fun RegisterScreen(navController: NavHostController) {
                 )
                 verticalSpacingS()
                 AppTextFieldBasic(
-                    value = Password,
-                    onValueChange = { Password = it },
+                    value = password,
+                    onValueChange = { password = it },
                     keyboardType = KeyboardType.Password,
                     placeholder = "Please your password"
                 )
@@ -122,8 +125,8 @@ fun RegisterScreen(navController: NavHostController) {
                 )
                 verticalSpacingS()
                 AppTextFieldBasic(
-                    value = Password,
-                    onValueChange = { Password = it },
+                    value = confirmPassword,
+                    onValueChange = { confirmPassword = it },
                     keyboardType = KeyboardType.Password,
                     placeholder = "Please your password"
                 )
@@ -137,7 +140,7 @@ fun RegisterScreen(navController: NavHostController) {
                 verticalSpacingM()
                 Button(
                     "Register",
-                    onClick = { navController.navigate("verification") },
+                    onClick = { navController.navigate(Routes.VERIFICATION) },
                     modifier = Modifier.fillMaxWidth(),
                     true
                 )
@@ -161,7 +164,7 @@ fun RegisterScreen(navController: NavHostController) {
                 fontWeight = FontWeight.SemiBold,
                 color = MaterialTheme.colorScheme.secondary,
                 modifier = Modifier.clickable {
-                    navController.navigate("login")
+                    navController.navigate(Routes.LOGIN)
                 }
             )
         }

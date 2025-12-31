@@ -30,10 +30,11 @@ import androidx.compose.ui.res.painterResource
 import androidx.compose.ui.text.font.FontWeight
 import androidx.compose.ui.unit.dp
 import androidx.navigation.NavHostController
-import com.example.bajuku.R
 import com.example.bajuku.ui.components.PrimaryButton
 import com.example.bajuku.ui.screen.onboarding.Components.OnboardingHeadings
 import com.example.bajuku.ui.screen.onboarding.Components.OnboardingTopBar
+import com.example.bajuku.ui.screen.onboarding.Model.StyleCategory
+import com.example.bajuku.ui.screen.onboarding.Model.styleOptions
 import com.example.bajuku.ui.theme.HorizontalSpacingM
 import com.example.bajuku.ui.theme.screenHorizontal
 import com.example.bajuku.ui.theme.verticalSpacingL
@@ -69,47 +70,40 @@ fun StyleScreen(navController: NavHostController) {
             // Woman styles
             Text("Woman", style = MaterialTheme.typography.titleLarge)
             verticalSpacingM()
-            Row {
-                val womanOptions = listOf(
-                    "Casual" to R.drawable.style_1,
-                    "Lounge" to R.drawable.style_2,
-                    "Cute" to R.drawable.style_3
-                )
-                womanOptions.forEach { (text, image) ->
-                    val id = "Woman_$text" // Unique ID
-                    StyleItem(text, image, selectedOptions.contains(id)) {
-                        toggleSelection(id)
+            StyleCategory.entries.forEach { category ->
 
-                    }
-                    HorizontalSpacingM()
-                }
-            }
-            verticalSpacingM()
-
-            // Man styles
-            Text("Man", style = MaterialTheme.typography.titleLarge)
-            verticalSpacingM()
-            Row {
-                val manOptions = listOf(
-                    "Casual" to R.drawable.style_4,
-                    "Formal" to R.drawable.style_5,
-                    "Cute" to R.drawable.style_6
+                Text(
+                    text = category.name.lowercase().replaceFirstChar { it.uppercase() },
+                    style = MaterialTheme.typography.titleLarge
                 )
-                manOptions.forEach { (text, image) ->
-                    val id = "Man_$text" // Unique ID
-                    StyleItem(text, image, selectedOptions.contains(id)) {
-                        toggleSelection(id)
-                    }
-                    HorizontalSpacingM()
+
+                verticalSpacingM()
+
+                Row {
+                    styleOptions
+                        .filter { it.category == category }
+                        .forEach { item ->
+                            StyleItem(
+                                text = item.title,
+                                image = item.imageRes,
+                                isSelected = selectedOptions.contains(item.id),
+                                onClick = { toggleSelection(item.id) }
+                            )
+                            HorizontalSpacingM()
+                        }
                 }
+
+                verticalSpacingM()
             }
+
+
             Spacer(modifier = Modifier.weight(1f))
 
             PrimaryButton(
                 buttonText = "Continue",
                 onClick = {
                     if (isContinueEnabled) {
-                        navController.navigate("interests")
+                        navController.navigate("login")
                     }
                 }, modifier = Modifier.fillMaxWidth(), isSelected = isContinueEnabled
             )

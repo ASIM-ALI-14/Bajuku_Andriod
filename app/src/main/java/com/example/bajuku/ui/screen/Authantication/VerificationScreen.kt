@@ -2,6 +2,7 @@ package com.example.bajuku.ui.screen.Authantication
 
 import androidx.compose.foundation.background
 import androidx.compose.foundation.border
+import androidx.compose.foundation.clickable
 import androidx.compose.foundation.layout.Column
 import androidx.compose.foundation.layout.Row
 import androidx.compose.foundation.layout.fillMaxSize
@@ -22,6 +23,7 @@ import androidx.compose.ui.text.font.FontWeight
 import androidx.compose.ui.text.style.TextAlign
 import androidx.compose.ui.unit.dp
 import androidx.navigation.NavHostController
+import com.example.bajuku.ui.components.PrimaryButton
 import com.example.bajuku.ui.theme.HorizontalSpacingS
 import com.example.bajuku.ui.theme.screenHorizontal
 import com.example.bajuku.ui.theme.verticalSpacingL
@@ -61,10 +63,17 @@ fun VerificationScreen(navController: NavHostController) {
                 .padding(15.dp)
 
         ) {
-            OtpVerificationRow { otp ->
-                otpValue = otp
-                isOtpComplete = true
-            }
+            val otpLength = 6
+            OtpVerificationRow(
+                otpLength = otpLength,
+                onOtpComplete = { otp ->
+                    otpValue = otp
+                    isOtpComplete = otp.length == otpLength
+                }
+            )
+
+
+
             verticalSpacingM()
             Row {
 
@@ -78,20 +87,24 @@ fun VerificationScreen(navController: NavHostController) {
                 )
             }
             verticalSpacingM()
-//            SelectedButton(
-//                "Verification",
-//                { if (isOtpComplete) navController.navigate("congratulations") },
-//                modifier = Modifier.fillMaxWidth(),
-//                selected = isOtpComplete
-//            )
+            PrimaryButton(
+                "Verification",
+                { if (isOtpComplete) navController.navigate("congratulations") },
+                modifier = Modifier.fillMaxWidth(),
+                isSelected = isOtpComplete
+            )
         }
         verticalSpacingL()
         Text(
             text = "Not my phone number? Change",
             style = MaterialTheme.typography.labelLarge,
             color = MaterialTheme.colorScheme.secondary,
-            modifier = Modifier.fillMaxWidth(), textAlign = TextAlign.Center
+            modifier = Modifier
+                .fillMaxWidth()
+                .clickable { navController.popBackStack() },
+            textAlign = TextAlign.Center
         )
+
     }
 
 
