@@ -18,6 +18,7 @@ import androidx.compose.ui.text.style.TextAlign
 import androidx.compose.ui.unit.dp
 import androidx.navigation.NavHostController
 import com.example.bajuku.R
+import com.example.bajuku.navigation.Routes
 import com.example.bajuku.ui.components.Button
 import com.example.bajuku.ui.theme.screenHorizontal
 import com.example.bajuku.ui.theme.verticalSpacingEXL
@@ -50,7 +51,7 @@ fun CongratulationsScreen(navController: NavHostController) {
         Button(
             "Continue",
             {
-                navController.navigate("home") {
+                navController.navigate(Routes.MAIN) {
                     popUpTo("onboarding_intro") { inclusive = true }
                 }
             },

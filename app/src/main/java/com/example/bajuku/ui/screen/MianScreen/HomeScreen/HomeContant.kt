@@ -43,9 +43,9 @@ fun HomeContant(
     val tabs = listOf("Jacket", "Pants", "Shoes", "Dress", "Accessories")
     var selectedTabIndex by remember { mutableStateOf(0) }
     if (onclciksearch) {
-        SearchContant(
-            isTyping = searchQuery.isNotEmpty()
-        )
+//        SearchContant(
+//            isTyping = searchQuery.isNotEmpty()
+//        )
     } else {
         Column(modifier = Modifier.fillMaxWidth()) {
             TabRow(

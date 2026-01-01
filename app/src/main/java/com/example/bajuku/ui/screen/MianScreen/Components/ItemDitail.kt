@@ -492,15 +492,15 @@ fun ItemDetail(onClick: () -> Unit, onBuy: () -> Unit) {
                 }
                 verticalSpacingM()
                 Row() {
-                    RelatedRow()
+//                    RelatedRow( )
                     HorizontalSpacingS()
-                    RelatedRow()
+//                    RelatedRow( )
                 }
                 verticalSpacingS()
                 Row() {
-                    RelatedRow()
+//                    RelatedRow()
                     HorizontalSpacingM()
-                    RelatedRow()
+//                    RelatedRow()
                 }
                 verticalSpacingEXL()
 

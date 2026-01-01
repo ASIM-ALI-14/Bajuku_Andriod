@@ -23,6 +23,7 @@ import androidx.compose.ui.text.font.FontWeight
 import androidx.compose.ui.text.style.TextAlign
 import androidx.compose.ui.unit.dp
 import androidx.navigation.NavHostController
+import com.example.bajuku.navigation.Routes
 import com.example.bajuku.ui.components.PrimaryButton
 import com.example.bajuku.ui.theme.HorizontalSpacingS
 import com.example.bajuku.ui.theme.screenHorizontal
@@ -88,8 +89,9 @@ fun VerificationScreen(navController: NavHostController) {
             }
             verticalSpacingM()
             PrimaryButton(
+
                 "Verification",
-                { if (isOtpComplete) navController.navigate("congratulations") },
+                { if (isOtpComplete) navController.navigate(Routes.CONGRATULATIONS) },
                 modifier = Modifier.fillMaxWidth(),
                 isSelected = isOtpComplete
             )

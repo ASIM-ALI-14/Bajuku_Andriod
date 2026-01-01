@@ -5,7 +5,6 @@ import androidx.navigation.NavGraphBuilder
 import androidx.navigation.NavHostController
 import androidx.navigation.compose.NavHost
 import androidx.navigation.compose.composable
-import com.example.bajuku.ui.screen.MianScreen.MainScreen
 import com.example.bajuku.ui.screen.Authantication.CongratulationsScreen
 import com.example.bajuku.ui.screen.Authantication.LoginScreen
 import com.example.bajuku.ui.screen.onboarding.Onboarding_3
@@ -13,6 +12,8 @@ import com.example.bajuku.ui.screen.Authantication.RegisterScreen
 import com.example.bajuku.ui.screen.onboarding.SelectionScreen
 import com.example.bajuku.ui.screen.onboarding.StyleScreen
 import com.example.bajuku.ui.screen.Authantication.VerificationScreen
+import com.example.bajuku.ui.screen.MianScreen.HomeScreen.SearchContant
+import com.example.bajuku.ui.screen.MianScreen.MainScreen_
 import com.example.bajuku.ui.screen.splash.SplashScreen
 import com.example.bajuku.ui.screens.onboarding.OnboardingScreen
 
@@ -33,7 +34,8 @@ object Routes {
     const val VERIFICATION = "verification"
 
     // Main
-    const val HOME = "home"
+    const val MAIN = "Main"
+    const val SEARCH = "Search"
 }
 
 @Composable
@@ -103,8 +105,13 @@ fun NavGraphBuilder.authGraph(navController: NavHostController) {
 
 fun NavGraphBuilder.mainGraph(navController: NavHostController) {
 
-    composable(Routes.HOME) {
-        MainScreen(navController)
+    composable(
+        Routes.MAIN
+    ) {
+        MainScreen_(navController)
+    }
+    composable(Routes.SEARCH) {
+        SearchContant()
     }
 }
 
