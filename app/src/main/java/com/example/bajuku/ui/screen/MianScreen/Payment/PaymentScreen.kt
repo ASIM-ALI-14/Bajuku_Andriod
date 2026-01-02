@@ -1,4 +1,4 @@
-package com.example.bajuku.ui.screen.MianScreen.HomeScreen.Components
+package com.example.bajuku.ui.screen.MianScreen.Payment
 
 import androidx.compose.foundation.Image
 import androidx.compose.foundation.background
@@ -31,6 +31,8 @@ import androidx.compose.ui.graphics.Color
 import androidx.compose.ui.res.painterResource
 import androidx.compose.ui.text.font.FontWeight
 import androidx.compose.ui.unit.dp
+import com.example.bajuku.R
+import com.example.bajuku.ui.components.PrimaryButton
 import com.example.bajuku.ui.theme.HorizontalSpacingS
 import com.example.bajuku.ui.theme.screenHorizontal
 import com.example.bajuku.ui.theme.verticalSpacingL
@@ -68,7 +70,7 @@ fun PaymentScreen() {
             )
             verticalSpacingS()
             PaymentBox(
-                image = com.example.bajuku.R.drawable.group,
+                image = R.drawable.group,
                 Mywallet = true,
                 selected = selectedPayment == 0,
                 onSelect = { selectedPayment = 0 },
@@ -77,7 +79,7 @@ fun PaymentScreen() {
             )
             verticalSpacingS()
             PaymentBox(
-                image = com.example.bajuku.R.drawable.group__4_,
+                image = R.drawable.group__4_,
                 Mywallet = false,
                 selected = selectedPayment == 1,
                 onSelect = { selectedPayment = 1 },
@@ -86,7 +88,7 @@ fun PaymentScreen() {
             )
             verticalSpacingS()
             PaymentBox(
-                image = com.example.bajuku.R.drawable.frame__1_,
+                image = R.drawable.frame__1_,
                 Mywallet = false,
                 selected = selectedPayment == 2,
                 onSelect = { selectedPayment = 2 },
@@ -138,14 +140,14 @@ fun PaymentTopbar() {
 @Composable
 fun PaymentBottombar() {
     Column() {
-//        SelectedButton(
-//            "Select",
-//            {},
-//            modifier = Modifier
-//                .padding(screenHorizontal)
-//                .fillMaxWidth(),
-//            selected = true
-//        )
+        PrimaryButton(
+            "Select",
+            {},
+            modifier = Modifier
+                .padding(screenHorizontal)
+                .fillMaxWidth(),
+            isSelected = true
+        )
     }
 }
 

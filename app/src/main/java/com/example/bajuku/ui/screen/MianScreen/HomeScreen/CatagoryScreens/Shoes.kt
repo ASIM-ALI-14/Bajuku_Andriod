@@ -1,4 +1,4 @@
-package com.example.bajuku.ui.screen.MianScreen.HomeScreen.ItemsConatant
+package com.example.bajuku.ui.screen.MianScreen.HomeScreen.CatagoryScreens
 
 import androidx.compose.foundation.layout.Arrangement
 import androidx.compose.foundation.layout.Box
@@ -14,9 +14,10 @@ import androidx.compose.ui.Alignment
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.res.painterResource
 import androidx.compose.ui.text.font.FontWeight
-import androidx.compose.ui.unit.dp
 import com.example.bajuku.R
+import com.example.bajuku.ui.screen.MianScreen.HomeScreen.Components.BestSaler
 import com.example.bajuku.ui.screen.MianScreen.HomeScreen.Components.ItemCard
+import com.example.bajuku.ui.screen.MianScreen.HomeScreen.Components.SaleCard
 import com.example.bajuku.ui.theme.HorizontalSpacingM
 import com.example.bajuku.ui.theme.screenHorizontal
 import com.example.bajuku.ui.theme.verticalSpacingEXL
@@ -24,7 +25,7 @@ import com.example.bajuku.ui.theme.verticalSpacingL
 import com.example.bajuku.ui.theme.verticalSpacingM
 
 @Composable
-fun Dress(onclick: () -> Unit) {
+fun Shoes(onclick: () -> Unit) {
     Column(
         modifier = Modifier
             .padding(horizontal = screenHorizontal)
@@ -50,10 +51,13 @@ fun Dress(onclick: () -> Unit) {
         }
         verticalSpacingM()
         Row() {
-            ItemCard(Image = painterResource(R.drawable.dress_1), onclick)
+            Box() {
+                ItemCard(Image = painterResource(R.drawable.shoes_1), onclick)
+                BestSaler()
+            }
             HorizontalSpacingM()
             Box() {
-                ItemCard(Image = painterResource(R.drawable.dress_2), onclick)
+                ItemCard(Image = painterResource(R.drawable.shoes_2), onclick)
                 SaleCard()
             }
         }
@@ -78,12 +82,9 @@ fun Dress(onclick: () -> Unit) {
         }
         verticalSpacingM()
         Row() {
-            Box() {
-                ItemCard(Image = painterResource(R.drawable.dress_2), onclick)
-                BestSaler()
-            }
+            ItemCard(Image = painterResource(R.drawable.shoes_3), onclick)
             HorizontalSpacingM()
-            ItemCard(Image = painterResource(R.drawable.dress_1), onclick)
+            ItemCard(Image = painterResource(R.drawable.shoes_4), onclick)
         }
         verticalSpacingL()
         Row(
@@ -106,9 +107,9 @@ fun Dress(onclick: () -> Unit) {
         }
         verticalSpacingM()
         Row() {
-            ItemCard(Image = painterResource(R.drawable.dress_2), onclick)
+            ItemCard(Image = painterResource(R.drawable.shoes_4), onclick)
             HorizontalSpacingM()
-            ItemCard(Image = painterResource(R.drawable.dress_1), onclick)
+            ItemCard(Image = painterResource(R.drawable.shoes_3), onclick)
         }
         verticalSpacingEXL()
     }

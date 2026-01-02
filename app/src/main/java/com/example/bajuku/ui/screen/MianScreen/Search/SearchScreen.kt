@@ -1,4 +1,4 @@
-package com.example.bajuku.ui.screen.MianScreen.HomeScreen
+package com.example.bajuku.ui.screen.MianScreen.Search
 
 import androidx.compose.foundation.Image
 import androidx.compose.foundation.background

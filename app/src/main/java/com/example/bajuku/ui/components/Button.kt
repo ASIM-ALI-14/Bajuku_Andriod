@@ -6,6 +6,7 @@ import androidx.compose.foundation.layout.PaddingValues
 import androidx.compose.foundation.layout.defaultMinSize
 import androidx.compose.foundation.layout.height
 import androidx.compose.foundation.layout.padding
+import androidx.compose.foundation.layout.width
 import androidx.compose.material3.Button
 import androidx.compose.material3.ButtonDefaults
 import androidx.compose.material3.MaterialTheme
@@ -70,7 +71,8 @@ fun PrimaryButton(
     onClick: () -> Unit,
     modifier: Modifier = Modifier,
     isSelected: Boolean = true,
-    height: Dp = 45.dp
+    height: Dp = 45.dp,
+    width: Dp = 0.dp,
 ) {
     Button(
         onClick = onClick,
@@ -80,7 +82,8 @@ fun PrimaryButton(
         ),
         modifier = modifier
             .defaultMinSize(0.dp, 0.dp)
-            .height(height),
+            .height(height)
+            .width(width),
         contentPadding = PaddingValues(0.dp)
     ) {
         Text(
@@ -98,6 +101,7 @@ fun SecondaryButton(
     onClick: () -> Unit,
     modifier: Modifier = Modifier,
     height: Dp = 45.dp,
+    width: Dp = 0.dp,
     onSelected: Boolean = false
 ) {
     OutlinedButton(
@@ -112,7 +116,8 @@ fun SecondaryButton(
         ),
         modifier = modifier
             .defaultMinSize(0.dp, 0.dp)
-            .height(height),
+            .height(height)
+            .width(width),
         contentPadding = PaddingValues(0.dp)
     ) {
         Text(

@@ -1,4 +1,4 @@
-package com.example.bajuku.ui.screen.MianScreen.HomeScreen
+package com.example.bajuku.ui.screen.MianScreen.CheakOut
 
 import androidx.compose.foundation.background
 import androidx.compose.foundation.border
@@ -32,6 +32,7 @@ import androidx.compose.ui.Modifier
 import androidx.compose.ui.graphics.Color
 import androidx.compose.ui.text.font.FontWeight
 import androidx.compose.ui.unit.dp
+import com.example.bajuku.ui.screen.MianScreen.Bag.BagItem
 import com.example.bajuku.ui.theme.HorizontalSpacingEXL
 import com.example.bajuku.ui.theme.screenHorizontal
 import com.example.bajuku.ui.theme.verticalSpacingL

@@ -1,4 +1,4 @@
-package com.example.bajuku.ui.screen.MianScreen.HomeScreen.ItemsConatant
+package com.example.bajuku.ui.screen.MianScreen.HomeScreen.CatagoryScreens
 
 import androidx.compose.foundation.layout.Arrangement
 import androidx.compose.foundation.layout.Box
@@ -14,9 +14,10 @@ import androidx.compose.ui.Alignment
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.res.painterResource
 import androidx.compose.ui.text.font.FontWeight
-import androidx.compose.ui.unit.dp
 import com.example.bajuku.R
+import com.example.bajuku.ui.screen.MianScreen.HomeScreen.Components.BestSaler
 import com.example.bajuku.ui.screen.MianScreen.HomeScreen.Components.ItemCard
+import com.example.bajuku.ui.screen.MianScreen.HomeScreen.Components.SaleCard
 import com.example.bajuku.ui.theme.HorizontalSpacingM
 import com.example.bajuku.ui.theme.screenHorizontal
 import com.example.bajuku.ui.theme.verticalSpacingEXL

@@ -53,8 +53,7 @@ import androidx.compose.ui.unit.sp
 import androidx.compose.ui.window.Dialog
 import com.example.bajuku.R
 import com.example.bajuku.ui.screen.MianScreen.HomeScreen.Components.ItemCard
-import com.example.bajuku.ui.screen.MianScreen.HomeScreen.ItemsConatant.SaleCard
-import com.example.bajuku.ui.screen.MianScreen.HomeScreen.RelatedRow
+import com.example.bajuku.ui.screen.MianScreen.HomeScreen.Components.SaleCard
 import com.example.bajuku.ui.theme.AppColors
 import com.example.bajuku.ui.theme.HorizontalSpacingES
 import com.example.bajuku.ui.theme.HorizontalSpacingM

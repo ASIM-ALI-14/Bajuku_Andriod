@@ -1,4 +1,4 @@
-package com.example.bajuku.ui.screen.MianScreen.HomeScreen.ItemsConatant
+package com.example.bajuku.ui.screen.MianScreen.HomeScreen.Components
 
 import androidx.compose.foundation.background
 import androidx.compose.foundation.layout.Box

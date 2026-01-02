@@ -12,7 +12,7 @@ import com.example.bajuku.ui.screen.Authantication.RegisterScreen
 import com.example.bajuku.ui.screen.onboarding.SelectionScreen
 import com.example.bajuku.ui.screen.onboarding.StyleScreen
 import com.example.bajuku.ui.screen.Authantication.VerificationScreen
-import com.example.bajuku.ui.screen.MianScreen.HomeScreen.SearchContant
+import com.example.bajuku.ui.screen.MianScreen.Search.SearchContant
 import com.example.bajuku.ui.screen.MianScreen.MainScreen_
 import com.example.bajuku.ui.screen.splash.SplashScreen
 import com.example.bajuku.ui.screens.onboarding.OnboardingScreen

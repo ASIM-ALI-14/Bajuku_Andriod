@@ -25,8 +25,8 @@ import androidx.compose.ui.graphics.graphicsLayer
 import androidx.compose.ui.layout.ContentScale
 import androidx.compose.ui.res.painterResource
 import androidx.compose.ui.unit.dp
-import androidx.compose.ui.util.lerp
-import com.example.bajuku.R
+import com.example.bajuku.ui.components.PrimaryButton
+import com.example.bajuku.ui.screen.MianScreen.HomeScreen.BannerUiModel
 import com.example.bajuku.ui.theme.verticalSpacingXS
 import kotlin.math.absoluteValue
 
@@ -75,15 +75,10 @@ import kotlin.math.absoluteValue
 //}
 
 @Composable
-fun BannerCarousel() {
-
-    val banners = listOf(
-        R.drawable.banner_1,
-        R.drawable.banner_2,
-        R.drawable.banner_3,
-        R.drawable.banner_4,
-        R.drawable.banner_5
-    )
+fun BannerCarousel(
+    banners: List<BannerUiModel>,
+    onCtaClick: (BannerUiModel) -> Unit = {}
+) {
 
     val realCount = banners.size
     val startIndex = Int.MAX_VALUE / 2
@@ -121,7 +116,7 @@ fun BannerCarousel() {
                 ) {
 
                     Image(
-                        painter = painterResource(banners[realPage]),
+                        painter = painterResource(banners[realPage].imageRes),
                         contentDescription = null,
                         contentScale = ContentScale.Crop,
                         modifier = Modifier.fillMaxWidth()
@@ -133,25 +128,24 @@ fun BannerCarousel() {
                             .align(Alignment.BottomStart)
                     ) {
                         Text(
-                            text = "New Season Essential",
+                            text = banners[realPage].title,
                             color = Color.White,
                             style = MaterialTheme.typography.labelLarge
                         )
                         Text(
-                            text = "Discount up to 50%",
+                            text = banners[realPage].subtitle,
                             color = Color.White,
                             style = MaterialTheme.typography.headlineSmall
                         )
                         verticalSpacingXS()
-//                        SelectedButton(
-//                            "Get it Now",
-//                            {},
-//                            modifier = Modifier,
-//                            selected = true,
-//                            bg = MaterialTheme.colorScheme.background,
-//                            contantcolor = MaterialTheme.colorScheme.primary,
-//                            height = 39.dp
-//                        )
+                        PrimaryButton(
+                            banners[realPage].ctaText,
+                            {},
+                            modifier = Modifier,
+                            isSelected = true,
+                            height = 35.dp,
+                            width = 100.dp
+                        )
 
                     }
                 }
