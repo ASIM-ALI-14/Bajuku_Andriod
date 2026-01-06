@@ -22,22 +22,21 @@ import androidx.compose.ui.res.painterResource
 import androidx.compose.ui.text.font.FontWeight
 import androidx.compose.ui.text.style.TextDecoration
 import androidx.compose.ui.unit.dp
-import androidx.navigation.NavHostController
+import com.example.bajuku.ui.screen.MianScreen.HomeScreen.Model.Product
 import com.example.bajuku.ui.theme.AppColors
 import com.example.bajuku.ui.theme.verticalSpacingM
 import com.example.bajuku.ui.theme.verticalSpacingS
-
 @Composable
-fun ItemCard(Image: Painter, onClick: () -> Unit) {
+fun ProductCard(product: Product, onClick: () -> Unit) {
     ElevatedCard(
         colors = CardDefaults.cardColors(containerColor = MaterialTheme.colorScheme.background),
-        modifier = Modifier.clickable(onClick = { onClick() })
+        modifier = Modifier.clickable { onClick() }
     ) {
-        Column() {
-            Box() {
+        Column {
+            Box {
                 Image(
-                    painter = Image,
-                    contentDescription = null,
+                    painter = painterResource(product.image),
+                    contentDescription = product.name,
                     modifier = Modifier.size(167.dp),
                     contentScale = ContentScale.FillBounds
                 )
@@ -50,35 +49,32 @@ fun ItemCard(Image: Painter, onClick: () -> Unit) {
                         .padding(top = 5.dp, end = 5.dp)
                         .size(22.dp)
                 )
-
             }
             verticalSpacingM()
             Column(modifier = Modifier.padding(horizontal = 9.dp)) {
-
                 Text(
-                    text = "Seamless Down Parka",
+                    text = product.name,
                     style = MaterialTheme.typography.labelLarge,
                     fontWeight = FontWeight.Bold,
                     color = MaterialTheme.colorScheme.onSecondary
                 )
                 Text(
-                    text = "IDR 300.000",
+                    text = product.originalPrice,
                     style = MaterialTheme.typography.labelLarge.copy(
-                        textDecoration = TextDecoration.LineThrough // adds a line through the text
+                        textDecoration = TextDecoration.LineThrough
                     ),
                     fontWeight = FontWeight.SemiBold,
                     color = AppColors.Error300
                 )
                 Text(
-                    text = "IDR 240.000",
+                    text = product.discountedPrice,
                     fontWeight = FontWeight.Bold,
                     style = MaterialTheme.typography.labelLarge,
                     color = MaterialTheme.colorScheme.onSecondary
                 )
                 verticalSpacingS()
             }
-
         }
-
     }
 }
+

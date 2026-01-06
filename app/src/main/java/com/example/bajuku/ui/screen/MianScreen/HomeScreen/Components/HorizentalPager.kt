@@ -26,53 +26,11 @@ import androidx.compose.ui.layout.ContentScale
 import androidx.compose.ui.res.painterResource
 import androidx.compose.ui.unit.dp
 import com.example.bajuku.ui.components.PrimaryButton
-import com.example.bajuku.ui.screen.MianScreen.HomeScreen.BannerUiModel
+import com.example.bajuku.ui.screen.MianScreen.HomeScreen.Model.BannerUiModel
 import com.example.bajuku.ui.theme.verticalSpacingXS
 import kotlin.math.absoluteValue
 
 
-//@Preview
-//@Composable
-//fun BannerCard() {
-//    Card() {
-//        Box(modifier = Modifier.fillMaxWidth()) {
-//            Image(
-//                painter = painterResource(R.drawable.banner_1),
-//                contentDescription = null,
-//                contentScale = ContentScale.Crop,
-//                modifier = Modifier.fillMaxWidth()
-//            )
-//
-//            Column(modifier = Modifier.padding(horizontal = screenHorizontal)) {
-//                Spacer(modifier = Modifier.height(68.dp))
-//                Text(
-//                    text = "New Season Essential",
-//                    style = MaterialTheme.typography.labelLarge,
-//                    fontWeight = FontWeight.SemiBold,
-//                    color = MaterialTheme.colorScheme.background,
-//                    lineHeight = 12.sp
-//                )
-//                Text(
-//                    text = "Discount Up to 50% off",
-//                    style = MaterialTheme.typography.headlineSmall,
-//                    fontWeight = FontWeight.SemiBold,
-//                    color = MaterialTheme.colorScheme.background
-//                )
-//                verticalSpacingS()
-//                SelectedButton(
-//                    "Get it Now",
-//                    {},
-//                    modifier = Modifier,
-//                    selected = true,
-//                    bg = MaterialTheme.colorScheme.background,
-//                    contantcolor = MaterialTheme.colorScheme.primary,
-//                    35.dp
-//                )
-//
-//            }
-//        }
-//    }
-//}
 
 @Composable
 fun BannerCarousel(

@@ -13,9 +13,12 @@ import androidx.compose.foundation.layout.fillMaxWidth
 import androidx.compose.foundation.layout.height
 import androidx.compose.foundation.layout.padding
 import androidx.compose.foundation.layout.size
+import androidx.compose.foundation.layout.systemBarsPadding
 import androidx.compose.foundation.layout.width
+import androidx.compose.foundation.rememberScrollState
 import androidx.compose.foundation.shape.CircleShape
 import androidx.compose.foundation.shape.RoundedCornerShape
+import androidx.compose.foundation.verticalScroll
 import androidx.compose.material.icons.Icons
 import androidx.compose.material.icons.outlined.Add
 import androidx.compose.material.icons.outlined.ArrowBack
@@ -43,6 +46,7 @@ import androidx.compose.ui.text.style.TextDecoration
 import androidx.compose.ui.unit.dp
 import androidx.compose.ui.unit.sp
 import com.example.bajuku.R
+import com.example.bajuku.ui.components.PrimaryButton
 import com.example.bajuku.ui.theme.AppColors
 import com.example.bajuku.ui.theme.HorizontalSpacingES
 import com.example.bajuku.ui.theme.screenHorizontal
@@ -51,14 +55,15 @@ import com.example.bajuku.ui.theme.verticalSpacingS
 import com.example.bajuku.ui.theme.verticalSpacingXS
 
 @Composable
-fun BagDetail() {
+fun BagDetail(onBack: () -> Unit, onNext: () -> Unit) {
     Scaffold(
         containerColor = Color(0xFFFAFAFA),
-        topBar = { BagTopBar() },
-        bottomBar = { BagBottomBar() }) { paddingValues ->
+        topBar = { BagTopBar(onBack = { onBack() }) },
+        bottomBar = { BagBottomBar(onNext) }) { paddingValues ->
         Column(
             modifier = Modifier
                 .padding(paddingValues)
+                .verticalScroll(rememberScrollState())
                 .padding(screenHorizontal)
         ) {
             Text(
@@ -102,8 +107,13 @@ fun BagDetail() {
 }
 
 @Composable
-fun BagTopBar() {
-    Column(modifier = Modifier.background(Color.White)) {
+fun BagTopBar(onBack: () -> Unit) {
+    Column(
+        modifier = Modifier
+
+            .background(Color.White)
+            .systemBarsPadding()
+    ) {
         Row(
             modifier = Modifier
                 .fillMaxWidth()
@@ -111,7 +121,7 @@ fun BagTopBar() {
             horizontalArrangement = Arrangement.SpaceBetween,
             verticalAlignment = Alignment.CenterVertically
         ) {
-            IconButton(onClick = {}) {
+            IconButton(onClick = { onBack() }) {
                 Icon(
                     Icons.Outlined.ArrowBack,
                     contentDescription = null,
@@ -124,7 +134,7 @@ fun BagTopBar() {
                 color = MaterialTheme.colorScheme.primary,
                 fontWeight = FontWeight.SemiBold
             )
-            IconButton(onClick = {}) {
+            IconButton(onClick = { onBack() }) {
                 Icon(
                     Icons.Outlined.Menu,
                     contentDescription = null,
@@ -139,19 +149,23 @@ fun BagTopBar() {
 }
 
 @Composable
-fun BagBottomBar() {
-    Column(modifier = Modifier.background(Color.White)) {
+fun BagBottomBar(onNext: () -> Unit) {
+    Column(
+        modifier = Modifier
+            .background(Color.White)
+            .systemBarsPadding()
+    ) {
         HorizontalDivider(thickness = 1.5.dp, color = MaterialTheme.colorScheme.onSurfaceVariant)
         verticalSpacingS()
-//        SelectedButton(
-//            "Select",
-//            {},
-//            modifier = Modifier
-//                .padding(screenHorizontal)
-//                .fillMaxWidth(),
-//            selected = true
-//
-//        )
+        PrimaryButton(
+            "Select",
+            { onNext() },
+            modifier = Modifier
+                .padding(screenHorizontal)
+                .fillMaxWidth(),
+            isSelected = true
+
+        )
         verticalSpacingS()
     }
 
@@ -170,7 +184,7 @@ fun BagItem() {
                 color = MaterialTheme.colorScheme.onSurfaceVariant,
                 RoundedCornerShape(15.dp)
             )
-            .padding(8.dp),
+            .padding(5.dp),
     ) {
         Image(
             painter = painterResource(R.drawable.jacket_2),

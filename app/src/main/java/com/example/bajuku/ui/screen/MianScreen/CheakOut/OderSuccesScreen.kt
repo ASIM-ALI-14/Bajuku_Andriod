@@ -4,6 +4,7 @@ import androidx.compose.foundation.Image
 import androidx.compose.foundation.layout.Arrangement
 import androidx.compose.foundation.layout.Column
 import androidx.compose.foundation.layout.fillMaxSize
+import androidx.compose.foundation.layout.fillMaxWidth
 import androidx.compose.foundation.layout.padding
 import androidx.compose.foundation.layout.size
 import androidx.compose.material3.MaterialTheme
@@ -17,14 +18,16 @@ import androidx.compose.ui.text.font.FontWeight
 import androidx.compose.ui.text.style.TextAlign
 import androidx.compose.ui.unit.dp
 import com.example.bajuku.R
+import com.example.bajuku.ui.components.PrimaryButton
+import com.example.bajuku.ui.components.SecondaryButton
 
 import com.example.bajuku.ui.theme.screenHorizontal
 import com.example.bajuku.ui.theme.verticalSpacingEXL
 import com.example.bajuku.ui.theme.verticalSpacingS
 
 @Composable
-fun OrderSuccessScreen() {
-    Scaffold(topBar = { CheckOutTopbar() }) { paddingValues ->
+fun OrderSuccessScreen(onBack: () -> Unit) {
+    Scaffold(topBar = { CheckOutTopbar(onBack) }) { paddingValues ->
         Column(
             verticalArrangement = Arrangement.Center,
             horizontalAlignment = Alignment.CenterHorizontally,
@@ -53,25 +56,25 @@ fun OrderSuccessScreen() {
                 color = MaterialTheme.colorScheme.primary
             )
             verticalSpacingEXL()
-//            SelectedButton(
-//                "Continue",
-//                {
-//                },
-//                modifier = Modifier
-//                    .fillMaxWidth()
-//                    .padding(horizontal = 60.dp),
-//                selected = true,
-//            )
-//            verticalSpacingS()
-//            NotSelectedButton(
-//                "View E-Receipt",
-//                {
-//                },
-//                modifier = Modifier
-//                    .fillMaxWidth()
-//                    .padding(horizontal = 60.dp),
-//                selected = false,
-//            )
+            PrimaryButton(
+                "Continue",
+                {
+                },
+                modifier = Modifier
+                    .fillMaxWidth()
+                    .padding(horizontal = 60.dp),
+                isSelected = true,
+            )
+            verticalSpacingS()
+            SecondaryButton(
+                "View E-Receipt",
+                {
+                },
+                modifier = Modifier
+                    .fillMaxWidth()
+                    .padding(horizontal = 60.dp),
+                onSelected = false,
+            )
 
 
         }

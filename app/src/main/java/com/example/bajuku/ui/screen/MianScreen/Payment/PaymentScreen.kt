@@ -8,6 +8,7 @@ import androidx.compose.foundation.layout.Row
 import androidx.compose.foundation.layout.fillMaxSize
 import androidx.compose.foundation.layout.fillMaxWidth
 import androidx.compose.foundation.layout.padding
+import androidx.compose.foundation.layout.systemBarsPadding
 import androidx.compose.foundation.shape.RoundedCornerShape
 import androidx.compose.material.icons.Icons
 import androidx.compose.material.icons.outlined.ArrowBack
@@ -40,12 +41,12 @@ import com.example.bajuku.ui.theme.verticalSpacingM
 import com.example.bajuku.ui.theme.verticalSpacingS
 
 @Composable
-fun PaymentScreen() {
+fun PaymentScreen(onConfrom: () -> Unit, onBack: () -> Unit) {
     var selectedPayment by remember { mutableStateOf(0) }
 
     Scaffold(
-        topBar = { PaymentTopbar() },
-        bottomBar = { PaymentBottombar() },
+        topBar = { PaymentTopbar(onBack) },
+        bottomBar = { PaymentBottombar(onConfrom) },
         containerColor = Color(0xFFFAFAFA)
     ) { paddingValues ->
         Column(
@@ -102,8 +103,10 @@ fun PaymentScreen() {
 }
 
 @Composable
-fun PaymentTopbar() {
-    Column(modifier = Modifier.background(Color.White)) {
+fun PaymentTopbar(onBack: () -> Unit) {
+    Column(modifier = Modifier
+        .background(Color.White)
+        .systemBarsPadding()) {
         Row(
             modifier = Modifier
                 .fillMaxWidth()
@@ -111,7 +114,7 @@ fun PaymentTopbar() {
             horizontalArrangement = Arrangement.SpaceBetween,
             verticalAlignment = Alignment.CenterVertically
         ) {
-            IconButton(onClick = {}) {
+            IconButton(onClick = { onBack() }) {
                 Icon(
                     Icons.Outlined.ArrowBack,
                     contentDescription = null,
@@ -138,11 +141,11 @@ fun PaymentTopbar() {
 }
 
 @Composable
-fun PaymentBottombar() {
-    Column() {
+fun PaymentBottombar(onConfrom: () -> Unit) {
+    Column(modifier = Modifier.systemBarsPadding()) {
         PrimaryButton(
             "Select",
-            {},
+            { onConfrom() },
             modifier = Modifier
                 .padding(screenHorizontal)
                 .fillMaxWidth(),

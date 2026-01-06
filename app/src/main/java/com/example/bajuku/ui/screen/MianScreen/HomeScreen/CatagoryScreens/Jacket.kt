@@ -11,7 +11,7 @@ import androidx.compose.ui.Modifier
 import com.example.bajuku.ui.screen.MianScreen.HomeScreen.Components.CategoryRow
 import com.example.bajuku.ui.screen.MianScreen.HomeScreen.Components.ProductCard
 import com.example.bajuku.ui.screen.MianScreen.HomeScreen.Data.DressProducts
-import com.example.bajuku.ui.screen.MianScreen.HomeScreen.Data.PantsProducts
+import com.example.bajuku.ui.screen.MianScreen.HomeScreen.Data.JacketProducts
 import com.example.bajuku.ui.screen.MianScreen.HomeScreen.Data.accessoriesProducts
 import com.example.bajuku.ui.theme.HorizontalSpacingM
 import com.example.bajuku.ui.theme.screenHorizontal
@@ -20,7 +20,7 @@ import com.example.bajuku.ui.theme.verticalSpacingL
 import com.example.bajuku.ui.theme.verticalSpacingM
 
 @Composable
-fun Pants(onClick: (productId: String) -> Unit) {
+fun Jacket(onClick: (productId: String) -> Unit) {
     Column(
         modifier = Modifier
             .padding(horizontal = screenHorizontal)
@@ -28,15 +28,15 @@ fun Pants(onClick: (productId: String) -> Unit) {
     ) {
 
         // --- New Arrival (First 2 products) ---
-        CategoryRow("New Arrival", PantsProducts.take(2), onClick)
+        CategoryRow("New Arrival", JacketProducts.take(2), onClick)
         verticalSpacingL()
 
         // --- Recommendation (Next 2 products) ---
-        CategoryRow("Recommendation", PantsProducts.slice(2..3), onClick)
+        CategoryRow("Recommendation", JacketProducts.slice(2..3), onClick)
         verticalSpacingL()
 
         // --- Popular Jacket (Next 2 products) ---
-        CategoryRow("Popular Dress", PantsProducts.slice(4..5), onClick)
+        CategoryRow("Popular Dress", JacketProducts.slice(4..5), onClick)
         verticalSpacingEXL()
     }
 }

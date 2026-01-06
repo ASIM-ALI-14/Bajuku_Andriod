@@ -25,7 +25,7 @@ import androidx.compose.material.icons.outlined.NotificationsNone
 import androidx.compose.material.icons.outlined.Person
 import androidx.compose.material.icons.outlined.Search
 import androidx.compose.material.icons.outlined.ShoppingBag
-import androidx.compose.material3.HorizontalDivider
+import androidx.compose.material3.Divider
 import androidx.compose.material3.Icon
 import androidx.compose.material3.MaterialTheme
 import androidx.compose.material3.NavigationBar
@@ -42,6 +42,7 @@ import androidx.compose.ui.graphics.Color
 import androidx.compose.ui.graphics.vector.ImageVector
 import androidx.compose.ui.text.font.FontWeight
 import androidx.compose.ui.unit.dp
+import androidx.navigation.NavDestination
 import androidx.navigation.NavDestination.Companion.hierarchy
 import androidx.navigation.NavHostController
 import androidx.navigation.compose.NavHost
@@ -56,27 +57,38 @@ import com.example.bajuku.ui.screen.MianScreen.WishListScreen.WishlistScreen
 import com.example.bajuku.ui.theme.HorizontalSpacingS
 import com.example.bajuku.ui.theme.screenHorizontal
 
+// ----------------------- Main Screen -----------------------
 @Composable
 fun MainScreen_(rootNavController: NavHostController) {
     val navController = rememberNavController()
     val navBackStackEntry by navController.currentBackStackEntryAsState()
     val currentDestination = navBackStackEntry?.destination
+    val currentRoute = currentDestination?.route
 
     Scaffold(
-        topBar = { TopBar({ rootNavController.navigate(Routes.SEARCH) }) },
+        topBar = {
+            if (currentRoute != BottomNavScreen.Profile.route) {
+                TopBar(
+                    onSearchClick = { rootNavController.navigate(Routes.SEARCH) },
+                    onBag = { rootNavController.navigate(Routes.BAG) },
+                    onNotification = { rootNavController.navigate(Routes.NOTIFICATION) })
+            }
+        },
         bottomBar = {
-            BottomNavBar(
-                currentDestination = currentDestination,
-                onNavigate = { route ->
-                    navController.navigate(route) {
-                        popUpTo(navController.graph.startDestinationId) {
-                            saveState = true
+            if (currentRoute != BottomNavScreen.Profile.route) {
+                BottomNavBar(
+                    currentDestination = currentDestination,
+                    onNavigate = { route ->
+                        navController.navigate(route) {
+                            popUpTo(navController.graph.startDestinationId) {
+                                saveState = true
+                            }
+                            launchSingleTop = true
+                            restoreState = true
                         }
-                        launchSingleTop = true
-                        restoreState = true
                     }
-                }
-            )
+                )
+            }
         }
     ) { innerPadding ->
         NavHost(
@@ -92,30 +104,12 @@ fun MainScreen_(rootNavController: NavHostController) {
     }
 }
 
-@Composable
-fun CompactIconButton(
-    onClick: () -> Unit,
-    icon: ImageVector
-) {
-    Box(
-        modifier = Modifier
-            .size(37.dp)
-            .clip(CircleShape)
-            .clickable {
-                onClick()
-            }
-            .border(1.dp, MaterialTheme.colorScheme.outline.copy(alpha = 0.5f), CircleShape),
-        contentAlignment = Alignment.Center
-    ) {
-        Icon(icon, contentDescription = null, modifier = Modifier.size(20.dp))
-    }
-}
-
+// ----------------------- Top Bar -----------------------
 @Composable
 fun TopBar(
     onSearchClick: () -> Unit,
     onBag: () -> Unit = {},
-    onNotification: () -> Unit = {}
+    onNotification: () -> Unit
 ) {
     Row(
         modifier = Modifier
@@ -124,8 +118,6 @@ fun TopBar(
             .systemBarsPadding(),
         verticalAlignment = Alignment.CenterVertically
     ) {
-
-        // SEARCH FIELD AS CLICKABLE TRIGGER
         Text(
             "BrandName",
             style = MaterialTheme.typography.headlineMedium,
@@ -134,28 +126,31 @@ fun TopBar(
         )
 
         Spacer(modifier = Modifier.weight(1f))
-        CompactIconButton(
-            onClick = onNotification,
-            icon = Icons.Outlined.NotificationsNone
-        )
 
+        CompactIconButton(onClick = onNotification, icon = Icons.Outlined.NotificationsNone)
         HorizontalSpacingS()
-
-        CompactIconButton(
-            onClick = onBag,
-            icon = Icons.Outlined.ShoppingBag
-        )
+        CompactIconButton(onClick = onBag, icon = Icons.Outlined.ShoppingBag)
         HorizontalSpacingS()
-
-        CompactIconButton(
-            onClick = onSearchClick,
-            icon = Icons.Outlined.Search
-        )
-
+        CompactIconButton(onClick = onSearchClick, icon = Icons.Outlined.Search)
     }
 }
 
+// ----------------------- Compact Icon Button -----------------------
+@Composable
+fun CompactIconButton(onClick: () -> Unit, icon: ImageVector) {
+    Box(
+        modifier = Modifier
+            .size(37.dp)
+            .clip(CircleShape)
+            .clickable { onClick() }
+            .border(1.dp, MaterialTheme.colorScheme.outline.copy(alpha = 0.5f), CircleShape),
+        contentAlignment = Alignment.Center
+    ) {
+        Icon(icon, contentDescription = null, modifier = Modifier.size(20.dp))
+    }
+}
 
+// ----------------------- Bottom Navigation -----------------------
 sealed class BottomNavScreen(
     val route: String,
     val label: String,
@@ -186,17 +181,17 @@ val bottomNavItems = listOf(
 
 @Composable
 fun BottomNavBar(
-    currentDestination: androidx.navigation.NavDestination?,
+    currentDestination: NavDestination?,
     onNavigate: (String) -> Unit
 ) {
     Column {
-        HorizontalDivider(thickness = 0.3.dp, color = MaterialTheme.colorScheme.primary)
+        Divider(thickness = 0.3.dp, color = MaterialTheme.colorScheme.primary)
         NavigationBar(
             containerColor = MaterialTheme.colorScheme.background,
             modifier = Modifier
                 .navigationBarsPadding()
                 .height(60.dp),
-            tonalElevation = 0.dp,
+            tonalElevation = 0.dp
         ) {
             bottomNavItems.forEach { item ->
                 val selected = currentDestination?.hierarchy?.any { it.route == item.route } == true

@@ -1,4 +1,4 @@
-package com.example.bajuku.ui.screen.MianScreen.Components
+package com.example.bajuku.ui.screen.ProductDetial
 
 import androidx.compose.foundation.Image
 import androidx.compose.foundation.background
@@ -16,6 +16,7 @@ import androidx.compose.foundation.layout.fillMaxWidth
 import androidx.compose.foundation.layout.height
 import androidx.compose.foundation.layout.padding
 import androidx.compose.foundation.layout.size
+import androidx.compose.foundation.layout.systemBarsPadding
 import androidx.compose.foundation.rememberScrollState
 import androidx.compose.foundation.shape.CircleShape
 import androidx.compose.foundation.shape.RoundedCornerShape
@@ -52,8 +53,12 @@ import androidx.compose.ui.unit.dp
 import androidx.compose.ui.unit.sp
 import androidx.compose.ui.window.Dialog
 import com.example.bajuku.R
-import com.example.bajuku.ui.screen.MianScreen.HomeScreen.Components.ItemCard
+import com.example.bajuku.ui.components.PrimaryButton
+import com.example.bajuku.ui.components.SecondaryButton
+import com.example.bajuku.ui.screen.MianScreen.HomeScreen.Components.ProductCard
 import com.example.bajuku.ui.screen.MianScreen.HomeScreen.Components.SaleCard
+import com.example.bajuku.ui.screen.MianScreen.HomeScreen.Data.ProductRepository
+import com.example.bajuku.ui.screen.MianScreen.Search.RelatedRow
 import com.example.bajuku.ui.theme.AppColors
 import com.example.bajuku.ui.theme.HorizontalSpacingES
 import com.example.bajuku.ui.theme.HorizontalSpacingM
@@ -66,7 +71,22 @@ import com.example.bajuku.ui.theme.verticalSpacingS
 import com.example.bajuku.ui.theme.verticalSpacingXS
 
 @Composable
-fun ItemDetail(onClick: () -> Unit, onBuy: () -> Unit) {
+fun ProductDetail(
+    productId: String,
+    onBack: () -> Unit,
+    onBuy: () -> Unit,
+    navegateToBag: () -> Unit
+) {
+    val product = remember {
+        ProductRepository.getProductById(productId)
+    }
+
+    val relatedProducts = remember {
+        ProductRepository.getRelatedProducts(
+            category = product.category,
+            excludeId = product.id
+        )
+    }
     val productImages = listOf(
         R.drawable.jacket_1,
         R.drawable.jacket_2,
@@ -84,7 +104,7 @@ fun ItemDetail(onClick: () -> Unit, onBuy: () -> Unit) {
     var selectedImage by remember { mutableStateOf(productImages[0]) }
     var showDialog by remember { mutableStateOf(false) }
     Scaffold(
-        topBar = { ItemTopBar() },
+        topBar = { ItemTopBar(onBack) },
         bottomBar = { ItemBottomBar({ showDialog = true }, { onBuy() }) }) { innerPadding ->
         Column(
             modifier = Modifier
@@ -98,7 +118,7 @@ fun ItemDetail(onClick: () -> Unit, onBuy: () -> Unit) {
             )
             Box(contentAlignment = Alignment.BottomCenter) {
                 Image(
-                    painter = painterResource(selectedImage),
+                    painter = painterResource(product.image),
                     contentDescription = null,
                     contentScale = ContentScale.FillBounds,
                     modifier = Modifier.fillMaxWidth()
@@ -126,7 +146,7 @@ fun ItemDetail(onClick: () -> Unit, onBuy: () -> Unit) {
                     verticalAlignment = Alignment.CenterVertically
                 ) {
                     Text(
-                        text = "Seamless Down Parka",
+                        text = product.name,
                         style = MaterialTheme.typography.headlineMedium,
                         color = MaterialTheme.colorScheme.primary
                     )
@@ -135,7 +155,7 @@ fun ItemDetail(onClick: () -> Unit, onBuy: () -> Unit) {
                 verticalSpacingS()
                 Row(verticalAlignment = Alignment.CenterVertically) {
                     Text(
-                        text = "IDR 300.000",
+                        text = product.originalPrice,
                         style = MaterialTheme.typography.labelLarge.copy(
                             textDecoration = TextDecoration.LineThrough // adds a line through the text
                         ),
@@ -144,7 +164,7 @@ fun ItemDetail(onClick: () -> Unit, onBuy: () -> Unit) {
                     )
                     HorizontalSpacingS()
                     Text(
-                        text = "IDR 240.000",
+                        text = product.discountedPrice,
                         fontWeight = FontWeight.Bold,
                         style = MaterialTheme.typography.labelLarge,
                         color = MaterialTheme.colorScheme.onSecondary
@@ -210,7 +230,7 @@ fun ItemDetail(onClick: () -> Unit, onBuy: () -> Unit) {
                 )
                 verticalSpacingS()
                 Text(
-                    text = "The Seamless Down Parka is a stylish and functional outerwear piece designed to provide optimal warmth and comfort in cold weather., this parka features a seamless construction, eliminating the need for stitching and creating a sleek and modern appearance.",
+                    text = product.description,
                     style = MaterialTheme.typography.labelLarge,
                     color = MaterialTheme.colorScheme.tertiary,
                     fontWeight = FontWeight.Medium
@@ -231,7 +251,8 @@ fun ItemDetail(onClick: () -> Unit, onBuy: () -> Unit) {
                     )
                     Spacer(modifier = Modifier.weight(1f))
                     Text(
-                        text = "Jacket & Hoodies",
+                        text = product.itemDetails.category,
+
                         style = MaterialTheme.typography.labelLarge,
                         color = MaterialTheme.colorScheme.onBackground,
                         fontWeight = FontWeight.SemiBold
@@ -245,7 +266,8 @@ fun ItemDetail(onClick: () -> Unit, onBuy: () -> Unit) {
                 verticalSpacingS()
                 Row() {
                     Text(
-                        text = "Color", style = MaterialTheme.typography.labelLarge,
+                        text = product.itemDetails.color,
+                        style = MaterialTheme.typography.labelLarge,
                         color = MaterialTheme.colorScheme.onBackground,
                         fontWeight = FontWeight.SemiBold
                     )
@@ -271,7 +293,7 @@ fun ItemDetail(onClick: () -> Unit, onBuy: () -> Unit) {
                     )
                     Spacer(modifier = Modifier.weight(1f))
                     Text(
-                        text = "Australia",
+                        text = product.itemDetails.madeIn,
                         style = MaterialTheme.typography.labelLarge,
                         color = MaterialTheme.colorScheme.onBackground,
                         fontWeight = FontWeight.SemiBold
@@ -291,7 +313,7 @@ fun ItemDetail(onClick: () -> Unit, onBuy: () -> Unit) {
                     )
                     Spacer(modifier = Modifier.weight(1f))
                     Text(
-                        text = "Fleece base material",
+                        text = product.itemDetails.material,
                         style = MaterialTheme.typography.labelLarge,
                         color = MaterialTheme.colorScheme.onBackground,
                         fontWeight = FontWeight.SemiBold
@@ -323,7 +345,7 @@ fun ItemDetail(onClick: () -> Unit, onBuy: () -> Unit) {
                     ) {
                         Row(verticalAlignment = Alignment.Bottom) {
                             Text(
-                                text = "4.7",
+                                text = product.rating.toString(),
                                 style = MaterialTheme.typography.displayMedium,
                                 color = MaterialTheme.colorScheme.primary,
                                 fontWeight = FontWeight.Bold
@@ -336,7 +358,8 @@ fun ItemDetail(onClick: () -> Unit, onBuy: () -> Unit) {
                             )
                         }
                         Text(
-                            text = "154 reviews", style = MaterialTheme.typography.labelLarge,
+                            text = "${product.reviewsCount} reviews",
+                            style = MaterialTheme.typography.labelLarge,
                             color = MaterialTheme.colorScheme.onBackground,
                             fontWeight = FontWeight.SemiBold
                         )
@@ -458,18 +481,16 @@ fun ItemDetail(onClick: () -> Unit, onBuy: () -> Unit) {
                 }
                 verticalSpacingM()
                 Row(
-                    modifier = Modifier.fillMaxWidth(),
-                    horizontalArrangement = Arrangement.SpaceBetween
+                    horizontalArrangement = Arrangement.SpaceBetween,
+                    modifier = Modifier.fillMaxWidth()
                 ) {
-                    ItemCard(
-                        Image = painterResource(R.drawable.jacket_1),
-                        onClick = {},
-                    )
-                    ItemCard(
-                        Image = painterResource(R.drawable.jacket_2),
-                        onClick = {},
-                    )
+                    relatedProducts.forEach { related ->
+                        ProductCard(product = related) {
+                            // navigate again to detail
+                        }
+                    }
                 }
+
                 verticalSpacingM()
                 Row(
                     modifier = Modifier.fillMaxWidth(),
@@ -491,13 +512,13 @@ fun ItemDetail(onClick: () -> Unit, onBuy: () -> Unit) {
                 }
                 verticalSpacingM()
                 Row() {
-//                    RelatedRow( )
+                    RelatedRow()
                     HorizontalSpacingS()
 //                    RelatedRow( )
                 }
                 verticalSpacingS()
                 Row() {
-//                    RelatedRow()
+                    RelatedRow()
                     HorizontalSpacingM()
 //                    RelatedRow()
                 }
@@ -540,7 +561,8 @@ fun ItemDetail(onClick: () -> Unit, onBuy: () -> Unit) {
                         TextButton(
                             onClick = {
                                 showDialog = false
-                                onClick()
+                                navegateToBag()
+
                             }
                         ) {
                             Text(
@@ -560,16 +582,17 @@ fun ItemDetail(onClick: () -> Unit, onBuy: () -> Unit) {
 
 
 @Composable
-fun ItemTopBar() {
+fun ItemTopBar(onBack: () -> Unit) {
     var onclick by remember { mutableStateOf(false) }
     Row(
         verticalAlignment = Alignment.CenterVertically,
         horizontalArrangement = Arrangement.SpaceBetween,
         modifier = Modifier
             .fillMaxWidth()
-            .padding(end = screenHorizontal)
+            .systemBarsPadding()
+            .padding(horizontal = screenHorizontal)
     ) {
-        IconButton(onClick = { }) {
+        IconButton(onClick = { onBack() }) {
             Icon(Icons.Outlined.ArrowBack, contentDescription = null)
         }
         Text(
@@ -598,26 +621,26 @@ fun ItemTopBar() {
 
 @Composable
 fun ItemBottomBar(onClick: () -> Unit, Buynow: () -> Unit) {
-    Column() {
+    Column(modifier = Modifier.systemBarsPadding()) {
         HorizontalDivider(
             thickness = 1.7.dp,
             color = MaterialTheme.colorScheme.primaryContainer
         )
         verticalSpacingM()
         Row(modifier = Modifier.padding(horizontal = screenHorizontal)) {
-//            NotSelectedButton(
-//                "Add to bag",
-//                selected = false,
-//                onclick = { onClick() },
-//                modifier = Modifier.weight(1f)
-//            )
-//            HorizontalSpacingM()
-//            SelectedButton(
-//                "Buy now",
-//                selected = true,
-//                onclick = { Buynow() },
-//                modifier = Modifier.weight(1f)
-//            )
+            SecondaryButton(
+                "Add to bag",
+                onSelected = false,
+                onClick = { onClick() },
+                modifier = Modifier.weight(1f)
+            )
+            HorizontalSpacingM()
+            PrimaryButton(
+                "Buy now",
+                isSelected = true,
+                onClick = { Buynow() },
+                modifier = Modifier.weight(1f)
+            )
         }
     }
 }

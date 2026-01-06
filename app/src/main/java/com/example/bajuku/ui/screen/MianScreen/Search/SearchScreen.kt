@@ -89,7 +89,7 @@ fun SearchContant() {
             Row(
                 modifier = Modifier
                     .fillMaxWidth()
-                    .padding(horizontal = screenHorizontal)
+                    .padding(horizontal = screenHorizontal, vertical = 5.dp)
                     .systemBarsPadding()
             ) {
                 SearchField(

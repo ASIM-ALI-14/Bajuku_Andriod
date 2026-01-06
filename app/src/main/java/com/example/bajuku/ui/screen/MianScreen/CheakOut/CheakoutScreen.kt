@@ -3,6 +3,7 @@ package com.example.bajuku.ui.screen.MianScreen.CheakOut
 import androidx.compose.foundation.background
 import androidx.compose.foundation.border
 import androidx.compose.foundation.clickable
+import androidx.compose.foundation.horizontalScroll
 import androidx.compose.foundation.layout.Arrangement
 import androidx.compose.foundation.layout.Box
 import androidx.compose.foundation.layout.Column
@@ -10,7 +11,10 @@ import androidx.compose.foundation.layout.Row
 import androidx.compose.foundation.layout.fillMaxWidth
 import androidx.compose.foundation.layout.heightIn
 import androidx.compose.foundation.layout.padding
+import androidx.compose.foundation.layout.systemBarsPadding
+import androidx.compose.foundation.rememberScrollState
 import androidx.compose.foundation.shape.RoundedCornerShape
+import androidx.compose.foundation.verticalScroll
 import androidx.compose.material.icons.Icons
 import androidx.compose.material.icons.outlined.ArrowBack
 import androidx.compose.material.icons.outlined.Edit
@@ -32,6 +36,7 @@ import androidx.compose.ui.Modifier
 import androidx.compose.ui.graphics.Color
 import androidx.compose.ui.text.font.FontWeight
 import androidx.compose.ui.unit.dp
+import com.example.bajuku.ui.components.PrimaryButton
 import com.example.bajuku.ui.screen.MianScreen.Bag.BagItem
 import com.example.bajuku.ui.theme.HorizontalSpacingEXL
 import com.example.bajuku.ui.theme.screenHorizontal
@@ -40,16 +45,20 @@ import com.example.bajuku.ui.theme.verticalSpacingM
 import com.example.bajuku.ui.theme.verticalSpacingS
 
 @Composable
-fun CheckOutScreen(onclick: () -> Unit, onsucses: () -> Unit) {
+fun CheckOutScreen(onBack: () -> Unit, onclick: () -> Unit, onsucses: () -> Unit) {
     var address by remember { mutableStateOf("") }
+    var selectedPayment by remember { mutableStateOf<Int?>(null) }
+
     Scaffold(
         containerColor = Color(0xFFFAFAFA),
-        topBar = { CheckOutTopbar() },
+        topBar = { CheckOutTopbar(onBack) },
         bottomBar = { CheckOutBottomBar(onsucses) }) { paddingValues ->
         Column(
             modifier = Modifier
                 .padding(paddingValues)
                 .padding(horizontal = screenHorizontal)
+                .verticalScroll(rememberScrollState())
+
         ) {
             verticalSpacingM()
             Text(
@@ -126,7 +135,12 @@ fun CheckOutScreen(onclick: () -> Unit, onsucses: () -> Unit) {
                     .padding(horizontal = 20.dp, 14.dp)
             ) {
                 Text(
-                    text = "Select your payment method",
+                    text = when (selectedPayment) {
+                        0 -> "My Wallet"
+                        1 -> "PayPal"
+                        2 -> "Card ............4679"
+                        else -> "Select your payment method"
+                    },
                     style = MaterialTheme.typography.labelLarge,
                     color = MaterialTheme.colorScheme.onBackground,
                     fontWeight = FontWeight.SemiBold
@@ -221,8 +235,10 @@ fun CheckOutScreen(onclick: () -> Unit, onsucses: () -> Unit) {
 }
 
 @Composable
-fun CheckOutTopbar() {
-    Column(modifier = Modifier.background(Color.White)) {
+fun CheckOutTopbar(onBack: () -> Unit) {
+    Column(modifier = Modifier
+        .background(Color.White)
+        .systemBarsPadding()) {
         Row(
             modifier = Modifier
                 .fillMaxWidth()
@@ -230,7 +246,7 @@ fun CheckOutTopbar() {
             horizontalArrangement = Arrangement.SpaceBetween,
             verticalAlignment = Alignment.CenterVertically
         ) {
-            IconButton(onClick = {}) {
+            IconButton(onClick = { onBack() }) {
                 Icon(
                     Icons.Outlined.ArrowBack,
                     contentDescription = null,
@@ -258,7 +274,9 @@ fun CheckOutTopbar() {
 
 @Composable
 fun CheckOutBottomBar(onclick: () -> Unit) {
-    Column(modifier = Modifier.background(Color.White)) {
+    Column(modifier = Modifier
+        .background(Color.White)
+        .systemBarsPadding()) {
         HorizontalDivider(thickness = 1.5.dp, color = MaterialTheme.colorScheme.onSurfaceVariant)
         Row(
             modifier = Modifier.padding(horizontal = screenHorizontal, vertical = 16.dp),
@@ -271,14 +289,13 @@ fun CheckOutBottomBar(onclick: () -> Unit) {
                 fontWeight = FontWeight.Bold
             )
             HorizontalSpacingEXL()
-//            SelectedButton(
-//                "Next",
-//                { onclick() },
-//                modifier = Modifier
-//                    .fillMaxWidth(),
-//                selected = false
-//
-//            )
+            PrimaryButton(
+                "Next",
+                { onclick() },
+                modifier = Modifier
+                    .fillMaxWidth(),
+                isSelected = true
+            )
 
         }
     }
