@@ -34,7 +34,6 @@ fun InterestsItemButton(
         onClick = onclick,
         contentPadding = PaddingValues(horizontal = 15.dp),
 
-        // 2️⃣ Remove default minimum size (48.dp height)
         modifier = modifier,
         border = BorderStroke(
             1.dp,
@@ -45,7 +44,6 @@ fun InterestsItemButton(
             contentColor = MaterialTheme.colorScheme.surfaceVariant
         ),
     ) {
-        // Show icon if provided
         Image(
             painter = painterResource(id = image),
             contentDescription = text

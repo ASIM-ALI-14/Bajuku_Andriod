@@ -17,12 +17,13 @@ import androidx.compose.foundation.layout.Row
 import androidx.compose.foundation.layout.Spacer
 import androidx.compose.foundation.layout.fillMaxSize
 import androidx.compose.foundation.layout.fillMaxWidth
-import androidx.compose.foundation.layout.height
+import androidx.compose.foundation.layout.heightIn
 import androidx.compose.foundation.layout.padding
 import androidx.compose.foundation.layout.width
 import androidx.compose.material3.MaterialTheme
 import androidx.compose.material3.Text
 import androidx.compose.runtime.Composable
+import androidx.compose.runtime.LaunchedEffect
 import androidx.compose.runtime.getValue
 import androidx.compose.runtime.mutableStateOf
 import androidx.compose.runtime.remember
@@ -47,8 +48,10 @@ import com.example.bajuku.ui.theme.verticalSpacingM
 @OptIn(ExperimentalAnimationApi::class)
 @Composable
 fun OnboardingScreen(onFinished: () -> Unit) {
+
     var currentPage by remember { mutableStateOf(0) }
-    var previousPage by remember { mutableStateOf(0) }
+    var isAnimating by remember { mutableStateOf(false) }
+
     val configuration = LocalConfiguration.current
     val screenHeight = configuration.screenHeightDp.dp
 
@@ -57,39 +60,35 @@ fun OnboardingScreen(onFinished: () -> Unit) {
             .fillMaxSize()
             .background(MaterialTheme.colorScheme.background)
     ) {
+
         Box(
             modifier = Modifier
                 .fillMaxWidth()
-                .height(screenHeight * 0.7f) // Fixed image height
+                .weight(1f)
                 .clipToBounds()
         ) {
-            // Animate image change with direction
+
             AnimatedContent(
                 targetState = currentPage,
                 transitionSpec = {
-                    if (targetState > previousPage) {
-                        // Next animation
-                        slideInHorizontally(
-                            initialOffsetX = { fullWidth -> fullWidth },
-                            animationSpec = tween(500)
-                        ) + fadeIn(animationSpec = tween(500)) with
-                                slideOutHorizontally(
-                                    targetOffsetX = { fullWidth -> -fullWidth },
-                                    animationSpec = tween(500)
-                                ) + fadeOut(animationSpec = tween(500))
-                    } else {
-                        // Back animation (reverse)
-                        slideInHorizontally(
-                            initialOffsetX = { fullWidth -> -fullWidth },
-                            animationSpec = tween(500)
-                        ) + fadeIn(animationSpec = tween(500)) with
-                                slideOutHorizontally(
-                                    targetOffsetX = { fullWidth -> fullWidth },
-                                    animationSpec = tween(500)
-                                ) + fadeOut(animationSpec = tween(500))
-                    }
-                }
+                    isAnimating = true
+
+                    val direction =
+                        if (targetState > initialState) 1 else -1
+
+                    slideInHorizontally(
+                        initialOffsetX = { it * direction },
+                        animationSpec = tween(500)
+                    ) + fadeIn(tween(500)) with
+                            slideOutHorizontally(
+                                targetOffsetX = { -it * direction },
+                                animationSpec = tween(500)
+                            ) + fadeOut(tween(500))
+                },
+                contentAlignment = Alignment.Center,
+                label = "OnboardingImage"
             ) { page ->
+
                 Image(
                     painter = painterResource(onboardingItems[page].imageRes),
                     contentDescription = null,
@@ -97,7 +96,13 @@ fun OnboardingScreen(onFinished: () -> Unit) {
                     contentScale = ContentScale.Crop
                 )
             }
-            // Page indicator
+
+            // Unlock input after animation completes
+            LaunchedEffect(currentPage) {
+                kotlinx.coroutines.delay(500)
+                isAnimating = false
+            }
+
             PageIndicator(
                 totalPages = onboardingItems.size,
                 currentPage = currentPage,
@@ -111,13 +116,15 @@ fun OnboardingScreen(onFinished: () -> Unit) {
             modifier = Modifier
                 .fillMaxWidth()
                 .padding(horizontal = screenHorizontal)
+                .heightIn(min = 80.dp)
         ) {
+
             verticalSpacingM()
 
-            // Title
             AnimatedContent(
                 targetState = onboardingItems[currentPage].title,
-                transitionSpec = { fadeIn(tween(400)) with fadeOut(tween(400)) }
+                transitionSpec = { fadeIn(tween(300)) with fadeOut(tween(300)) },
+                label = "Title"
             ) { title ->
                 Text(
                     text = title,
@@ -127,64 +134,70 @@ fun OnboardingScreen(onFinished: () -> Unit) {
             }
 
             verticalSpacingM()
-            Box(modifier = Modifier.height(screenHeight * 0.1f)) {
-                // Description
-                AnimatedContent(
-                    targetState = onboardingItems[currentPage].description,
-                    transitionSpec = { fadeIn(tween(400)) with fadeOut(tween(400)) }
-                ) { desc ->
-                    Text(
-                        text = desc,
-                        style = MaterialTheme.typography.labelLarge,
-                        fontWeight = FontWeight.Medium
-                    )
-                }
+
+            AnimatedContent(
+                targetState = onboardingItems[currentPage].description,
+                transitionSpec = { fadeIn(tween(300)) with fadeOut(tween(300)) },
+                label = "Description"
+            ) { desc ->
+                Text(
+                    text = desc,
+                    style = MaterialTheme.typography.labelLarge,
+                    fontWeight = FontWeight.Medium
+                )
             }
-            verticalSpacingM()
-            if (currentPage == 0) {
-                // First page: full width Next button only
+        }
+        verticalSpacingL()
+
+        if (currentPage == 0) {
+
+            PrimaryButton(
+                buttonText = "Next",
+                onClick = {
+                    if (!isAnimating) currentPage++
+                },
+                modifier = Modifier
+                    .fillMaxWidth()
+                    .padding(horizontal = screenHorizontal),
+                isSelected = !isAnimating
+            )
+
+        } else {
+
+            Row(
+                modifier = Modifier
+                    .fillMaxWidth()
+                    .padding(horizontal = screenHorizontal),
+                horizontalArrangement = Arrangement.SpaceBetween
+            ) {
+
+                SecondaryButton(
+                    buttonText = "Back",
+                    onClick = {
+                        if (!isAnimating) currentPage--
+                    },
+                    modifier = Modifier.weight(1f),
+                    onSelected = false
+                )
+
+                Spacer(modifier = Modifier.width(16.dp))
+
                 PrimaryButton(
                     buttonText = "Next",
                     onClick = {
-                        previousPage = currentPage
-                        currentPage++
-                    },
-                    modifier = Modifier.fillMaxWidth(),
-                    true
-                )
-            } else {
-                // From second page onwards: Back + Next in a row
-                Row(
-                    modifier = Modifier.fillMaxWidth(),
-                    horizontalArrangement = Arrangement.SpaceBetween
-                ) {
-                    SecondaryButton(
-                        buttonText = "Back",
-                        onClick = {
-                            previousPage = currentPage
-                            currentPage--
-                        },
-                        modifier = Modifier.weight(1f),
-                        onSelected = false
-                    )
-
-                    Spacer(modifier = Modifier.width(16.dp)) // Optional spacing
-
-                    PrimaryButton(
-                        buttonText = "Next",
-                        onClick = {
-                            previousPage = currentPage
+                        if (!isAnimating) {
                             if (currentPage < onboardingItems.size - 1) {
                                 currentPage++
                             } else {
                                 onFinished()
                             }
-                        },
-                        modifier = Modifier.weight(1f),
-                        true
-                    )
-                }
+                        }
+                    },
+                    modifier = Modifier.weight(1f),
+                    isSelected = !isAnimating
+                )
             }
         }
+        verticalSpacingL()
     }
 }

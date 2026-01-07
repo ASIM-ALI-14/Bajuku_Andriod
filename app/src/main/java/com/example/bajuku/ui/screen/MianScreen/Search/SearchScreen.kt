@@ -58,7 +58,7 @@ data class TopProduct(val title: String, val subtitle: String, val imageRes: Int
 data class RecentSearch(val title: String)
 data class RelatedSearch(val line1: String, val line2: String, val imageRes: Int)
 @Composable
-fun SearchContant() {
+fun SearchScreen() {
     var searchQuery by remember { mutableStateOf("") }
 
     // Sample data

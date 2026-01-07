@@ -3,41 +3,56 @@ package com.example.bajuku.ui.screen.MianScreen.HomeScreen.ItemsConatant
 import androidx.compose.foundation.layout.*
 import androidx.compose.foundation.rememberScrollState
 import androidx.compose.foundation.verticalScroll
-import androidx.compose.material3.MaterialTheme
-import androidx.compose.material3.Text
 import androidx.compose.runtime.Composable
-import androidx.compose.ui.Alignment
 import androidx.compose.ui.Modifier
 import com.example.bajuku.ui.screen.MianScreen.HomeScreen.Components.CategoryRow
-import com.example.bajuku.ui.screen.MianScreen.HomeScreen.Components.ProductCard
-import com.example.bajuku.ui.screen.MianScreen.HomeScreen.Data.DressProducts
 import com.example.bajuku.ui.screen.MianScreen.HomeScreen.Data.JacketProducts
-import com.example.bajuku.ui.screen.MianScreen.HomeScreen.Data.accessoriesProducts
-import com.example.bajuku.ui.theme.HorizontalSpacingM
 import com.example.bajuku.ui.theme.screenHorizontal
 import com.example.bajuku.ui.theme.verticalSpacingEXL
 import com.example.bajuku.ui.theme.verticalSpacingL
-import com.example.bajuku.ui.theme.verticalSpacingM
 
 @Composable
-fun Jacket(onClick: (productId: String) -> Unit) {
+fun Jacket(
+    wishlist: List<com.example.bajuku.ui.screen.MianScreen.HomeScreen.Model.Product>,
+    onToggleWishlist: (com.example.bajuku.ui.screen.MianScreen.HomeScreen.Model.Product) -> Unit,
+    onProductClick: (productId: String) -> Unit
+) {
     Column(
         modifier = Modifier
             .padding(horizontal = screenHorizontal)
             .verticalScroll(rememberScrollState())
     ) {
 
-        // --- New Arrival (First 2 products) ---
-        CategoryRow("New Arrival", JacketProducts.take(2), onClick)
+        // --- New Arrival ---
+        CategoryRow(
+            title = "New Arrival",
+            products = JacketProducts.take(2),
+            wishlist = wishlist,
+            onToggleWishlist = onToggleWishlist,
+            onProductClick = onProductClick
+        )
         verticalSpacingL()
 
-        // --- Recommendation (Next 2 products) ---
-        CategoryRow("Recommendation", JacketProducts.slice(2..3), onClick)
+        // --- Recommendation ---
+        CategoryRow(
+            title = "Recommendation",
+            products = JacketProducts.slice(2..3),
+            wishlist = wishlist,
+            onToggleWishlist = onToggleWishlist,
+            onProductClick = onProductClick
+        )
         verticalSpacingL()
 
-        // --- Popular Jacket (Next 2 products) ---
-        CategoryRow("Popular Dress", JacketProducts.slice(4..5), onClick)
+        // --- Popular Jacket ---
+        CategoryRow(
+            title = "Popular Jacket",
+            products = JacketProducts.slice(4..5),
+            wishlist = wishlist,
+            onToggleWishlist = onToggleWishlist,
+            onProductClick = onProductClick
+        )
         verticalSpacingEXL()
     }
 }
+
 

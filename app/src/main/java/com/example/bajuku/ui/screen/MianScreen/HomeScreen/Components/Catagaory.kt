@@ -8,6 +8,7 @@ import androidx.compose.material3.Text
 import androidx.compose.runtime.Composable
 import androidx.compose.ui.Alignment
 import androidx.compose.ui.Modifier
+import com.example.bajuku.ui.screen.MianScreen.Components.ProductCard
 import com.example.bajuku.ui.theme.HorizontalSpacingM
 import com.example.bajuku.ui.theme.verticalSpacingM
 
@@ -15,9 +16,11 @@ import com.example.bajuku.ui.theme.verticalSpacingM
 fun CategoryRow(
     title: String,
     products: List<com.example.bajuku.ui.screen.MianScreen.HomeScreen.Model.Product>,
-    onClick: (productId: String) -> Unit
+    wishlist: List<com.example.bajuku.ui.screen.MianScreen.HomeScreen.Model.Product>,
+    onToggleWishlist: (com.example.bajuku.ui.screen.MianScreen.HomeScreen.Model.Product) -> Unit,
+    onProductClick: (String) -> Unit
 ) {
-    // Title
+    // --- Title ---
     Row(
         horizontalArrangement = Arrangement.SpaceBetween,
         verticalAlignment = Alignment.CenterVertically,
@@ -34,15 +37,22 @@ fun CategoryRow(
             color = MaterialTheme.colorScheme.onBackground
         )
     }
+
     verticalSpacingM()
 
-    // Product Cards Row
+    // --- Product Cards Row ---
     Row {
         products.forEachIndexed { index, product ->
-            ProductCard(product = product) {
-                onClick(product.id)
-            }
+
+            ProductCard(
+                product = product,
+                isFavorite = wishlist.any { it.id == product.id },
+                onFavoriteClick = { onToggleWishlist(product) },
+                onClick = { onProductClick(product.id) }
+            )
+
             if (index != products.lastIndex) HorizontalSpacingM()
         }
     }
 }
+

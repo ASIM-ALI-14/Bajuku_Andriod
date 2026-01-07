@@ -50,6 +50,7 @@ import com.example.bajuku.ui.components.PrimaryButton
 import com.example.bajuku.ui.theme.AppColors
 import com.example.bajuku.ui.theme.HorizontalSpacingES
 import com.example.bajuku.ui.theme.screenHorizontal
+import com.example.bajuku.ui.theme.verticalSpacingL
 import com.example.bajuku.ui.theme.verticalSpacingM
 import com.example.bajuku.ui.theme.verticalSpacingS
 import com.example.bajuku.ui.theme.verticalSpacingXS
@@ -64,8 +65,9 @@ fun BagDetail(onBack: () -> Unit, onNext: () -> Unit) {
             modifier = Modifier
                 .padding(paddingValues)
                 .verticalScroll(rememberScrollState())
-                .padding(screenHorizontal)
+                .padding(horizontal = screenHorizontal)
         ) {
+            verticalSpacingM()
             Text(
                 text = "You are IDR 700.000 (excluding tax) away from free standard shipping.",
                 style = MaterialTheme.typography.labelLarge,
@@ -110,10 +112,14 @@ fun BagDetail(onBack: () -> Unit, onNext: () -> Unit) {
 fun BagTopBar(onBack: () -> Unit) {
     Column(
         modifier = Modifier
-
+            .fillMaxWidth()
             .background(Color.White)
-            .systemBarsPadding()
+
+//            .systemBarsPadding()
+
+
     ) {
+        verticalSpacingL()
         Row(
             modifier = Modifier
                 .fillMaxWidth()
@@ -134,7 +140,7 @@ fun BagTopBar(onBack: () -> Unit) {
                 color = MaterialTheme.colorScheme.primary,
                 fontWeight = FontWeight.SemiBold
             )
-            IconButton(onClick = { onBack() }) {
+            IconButton(onClick = { }) {
                 Icon(
                     Icons.Outlined.Menu,
                     contentDescription = null,
@@ -153,7 +159,6 @@ fun BagBottomBar(onNext: () -> Unit) {
     Column(
         modifier = Modifier
             .background(Color.White)
-            .systemBarsPadding()
     ) {
         HorizontalDivider(thickness = 1.5.dp, color = MaterialTheme.colorScheme.onSurfaceVariant)
         verticalSpacingS()
@@ -250,7 +255,10 @@ fun BagItem() {
                 Box(
                     modifier = Modifier
                         .size(22.dp)
+                        .clip(CircleShape)
+
                         .padding(1.dp)
+
                         .background(Color.Transparent, CircleShape)
                         .border(
                             1.dp,
@@ -274,6 +282,8 @@ fun BagItem() {
                 Box(
                     modifier = Modifier
                         .size(22.dp)
+                        .clip(CircleShape)
+
                         .padding(1.dp)
                         .background(MaterialTheme.colorScheme.primary, CircleShape)
                         .border(

@@ -1,5 +1,7 @@
 package com.example.bajuku.ui.screen.MianScreen
 
+import WishlistScreen
+import androidx.compose.foundation.Image
 import androidx.compose.foundation.border
 import androidx.compose.foundation.clickable
 import androidx.compose.foundation.layout.Box
@@ -35,11 +37,15 @@ import androidx.compose.material3.Scaffold
 import androidx.compose.material3.Text
 import androidx.compose.runtime.Composable
 import androidx.compose.runtime.getValue
+import androidx.compose.runtime.mutableStateOf
+import androidx.compose.runtime.remember
+import androidx.compose.runtime.setValue
 import androidx.compose.ui.Alignment
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.draw.clip
 import androidx.compose.ui.graphics.Color
 import androidx.compose.ui.graphics.vector.ImageVector
+import androidx.compose.ui.res.painterResource
 import androidx.compose.ui.text.font.FontWeight
 import androidx.compose.ui.unit.dp
 import androidx.navigation.NavDestination
@@ -49,13 +55,17 @@ import androidx.navigation.compose.NavHost
 import androidx.navigation.compose.composable
 import androidx.navigation.compose.currentBackStackEntryAsState
 import androidx.navigation.compose.rememberNavController
+import com.example.bajuku.R
 import com.example.bajuku.navigation.Routes
 import com.example.bajuku.ui.screen.MianScreen.CategoryScreen.CategoryScreen
 import com.example.bajuku.ui.screen.MianScreen.HomeScreen.HomeScreen
+import com.example.bajuku.ui.screen.MianScreen.HomeScreen.Model.Product
 import com.example.bajuku.ui.screen.MianScreen.ProfileScreen.ProfileScreen
-import com.example.bajuku.ui.screen.MianScreen.WishListScreen.WishlistScreen
+import com.example.bajuku.ui.theme.HorizontalSpacingES
 import com.example.bajuku.ui.theme.HorizontalSpacingS
 import com.example.bajuku.ui.theme.screenHorizontal
+import com.example.bajuku.ui.theme.verticalSpacingS
+import com.example.bajuku.ui.theme.verticalSpacingXS
 
 // ----------------------- Main Screen -----------------------
 @Composable
@@ -64,6 +74,8 @@ fun MainScreen_(rootNavController: NavHostController) {
     val navBackStackEntry by navController.currentBackStackEntryAsState()
     val currentDestination = navBackStackEntry?.destination
     val currentRoute = currentDestination?.route
+    var wishlist by remember { mutableStateOf<List<Product>>(emptyList()) }
+
 
     Scaffold(
         topBar = {
@@ -96,8 +108,28 @@ fun MainScreen_(rootNavController: NavHostController) {
             startDestination = BottomNavScreen.Home.route,
             modifier = Modifier.padding(innerPadding)
         ) {
-            composable(BottomNavScreen.Home.route) { HomeScreen(rootNavController) }
-            composable(BottomNavScreen.Wishlist.route) { WishlistScreen() }
+            composable(BottomNavScreen.Home.route) {
+                HomeScreen(
+                    navHostController = rootNavController,
+                    wishlist = wishlist,
+                    onToggleWishlist = { product ->
+                        wishlist =
+                            if (wishlist.contains(product)) {
+                                wishlist - product
+                            } else {
+                                wishlist + product
+                            }
+                    }
+                )
+            }
+            composable(BottomNavScreen.Wishlist.route) {
+                WishlistScreen(
+                    wishlist = wishlist,
+                    onRemove = { product ->
+                        wishlist = wishlist - product
+                    }
+                )
+            }
             composable(BottomNavScreen.Category.route) { CategoryScreen() }
             composable(BottomNavScreen.Profile.route) { ProfileScreen() }
         }
@@ -114,13 +146,19 @@ fun TopBar(
     Row(
         modifier = Modifier
             .fillMaxWidth()
-            .padding(screenHorizontal)
+            .padding(horizontal = screenHorizontal)
             .systemBarsPadding(),
-        verticalAlignment = Alignment.CenterVertically
+        verticalAlignment = Alignment.Bottom
     ) {
+        Image(
+            painter = painterResource(R.drawable.main_logo),
+            contentDescription = null,
+            modifier = Modifier.size(28.dp)
+        )
+        HorizontalSpacingES()
         Text(
             "BrandName",
-            style = MaterialTheme.typography.headlineMedium,
+            style = MaterialTheme.typography.headlineSmall,
             color = MaterialTheme.colorScheme.primary,
             fontWeight = FontWeight.Bold
         )

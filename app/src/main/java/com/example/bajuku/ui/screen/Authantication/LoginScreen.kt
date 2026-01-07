@@ -85,11 +85,10 @@ fun LoginScreen(navController: NavHostController) {
             placeholder = "Input your password",
         )
         verticalSpacingS()
-        TextButton(onClick = {}) {
+        TextButton(onClick = {}, modifier = Modifier.align(Alignment.End)) {
             Text(
                 text = "Forgot Password?",
-                modifier = Modifier.fillMaxWidth(),
-                textAlign = TextAlign.End,
+                modifier = Modifier,
                 style = MaterialTheme.typography.labelLarge,
                 fontWeight = FontWeight.SemiBold,
                 color = MaterialTheme.colorScheme.secondary

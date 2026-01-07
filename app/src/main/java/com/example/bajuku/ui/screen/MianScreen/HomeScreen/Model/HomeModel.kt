@@ -38,49 +38,82 @@ data class ItemDetails(
     val material: String
 )
 
+//------------------- HOME TAB MODEL -----------------------
 data class HomeTab(
     val title: String,
     val content: @Composable () -> Unit
 )
 
-fun getHomeTabs(navHostController: NavHostController): List<HomeTab> {
+// ----------------------- HOME TABS FACTORY -----------------------
+fun getHomeTabs(
+    navHostController: NavHostController,
+    wishlist: List<Product>,
+    onToggleWishlist: (Product) -> Unit
+): List<HomeTab> {
+
     return listOf(
+
         HomeTab("Dress") {
-            Dress { productId ->
-                navHostController.navigate(
-                    "${Routes.PRODUCT_DETAIL}/$productId"
-                )
-            }
+            Dress(
+                wishlist = wishlist,
+                onToggleWishlist = onToggleWishlist,
+                onProductClick = { productId ->
+                    navHostController.navigate(
+                        "${Routes.PRODUCT_DETAIL}/$productId"
+                    )
+                }
+            )
         },
+
         HomeTab("Jacket") {
-            Jacket { productId ->
-                navHostController.navigate(
-                    "${Routes.PRODUCT_DETAIL}/$productId"
-                )
-            }
+            Jacket(
+                wishlist = wishlist,
+                onToggleWishlist = onToggleWishlist,
+                onProductClick = { productId ->
+                    navHostController.navigate(
+                        "${Routes.PRODUCT_DETAIL}/$productId"
+                    )
+                }
+            )
         },
+
         HomeTab("Pants") {
-            Pants { productId ->
-                navHostController.navigate(
-                    "${Routes.PRODUCT_DETAIL}/$productId"
-                )
-            }
+            Pants(
+                wishlist = wishlist,
+                onToggleWishlist = onToggleWishlist,
+                onProductClick = { productId ->
+                    navHostController.navigate(
+                        "${Routes.PRODUCT_DETAIL}/$productId"
+                    )
+                }
+            )
         },
+
         HomeTab("Shoes") {
-            Shoes { productId ->
-                navHostController.navigate(
-                    "${Routes.PRODUCT_DETAIL}/$productId"
-                )
-            }
+            Shoes(
+                wishlist = wishlist,
+                onToggleWishlist = onToggleWishlist,
+                onProductClick = { productId ->
+                    navHostController.navigate(
+                        "${Routes.PRODUCT_DETAIL}/$productId"
+                    )
+                }
+            )
         },
+
         HomeTab("Accessories") {
-            Accessories { productId ->
-                navHostController.navigate(
-                    "${Routes.PRODUCT_DETAIL}/$productId"
-                )
-            }
+            Accessories(
+                wishlist = wishlist,
+                onToggleWishlist = onToggleWishlist,
+                onProductClick = { productId ->
+                    navHostController.navigate(
+                        "${Routes.PRODUCT_DETAIL}/$productId"
+                    )
+                }
+            )
         }
     )
 }
+
 
 

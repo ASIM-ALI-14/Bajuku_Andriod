@@ -33,6 +33,7 @@ import androidx.compose.runtime.remember
 import androidx.compose.runtime.setValue
 import androidx.compose.ui.Alignment
 import androidx.compose.ui.Modifier
+import androidx.compose.ui.draw.clip
 import androidx.compose.ui.graphics.Color
 import androidx.compose.ui.text.font.FontWeight
 import androidx.compose.ui.unit.dp
@@ -129,6 +130,7 @@ fun CheckOutScreen(onBack: () -> Unit, onclick: () -> Unit, onsucses: () -> Unit
             Box(
                 modifier = Modifier
                     .fillMaxWidth()
+                    .clip(RoundedCornerShape(10.dp))
                     .clickable(onClick = onclick)
                     .background(Color.Transparent)
                     .border(1.5.dp, MaterialTheme.colorScheme.outline, RoundedCornerShape(10.dp))
@@ -238,7 +240,8 @@ fun CheckOutScreen(onBack: () -> Unit, onclick: () -> Unit, onsucses: () -> Unit
 fun CheckOutTopbar(onBack: () -> Unit) {
     Column(modifier = Modifier
         .background(Color.White)
-        .systemBarsPadding()) {
+    ) {
+        verticalSpacingL()
         Row(
             modifier = Modifier
                 .fillMaxWidth()
@@ -276,7 +279,7 @@ fun CheckOutTopbar(onBack: () -> Unit) {
 fun CheckOutBottomBar(onclick: () -> Unit) {
     Column(modifier = Modifier
         .background(Color.White)
-        .systemBarsPadding()) {
+    ) {
         HorizontalDivider(thickness = 1.5.dp, color = MaterialTheme.colorScheme.onSurfaceVariant)
         Row(
             modifier = Modifier.padding(horizontal = screenHorizontal, vertical = 16.dp),
@@ -298,5 +301,6 @@ fun CheckOutBottomBar(onclick: () -> Unit) {
             )
 
         }
+        verticalSpacingM()
     }
 }

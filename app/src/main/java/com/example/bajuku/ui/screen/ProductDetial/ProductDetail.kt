@@ -16,7 +16,6 @@ import androidx.compose.foundation.layout.fillMaxWidth
 import androidx.compose.foundation.layout.height
 import androidx.compose.foundation.layout.padding
 import androidx.compose.foundation.layout.size
-import androidx.compose.foundation.layout.systemBarsPadding
 import androidx.compose.foundation.rememberScrollState
 import androidx.compose.foundation.shape.CircleShape
 import androidx.compose.foundation.shape.RoundedCornerShape
@@ -55,7 +54,7 @@ import androidx.compose.ui.window.Dialog
 import com.example.bajuku.R
 import com.example.bajuku.ui.components.PrimaryButton
 import com.example.bajuku.ui.components.SecondaryButton
-import com.example.bajuku.ui.screen.MianScreen.HomeScreen.Components.ProductCard
+import com.example.bajuku.ui.screen.MianScreen.Components.ProductCard
 import com.example.bajuku.ui.screen.MianScreen.HomeScreen.Components.SaleCard
 import com.example.bajuku.ui.screen.MianScreen.HomeScreen.Data.ProductRepository
 import com.example.bajuku.ui.screen.MianScreen.Search.RelatedRow
@@ -485,9 +484,15 @@ fun ProductDetail(
                     modifier = Modifier.fillMaxWidth()
                 ) {
                     relatedProducts.forEach { related ->
-                        ProductCard(product = related) {
-                            // navigate again to detail
-                        }
+                        var isFav by remember { mutableStateOf(false) }
+
+                        ProductCard(
+                            product = related,
+                            isFavorite = isFav,
+                            onFavoriteClick = { isFav = !isFav },
+                            onClick = {}
+
+                        )
                     }
                 }
 
@@ -589,8 +594,7 @@ fun ItemTopBar(onBack: () -> Unit) {
         horizontalArrangement = Arrangement.SpaceBetween,
         modifier = Modifier
             .fillMaxWidth()
-            .systemBarsPadding()
-            .padding(horizontal = screenHorizontal)
+            .padding(horizontal = screenHorizontal, vertical = 23.dp)
     ) {
         IconButton(onClick = { onBack() }) {
             Icon(Icons.Outlined.ArrowBack, contentDescription = null)
@@ -621,7 +625,7 @@ fun ItemTopBar(onBack: () -> Unit) {
 
 @Composable
 fun ItemBottomBar(onClick: () -> Unit, Buynow: () -> Unit) {
-    Column(modifier = Modifier.systemBarsPadding()) {
+    Column(modifier = Modifier.padding(bottom = 18.dp)) {
         HorizontalDivider(
             thickness = 1.7.dp,
             color = MaterialTheme.colorScheme.primaryContainer

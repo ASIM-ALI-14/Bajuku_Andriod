@@ -66,9 +66,6 @@ fun StyleScreen(navController: NavHostController) {
                 "Style Selection",
                 "Who do you usually shop for? (You can select multiple\noptions)"
             )
-            verticalSpacingL()
-            // Woman styles
-            Text("Woman", style = MaterialTheme.typography.titleLarge)
             verticalSpacingM()
             StyleCategory.entries.forEach { category ->
 

@@ -1,6 +1,5 @@
 package com.example.bajuku.navigation
 
-import android.app.Notification
 import androidx.compose.runtime.Composable
 import androidx.navigation.NavGraphBuilder
 import androidx.navigation.NavHostController
@@ -18,7 +17,7 @@ import com.example.bajuku.ui.screen.MianScreen.CheakOut.OrderSuccessScreen
 import com.example.bajuku.ui.screen.MianScreen.MainScreen_
 import com.example.bajuku.ui.screen.MianScreen.Notification.NotificationScreen
 import com.example.bajuku.ui.screen.MianScreen.Payment.PaymentScreen
-import com.example.bajuku.ui.screen.MianScreen.Search.SearchContant
+import com.example.bajuku.ui.screen.MianScreen.Search.SearchScreen
 import com.example.bajuku.ui.screen.ProductDetial.ProductDetail
 import com.example.bajuku.ui.screen.onboarding.Onboarding_3
 import com.example.bajuku.ui.screen.onboarding.SelectionScreen
@@ -128,7 +127,7 @@ fun NavGraphBuilder.mainGraph(navController: NavHostController) {
         MainScreen_(navController)
     }
     composable(Routes.SEARCH) {
-        SearchContant()
+        SearchScreen()
     }
     composable(
         route = "${Routes.PRODUCT_DETAIL}/{productId}",
@@ -166,7 +165,7 @@ fun NavGraphBuilder.mainGraph(navController: NavHostController) {
         )
     }
     composable(Routes.NOTIFICATION) {
-        NotificationScreen()
+        NotificationScreen(onBack = { navController.popBackStack() })
     }
 
 }

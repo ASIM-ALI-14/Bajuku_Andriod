@@ -12,6 +12,7 @@ import androidx.compose.material3.Divider
 import androidx.compose.material3.MaterialTheme
 import androidx.compose.material3.ScrollableTabRow
 import androidx.compose.material3.Tab
+import androidx.compose.material3.TabRow
 import androidx.compose.material3.TabRowDefaults.tabIndicatorOffset
 import androidx.compose.material3.Text
 import androidx.compose.runtime.Composable
@@ -27,19 +28,27 @@ import androidx.compose.ui.zIndex
 import androidx.navigation.NavHostController
 import com.example.bajuku.ui.screen.MianScreen.HomeScreen.Components.BannerCarousel
 import com.example.bajuku.ui.screen.MianScreen.HomeScreen.Data.bannerList
+import com.example.bajuku.ui.screen.MianScreen.HomeScreen.Model.Product
 import com.example.bajuku.ui.screen.MianScreen.HomeScreen.Model.getHomeTabs
 import com.example.bajuku.ui.theme.verticalSpacingM
 
 @Composable
 fun HomeScreen(
-    navHostController: NavHostController
+    navHostController: NavHostController,
+    wishlist: List<Product>,
+    onToggleWishlist: (Product) -> Unit
 ) {
     var selectedTabIndex by rememberSaveable { mutableIntStateOf(0) }
-    val tabs = getHomeTabs(navHostController)
+
+    // ✅ Pass wishlist & onToggleWishlist to getHomeTabs
+    val tabs = getHomeTabs(
+        navHostController = navHostController,
+        wishlist = wishlist,
+        onToggleWishlist = onToggleWishlist
+    )
 
     Column(modifier = Modifier.fillMaxWidth()) {
-        ScrollableTabRow(
-            edgePadding = 0.dp,
+        TabRow(
             selectedTabIndex = selectedTabIndex,
             containerColor = Color.Transparent,
             contentColor = MaterialTheme.colorScheme.primary,
@@ -69,7 +78,6 @@ fun HomeScreen(
                         .height(58.dp)
                         .width(34.dp)
                         .zIndex(2f),
-
                     selected = selectedTabIndex == index,
                     onClick = { selectedTabIndex = index },
                     selectedContentColor = MaterialTheme.colorScheme.primary,
@@ -79,6 +87,7 @@ fun HomeScreen(
                             text = tab.title,
                             style = MaterialTheme.typography.labelLarge,
                             fontWeight = FontWeight.SemiBold,
+                            maxLines = 1
                         )
                     }
                 )
@@ -88,7 +97,7 @@ fun HomeScreen(
         verticalSpacingM()
         BannerCarousel(bannerList)
 
-        // Render selected tab content dynamically
+        // 🔥 TAB CONTENT (WISHLIST-AWARE)
         tabs[selectedTabIndex].content()
     }
 }

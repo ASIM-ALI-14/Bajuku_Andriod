@@ -32,14 +32,15 @@ import com.example.bajuku.R
 import com.example.bajuku.ui.theme.AppColors
 import com.example.bajuku.ui.theme.screenHorizontal
 import com.example.bajuku.ui.theme.verticalSpacingEXL
+import com.example.bajuku.ui.theme.verticalSpacingL
 import com.example.bajuku.ui.theme.verticalSpacingM
 import com.example.bajuku.ui.theme.verticalSpacingS
 
 @Composable
-fun NotificationScreen() {
+fun NotificationScreen(onBack: () -> Unit) {
     Scaffold(
         containerColor = Color(0xFFFAFAFA),
-        topBar = { NotificationTopbar() }) { paddingValues ->
+        topBar = { NotificationTopbar(onBack) }) { paddingValues ->
         Column(
             modifier = Modifier
                 .padding(paddingValues)
@@ -85,10 +86,11 @@ fun NotificationScreen() {
 }
 
 @Composable
-fun NotificationTopbar() {
+fun NotificationTopbar(onBack: () -> Unit) {
     Column(modifier = Modifier
         .background(Color.White)
-        .systemBarsPadding()) {
+    ) {
+        verticalSpacingL()
         Row(
             modifier = Modifier
                 .fillMaxWidth()
@@ -96,7 +98,7 @@ fun NotificationTopbar() {
             horizontalArrangement = Arrangement.SpaceBetween,
             verticalAlignment = Alignment.CenterVertically
         ) {
-            IconButton(onClick = {}) {
+            IconButton(onClick = { onBack() }) {
                 Icon(
                     Icons.Outlined.ArrowBack,
                     contentDescription = null,
